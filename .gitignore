@@ -5,4 +5,5 @@
 /public/system
 /public/cache
 /public/build/*
+/storage/app/public/upload/*
 composer.lock
