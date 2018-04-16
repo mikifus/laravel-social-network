@@ -71,7 +71,7 @@ class User extends Authenticatable
         if (!empty($this->profile_path)){
             $path = 'storage/uploads/profile_photos/'.$this->profile_path;
         }else {
-            $path = "images/profile-picture.png";
+            $path = "img/profile-picture.png";
         }
         if ($w == null && $h == null){
             return url('/'.$path);
@@ -214,4 +214,37 @@ class User extends Authenticatable
         if ($check) return true;
         return false;
     }
+
+
+    ### Relationships ###
+
+    /**
+     * Images of this user
+     *
+     * @return HasMany
+     */
+    public function images() {
+        return $this->hasMany('App\Models\Image');
+    }
+
+    /**
+     * Images without album of this user
+     *
+     * @return HasMany
+     */
+    public function imagesWithoutAlbum() {
+        return $this->hasMany('App\Models\Image')->where('imagealbum_id', '=', NULL);
+    }
+
+    /**
+     * Images albums of this user
+     *
+     * @return HasMany
+     */
+    public function imagealbums() {
+        return $this->hasMany('App\Models\Imagealbum')->with(['images' => function($query) {
+                        $query->get();
+                    }]);
+    }
+
 }

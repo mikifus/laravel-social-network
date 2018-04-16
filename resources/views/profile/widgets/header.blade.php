@@ -3,7 +3,7 @@
         <div class="cover @if(!$user->getCover() || !$can_see){{ 'no-cover' }}@endif" style="@if($can_see) background-image: url('{{ $user->getCover() }}') @endif">
             @if($my_profile)
                 <div class="loading-cover">
-                    <img src="{{ asset('images/rolling.gif') }}" alt="">
+                    <img src="{{ asset('img/rolling.gif') }}" alt="">
                 </div>
             @endif
             <div class="bar">
@@ -11,7 +11,7 @@
                     <div class="profile-image @if($user->sex == 1){{ 'female' }}@endif">
                         @if($my_profile)
                             <div class="loading-image">
-                                <img src="{{ asset('images/rolling.gif') }}" alt="">
+                                <img src="{{ asset('img/rolling.gif') }}" alt="">
                             </div>
                             <form id="form-upload-profile-photo" enctype="multipart/form-data">
                                 <div class="change-image">

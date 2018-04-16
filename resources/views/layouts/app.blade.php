@@ -21,6 +21,7 @@
     <link href="{{ asset('plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/around.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     @yield('header')
 </head>
@@ -40,7 +41,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/logo.png') }}" alt="" />
+                    <img src="{{ asset('img/logo.png') }}" alt="" />
                 </a>
             </div>
 
@@ -112,7 +113,7 @@
     </div>
 </div>
 <div class="loading-page">
-    <img src="{{ asset('images/rolling.gif') }}" alt="">
+    <img src="{{ asset('img/rolling.gif') }}" alt="">
 </div>
 @include('widgets.error')
 <!-- Scripts -->

@@ -1,0 +1,98 @@
+/*
+    Style details
+ */
+/*.autocomplete-suggestions {
+    @extend .dropdown-menu;
+
+     Copied from Bootstrap's _dowpdowns.scss as it can't be extended
+    .autocomplete-suggestion {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: normal;
+        line-height: 1.5;
+        color: gray;
+        white-space: nowrap; // prevent links from randomly breaking onto new lines
+    }
+    .autocomplete-suggestion.autocomplete-selected {
+      text-decoration: none;
+      color: darken(gray, 5%);
+      background-color: light-gray;
+    }
+}*/
+
+/*
+    Dropzone Override
+ */
+ .dropzone {
+    &.dz-previews-container {
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        height: auto;
+        min-height: auto;
+
+        #submit_all {
+            margin-top: 20px;
+        }
+
+        .dz-preview {
+            /*width: 216px;*/
+            margin: 10px 0;
+        }
+        .dz-preview .dz-image {
+            border-radius: 5px;
+            width: 100%;
+        }
+        .dz-preview .dz-image img {
+            width: 100%;
+        }
+    }
+    &.dz-container {
+        border: 5px dotted black;
+        border-radius: 20px;
+        padding: 20px 6px;
+        min-height: 150px;
+    }
+
+    .dz-extrafields {
+        padding: 10px;
+
+        textarea {
+            height: 60px;
+        }
+    }
+}
+/*
+    Dropzone tracks
+ */
+.dropzone {
+
+    &.dz-audio-previews-container {
+        .dz-error-message {
+            top: 0 !important;
+        }
+    }
+
+    .dz-audio-preview {
+        padding: 10px;
+
+        audio {
+            display: block;
+            width: 100%;
+        }
+    }
+}
+/*
+    Steps in a set of forms.
+*/
+.steps h4 {
+    font-size: 16px;
+}
+/*
+    Centers divs inside a text-center
+*/
+.text-center > div {
+    margin-left: auto;
+    margin-right: auto;
+}

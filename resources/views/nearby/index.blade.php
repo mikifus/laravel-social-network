@@ -83,7 +83,7 @@
             lat: {{ $user->location->latitud }},
             lng: {{ $user->location->longitud }},
             title: 'You',
-            icon: '{{ asset('/images/home_marker.png') }}',
+            icon: '{{ asset('/img/home_marker.png') }}',
             infoWindow: {
                 content: 'You'
             }
@@ -96,9 +96,9 @@
                 lng: {{ $location->longitud }},
                 title: '{{ $location->user->name }}',
                 @if(($location->user->sex == 0))
-                    icon: '{{ asset('/images/male_marker.png') }}',
+                    icon: '{{ asset('/img/male_marker.png') }}',
                 @else
-                    icon: '{{ asset('/images/female_marker.png') }}',
+                    icon: '{{ asset('/img/female_marker.png') }}',
                 @endif
                 infoWindow: {
                     content: '{{ $location->user->name }}'

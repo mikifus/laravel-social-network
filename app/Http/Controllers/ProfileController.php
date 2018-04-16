@@ -29,21 +29,6 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
-
-    public function secure($username, $is_owner = false){
-        $user = User::where('username', $username)->first();
-
-        if ($user){
-            $this->user = $user;
-            $this->my_profile = (Auth::id() == $this->user->id)?true:false;
-            if ($is_owner && !$this->my_profile){
-                return false;
-            }
-            return true;
-        }
-        return false;
-    }
-
     public function index($username){
 
         if (!$this->secure($username)) return redirect('/404');

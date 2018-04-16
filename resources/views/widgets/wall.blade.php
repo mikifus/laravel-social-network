@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-xs-4">
                     <div class="loading-post">
-                        <img src="{{ asset('images/rolling.gif') }}" alt="">
+                        <img src="{{ asset('img/rolling.gif') }}" alt="">
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -34,13 +34,13 @@
 @endif
 
 <div class="post-list-top-loading">
-    <img src="{{ asset('images/rolling.gif') }}" alt="">
+    <img src="{{ asset('img/rolling.gif') }}" alt="">
 </div>
 <div class="post-list">
 
 </div>
 <div class="post-list-bottom-loading">
-    <img src="{{ asset('images/rolling.gif') }}" alt="">
+    <img src="{{ asset('img/rolling.gif') }}" alt="">
 </div>
 
 <div class="modal fade " id="likeListModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">

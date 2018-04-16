@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-md-6">
             <a href="{{ url('/') }}" class="logo">
-                <img src="{{ asset('images/guest_logo.png') }}" alt="" />
+                <img src="{{ asset('img/guest_logo.png') }}" alt="" />
             </a>
         </div>
 

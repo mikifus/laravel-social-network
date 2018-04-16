@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Madrid',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +166,17 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
+//        Laravel\Tinker\TinkerServiceProvider::class,
+//        Grimthorr\LaravelUserSettings\ServiceProvider::class,
+//        Serverfireteam\Panel\PanelServiceProvider::class,
+        Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
+        Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
+//        Collective\Html\HtmlServiceProvider::class,
+//        Proengsoft\JsValidation\JsValidationServiceProvider::class,
+//        Conner\Likeable\LikeableServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Spatie\EloquentSortable\SortableServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -236,6 +246,12 @@ return [
         'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
         'sHelper' => App\Library\sHelper::class,
 
+
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+
+
+        'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
     ],
 
 ];
