@@ -5,5 +5,7 @@
 /public/system
 /public/cache
 /public/build/*
-/storage/app/public/upload/*
+/storage/app/public/upload/covers/*
+/storage/app/public/upload/posts/*
+/storage/app/public/upload/profile_photos/*
 composer.lock

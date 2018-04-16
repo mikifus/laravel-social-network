@@ -89,3 +89,101 @@ Route::get('/{username}/followers', 'ProfileController@followers');
 Route::post('/{username}/save/hobbies', 'ProfileController@saveHobbies');
 Route::post('/{username}/save/relationship', 'ProfileController@saveRelationship');
 
+
+/**
+ * Multimedia
+ */
+// Images
+//Route::group(['middleware' => 'web'], function() {
+    Route::get('images/add', ['as' => 'images.add', 'uses' => 'ImagesController@getAdd']);
+    Route::post('images/add', ['as' => 'images.store_async', 'uses' => 'ImagesController@storeAsync']);
+    Route::get('images/edit/{id}', ['as' => 'images.edit', 'uses' => 'ImagesController@getEdit']);
+    Route::post('images/udpate/{id}', ['as' => 'images.update', 'uses' => 'ImagesController@update']);
+    Route::get('images/delete/{id}', ['as' => 'images.delete', 'uses' => 'ImagesController@getDelete']);
+    Route::post('images/delete', ['as' => 'images.destroy', 'uses' => 'ImagesController@destroy']);
+    Route::get('images/{username}', ['as' => 'images_profile_path', 'uses' => 'ImagesController@showUser']);
+    Route::get('image/{slug}', ['as' => 'images.slug_view', 'uses' => 'ImagesController@showSlug']);
+
+    Route::get('images', ['as' => 'images.index', 'uses' => 'ImagesController@getIndex']);
+//});
+
+//imagealbum Routes
+//Route::group(['middleware' => 'web'], function() {
+//    Route::get('imagealbums/add', [ 'as' => 'imagealbums.add', 'uses' => 'ImagealbumsController@getAdd' ]);
+    Route::post('imagealbums/store', ['as' => 'imagealbums.store', 'uses' => 'ImagealbumsController@store']);
+    Route::get('imagealbums/edit/{id}', ['as' => 'imagealbums.edit', 'uses' => 'ImagealbumsController@getEdit']);
+    Route::post('imagealbums/edit/{id}', ['as' => 'imagealbums.update', 'uses' => 'ImagealbumsController@update']);
+    Route::get('imagealbums/delete/{id}', ['as' => 'imagealbums.destroy', 'uses' => 'ImagealbumsController@destroy']);
+//});
+
+// Videos
+Route::get('videos/add', ['as' => 'videos.add', 'uses' => 'VideosController@getAdd']);
+Route::post('videos/add', ['as' => 'videos.store', 'uses' => 'VideosController@store']);
+Route::get('videos/edit/{id}', ['as' => 'videos.edit', 'uses' => 'VideosController@getEdit']);
+Route::post('videos/edit/{id}', ['as' => 'videos.update', 'uses' => 'VideosController@update']);
+Route::get('videos/delete/{id}', ['as' => 'videos.destroy', 'uses' => 'VideosController@destroy']);
+
+Route::get('/videos/{username}', ['as' => 'videos.username', 'uses' => 'VideosController@showUser']);
+Route::get('videos', ['as' => 'videos.index', 'uses' => 'VideosController@getIndex']);
+
+//videoalbum Routes
+//Route::group(['middleware' => 'web'], function() {
+    Route::get('videoalbums/add', ['as' => 'videoalbums.add', 'uses' => 'VideoalbumsController@getAdd']);
+    Route::post('videoalbums/store', ['as' => 'videoalbums.store', 'uses' => 'VideoalbumsController@store']);
+    Route::get('videoalbums/edit/{id}', ['as' => 'videoalbums.edit', 'uses' => 'VideoalbumsController@getEdit']);
+    Route::post('videoalbums/edit/{id}', ['as' => 'videoalbums.update', 'uses' => 'VideoalbumsController@update']);
+    Route::get('videoalbums/delete/{id}', ['as' => 'videoalbums.destroy', 'uses' => 'VideoalbumsController@destroy']);
+//    Route::get('videoalbums', [ 'as' => 'videoalbums.index', 'uses' => 'VideoalbumsController@getIndex' ]);
+//  Route::resource('videoalbum','\App\Http\Controllers\VideoalbumController');
+//  Route::post('videoalbums/{id}/update', [ 'as' => 'videoalbums.index', 'uses' => '\App\Http\Controllers\VideoalbumsController@update' ]);
+//  Route::get('videoalbums/{id}/delete', [ 'as' => 'videoalbums.index', 'uses' => '\App\Http\Controllers\VideoalbumsController@destroy' ]);
+//  Route::get('videoalbums/{id}/deleteMsg', [ 'as' => 'videoalbums.index', 'uses' => '\App\Http\Controllers\VideoalbumsController@DeleteMsg' ]);
+//});
+
+
+/**
+ * Music
+ */
+//Route::post('videos/add', [ 'as' => 'videos.store', 'uses' => 'VideosController@store' ]);
+//Route::post('videos/delete', [ 'as' => 'videos.destroy', 'uses' => 'VideosController@destroy' ]);
+
+Route::get('/music/{username}', ['as' => 'music_profile_path', 'uses' => 'MusicController@showUser']);
+
+Route::get('music', ['as' => 'music', 'uses' => 'MusicController@getIndex']);
+
+// Track management
+Route::get('tracks/add', ['as' => 'tracks.add', 'uses' => 'TracksController@getAdd']);
+
+Route::post('tracks/add', ['as' => 'tracks.store_async', 'uses' => 'TracksController@storeAsync']);
+
+Route::get('tracks/delete/{id}', ['as' => 'tracks.delete', 'uses' => 'TracksController@getDelete']);
+
+Route::post('tracks/delete', ['as' => 'tracks.destroy', 'uses' => 'TracksController@destroy']);
+
+Route::get('track/{slug}', ['as' => 'tracks.slug_view', 'uses' => 'TracksController@showSlug']);
+
+//Route::controller('tracks', 'TracksController'); // The specific routes are declared first
+// Music album management
+Route::get('musicalbums/add', ['as' => 'musicalbums.add', 'uses' => 'MusicalbumsController@getAdd']);
+Route::post('musicalbums/add', ['as' => 'musicalbums.store', 'uses' => 'MusicalbumsController@store']);
+
+Route::get('musicalbums/edit/{id}', ['as' => 'musicalbums.edit', 'uses' => 'MusicalbumsController@getEdit']);
+Route::post('musicalbums/edit/{id}', ['as' => 'musicalbums.store_update', 'uses' => 'MusicalbumsController@storeUpdate']);
+
+Route::get('musicalbums/add_images/{id}', ['as' => 'musicalbums.add_images', 'uses' => 'MusicalbumsController@getAddImages']);
+Route::post('musicalbums/add_images/{id}', ['as' => 'musicalbums.store_images', 'uses' => 'MusicalbumsController@storeImages']);
+Route::post('musicalbums/destroy_images/{id}', ['as' => 'musicalbums.destroy_images', 'uses' => 'MusicalbumsController@destroyImages']);
+Route::post('musicalbums/finish_images/{id}', ['as' => 'musicalbums.finish_images', 'uses' => 'MusicalbumsController@finishImages']);
+
+Route::get('musicalbums/add_tracks/{id}', ['as' => 'musicalbums.add_tracks', 'uses' => 'MusicalbumsController@getAddTracks']);
+Route::post('musicalbums/add_tracks/{id}', ['as' => 'musicalbums.store_tracks', 'uses' => 'MusicalbumsController@storeTracks']);
+Route::get('musicalbums/destroy_tracks/{id}/{track_id}', ['as' => 'musicalbums.destroy_tracks', 'uses' => 'MusicalbumsController@destroyTracks']);
+Route::post('musicalbums/finish_tracks/{id}', ['as' => 'musicalbums.finish_tracks', 'uses' => 'MusicalbumsController@finishTracks']);
+Route::get('musicalbums/sort_tracks/{id}', ['as' => 'musicalbums.sort_tracks', 'uses' => 'MusicalbumsController@getSortTracks']);
+Route::post('musicalbums/sort_tracks/{id}', ['as' => 'musicalbums.save_sort_tracks', 'uses' => 'MusicalbumsController@saveSortTracks']);
+Route::get('musicalbums/publish/{id}', ['as' => 'musicalbums.publish', 'uses' => 'MusicalbumsController@getPublish']);
+Route::post('musicalbums/publish/{id}', ['as' => 'musicalbums.finish_publish', 'uses' => 'MusicalbumsController@finishPublish']);
+
+Route::get('musicalbums/delete/{id}', ['as' => 'musicalbums.delete', 'uses' => 'MusicalbumsController@destroy']);
+
+Route::get('musicalbums/{slug}', ['as' => 'musicalbums.slug_view', 'uses' => 'MusicalbumsController@showSlug']);
