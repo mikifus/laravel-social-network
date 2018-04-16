@@ -1,0 +1,8 @@
+/vendor
+/node_modules
+.env
+/nbproject/private
+/public/system
+/public/cache
+/public/build/*
+composer.lock
