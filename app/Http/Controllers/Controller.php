@@ -13,7 +13,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-
+    protected $user;
+    protected $my_profile = false;
 
     public function secure($username, $is_owner = false) {
         $user = User::where('username', $username)->first();

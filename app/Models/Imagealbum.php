@@ -21,7 +21,7 @@ class Imagealbum extends Model
      */
     public function images()
     {
-        return $this->hasMany('App\Image');
+        return $this->hasMany('App\Models\Image');
     }
 
     /**
@@ -31,7 +31,7 @@ class Imagealbum extends Model
      */
     public function thumb()
     {
-        return $this->hasMany('App\Image')->orderBy('id', 'desc')->first();
+        return $this->hasMany('App\Models\Image')->orderBy('id', 'desc')->first();
     }
 
     /**

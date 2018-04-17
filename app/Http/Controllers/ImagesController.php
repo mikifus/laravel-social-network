@@ -19,12 +19,6 @@ use Auth;
 
 class ImagesController extends UserProfileController {
 
-
-
-    public function __construct() {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -214,6 +208,7 @@ class ImagesController extends UserProfileController {
         $data['id'] = $el->id;
         $data['item'] = $el;
         $data['imagealbums'] = Imagealbum::pluck('title', 'id');
+        $data['user'] = $user;
         return $this->renderProfileView('images.edit', $data);
     }
 
@@ -278,9 +273,11 @@ class ImagesController extends UserProfileController {
     public function showSlug($slug)
     {
         $el = Image::findBySlugOrFail($slug);
+        $user = $el->user()->first();
         $data = [];
         $data['id'] = $el->id;
         $data['item'] = $el;
+        $data['user'] = $user;
         return $this->renderProfileView('images.view', $data);
     }
 
@@ -301,7 +298,7 @@ class ImagesController extends UserProfileController {
         $data = [];
         $data['id'] = $el->id;
         $data['item'] = $el;
-        $data['user'] = $this->currentUser;
+        $data['user'] = $user;
 //        return view('images.delete', $data);
         return $this->renderProfileView('images.delete', $data);
     }

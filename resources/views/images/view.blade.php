@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="row">
-		<div class="col-md-3">
-			@include('users.partials.profile-section')
-		</div>
-		<div id="center-column" class="col-md-6">
+<div class="h-20"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @include('widgets.sidebar')
+        </div>
+        <div class="col-md-9">
 			<div class="panel panel-default">
 				<div class="panel-heading">
                     <h3>{{ $item->title }}</h3>
@@ -16,9 +18,6 @@
 				</div>
 			</div>
 		</div>
-
-		<div id="right-side-column" class="col-md-3">
-			@include('friends.partials.friend-chat-list')
-		</div>
-	</div>
+    </div>
+</div>
 @endsection

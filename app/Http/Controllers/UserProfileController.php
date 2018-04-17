@@ -11,9 +11,9 @@ abstract class UserProfileController extends Controller
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
-	}
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
     protected function renderProfileView($view = null, $data = [], $mergeData = [])
     {

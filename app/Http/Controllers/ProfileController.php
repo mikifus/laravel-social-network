@@ -20,9 +20,6 @@ use Session;
 
 class ProfileController extends Controller
 {
-    private $user;
-    private $my_profile = false;
-
 
     public function __construct()
     {

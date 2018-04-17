@@ -26,7 +26,7 @@ class ImageEditRequest extends Request
     {
         return [
             'imagealbum_id' => 'integer|exists:imagealbums,id',
-            'imagealbum_title' => 'sometimes|min:4|unique:imagealbums,title'
+            'imagealbum_title' => 'nullable|min:4|unique:imagealbums,title'
         ];
     }
 }

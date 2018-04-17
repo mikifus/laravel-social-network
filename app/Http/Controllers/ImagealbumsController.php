@@ -8,7 +8,7 @@ use App\Http\Controllers\UserProfileController;
 
 use Illuminate\Http\Request;
 use Auth;
-use App\Imagealbum;
+use App\Models\Imagealbum;
 
 class ImagealbumsController extends UserProfileController {
 

@@ -19,7 +19,7 @@ class GroupController extends Controller
     }
 
 
-    public function secure($id){
+    public function secureGroup($id){
         $group = Group::find($id);
 
         if ($group){
@@ -51,7 +51,7 @@ class GroupController extends Controller
 
     public function group($id){
 
-        if (!$this->secure($id)) return redirect('/404');
+        if (!$this->secureGroup($id)) return redirect('/404');
 
         $user = Auth::user();
 
@@ -71,7 +71,7 @@ class GroupController extends Controller
     public function stats($id){
 
 
-        if (!$this->secure($id)) return redirect('/404');
+        if (!$this->secureGroup($id)) return redirect('/404');
 
         $user = Auth::user();
 
