@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\User\UserRepository;
 
 use App\Http\Requests;
 use App\Http\Controllers\UserProfileController;
 use Auth;
+use App\Models\User;
 
 class MusicController extends UserProfileController
 {
@@ -16,14 +16,20 @@ class MusicController extends UserProfileController
      *
      * @return Response
      */
-    public function getIndex(UserRepository $userRepository)
+    public function getIndex()
     {
         $user = Auth::user();
-        return $this->showUser($user->username, $userRepository);
+        return $this->showUser($user->username);
     }
 
-    public function showUser($username, UserRepository $userRepository) {
-        $user = $userRepository->findByUsername($username);
+    public function showUser($username) {
+        if (empty($username)) {
+            $user = Auth::user();
+        } else if (!$this->secure($username)) {
+            return redirect('/404');
+        } else {
+            $user = User::where('username', $username)->first();
+        }
 
         // Albums
         if( $user->isId( Auth::user()->id ) ) {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
-use App\Videoalbum;
+use App\Models\Videoalbum;
 use Amranidev\Ajaxis\Ajaxis;
 use URL;
 use \Serverfireteam\Panel\CrudController;

@@ -8,8 +8,8 @@ use App\Http\Controllers\UserProfileController;
 use App\Repositories\User\UserRepository;
 use Illuminate\Support\Facades\Response;
 
-use App\Musicalbum;
-use App\MusicalbumTrack;
+use App\Models\Musicalbum;
+use App\Models\MusicalbumTrack;
 use App\Http\Requests;
 use App\Http\Requests\MusicalbumAddRequest;
 use App\Http\Requests\MusicalbumImagesAddRequest;
@@ -312,13 +312,13 @@ class MusicalbumsController extends UserProfileController
             $title = $file->getClientOriginalName();
         }
 
-        $el = new \App\MusicalbumTrack;
+        $el = new \App\Models\MusicalbumTrack;
         $el->title = $title;
         $el->musicalbum_id = $musicalbum->id;
         $el->author = $request->author;
-        $el->feat = $request->feat;
-        $el->beatmaker = $request->beatmaker;
-        $el->description = $request->description;
+        $el->feat = $request->feat ? $request->feat : '';
+        $el->beatmaker = $request->beatmaker ? $request->beatmaker : '';
+        $el->description = $request->description ? $request->description : '';
         $el->user_id = $user->id;
         $el->file = $file;
         try {

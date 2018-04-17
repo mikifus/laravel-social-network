@@ -247,4 +247,72 @@ class User extends Authenticatable
                     }]);
     }
 
+    /**
+     * All videos of this user
+     *
+     * @return HasMany
+     */
+    public function videos() {
+        return $this->hasMany('App\Models\Video');
+    }
+
+    /**
+     * Videos without album of this user
+     *
+     * @return HasMany
+     */
+    public function videosWithoutAlbum() {
+        return $this->hasMany('App\Models\Video')->where('videoalbum_id', '=', NULL);
+    }
+
+    /**
+     * Video albums of this user
+     *
+     * @return HasMany
+     */
+    public function videoalbums() {
+        return $this->hasMany('App\Models\Videoalbum')->with(['videos' => function($query) {
+                        $query->get();
+                    }]);
+    }
+
+    /**
+     * Tracks of this user
+     *
+     * @return HasMany
+     */
+    public function tracks() {
+        return $this->hasMany('App\Models\Track');
+    }
+
+    /**
+     * Returns all albums
+     *
+     * @return hasMany
+     */
+    public function musicalbums() {
+        return $this->hasMany('App\Models\Musicalbum');
+    }
+
+    /**
+     * Returns published albums
+     *
+     * @return hasMany
+     */
+    public function publishedMusicalbums() {
+        return $this->hasMany('App\Models\Musicalbum')->where('status', Musicalbum::$STATUS_PUBLISHED);
+    }
+
+    /**
+     * Determine if the current user is the same as the given one.
+     *
+     * @param int $id
+     *
+     * @return boolean
+     *
+     */
+    public function isId($id) {
+        return $this->id == $id;
+    }
+
 }

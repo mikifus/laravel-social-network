@@ -125,6 +125,7 @@
 </script>
 <script src="{{ asset('plugins/jquery/jquery-2.1.4.min.js')  }}"></script>
 <script src="{{ asset('plugins/pace-master/pace.min.js') }}"></script>
+<script src="{{ asset('js/app.js')  }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery.serializeJSON/jquery.serializejson.min.js') }}"></script>
 <script src="{{ asset('plugins/fancybox/dist/jquery.fancybox.min.js') }}"></script>

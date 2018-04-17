@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Codesleeve\Stapler\ORM\EloquentTrait;
 use Illuminate\Database\Eloquent\Model;
-//use Conner\Likeable\LikeableTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 

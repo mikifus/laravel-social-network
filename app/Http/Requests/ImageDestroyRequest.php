@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\Image;
+use App\Models\Image;
 
 class ImageDestroyRequest extends Request
 {

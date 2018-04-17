@@ -101,8 +101,8 @@ Route::post('/{username}/save/relationship', 'ProfileController@saveRelationship
     Route::post('profile/images/udpate/{id}', ['as' => 'images.update', 'uses' => 'ImagesController@update']);
     Route::get('profile/images/delete/{id}', ['as' => 'images.delete', 'uses' => 'ImagesController@getDelete']);
     Route::post('profile/images/delete', ['as' => 'images.destroy', 'uses' => 'ImagesController@destroy']);
-    Route::get('profile/images/{username}', ['as' => 'images_profile_path', 'uses' => 'ImagesController@showUser']);
-    Route::get('profile/image/{slug}', ['as' => 'images.slug_view', 'uses' => 'ImagesController@showSlug']);
+    Route::get('/{username}/images/', ['as' => 'images_profile_path', 'uses' => 'ImagesController@showUser']);
+    Route::get('image/{slug}', ['as' => 'images.slug_view', 'uses' => 'ImagesController@showSlug']);
 
     Route::get('profile/images', ['as' => 'images.index', 'uses' => 'ImagesController@getIndex']);
 //});
@@ -123,7 +123,7 @@ Route::get('profile/videos/edit/{id}', ['as' => 'videos.edit', 'uses' => 'Videos
 Route::post('profile/videos/edit/{id}', ['as' => 'videos.update', 'uses' => 'VideosController@update']);
 Route::get('profile/videos/delete/{id}', ['as' => 'videos.destroy', 'uses' => 'VideosController@destroy']);
 
-Route::get('profile/videos/{username}', ['as' => 'videos.username', 'uses' => 'VideosController@showUser']);
+Route::get('/{username}/videos/', ['as' => 'videos.username', 'uses' => 'VideosController@showUser']);
 Route::get('profile/videos', ['as' => 'videos.index', 'uses' => 'VideosController@getIndex']);
 
 //videoalbum Routes
@@ -147,7 +147,7 @@ Route::get('profile/videos', ['as' => 'videos.index', 'uses' => 'VideosControlle
 //Route::post('videos/add', [ 'as' => 'videos.store', 'uses' => 'VideosController@store' ]);
 //Route::post('videos/delete', [ 'as' => 'videos.destroy', 'uses' => 'VideosController@destroy' ]);
 
-Route::get('profile/music/{username}', ['as' => 'music_profile_path', 'uses' => 'MusicController@showUser']);
+Route::get('/{username}/music', ['as' => 'music_profile_path', 'uses' => 'MusicController@showUser']);
 
 Route::get('profile/music', ['as' => 'music', 'uses' => 'MusicController@getIndex']);
 
@@ -186,4 +186,4 @@ Route::post('profile/musicalbums/publish/{id}', ['as' => 'musicalbums.finish_pub
 
 Route::get('profile/musicalbums/delete/{id}', ['as' => 'musicalbums.delete', 'uses' => 'MusicalbumsController@destroy']);
 
-Route::get('profile/musicalbums/{slug}', ['as' => 'musicalbums.slug_view', 'uses' => 'MusicalbumsController@showSlug']);
+Route::get('musicalbums/{slug}', ['as' => 'musicalbums.slug_view', 'uses' => 'MusicalbumsController@showSlug']);

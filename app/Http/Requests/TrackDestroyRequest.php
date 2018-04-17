@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\Track;
+use App\Models\Track;
 
 class TrackDestroyRequest extends Request
 {

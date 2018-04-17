@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\Musicalbum;
+use App\Models\Musicalbum;
 use Auth;
 
 class MusicalbumImagesAddRequest extends Request

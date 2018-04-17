@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserProfileController;
 use \App\Repositories\User\UserRepository;
 
-use App\Video;
-use App\Videoalbum;
+use App\Models\Video;
+use App\Models\Videoalbum;
 use App\Http\Requests\VideoAddRequest;
 use App\Http\Requests\VideoEditRequest;
 use App\Http\Requests\VideoDestroyRequest;

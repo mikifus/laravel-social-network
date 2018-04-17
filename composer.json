@@ -17,7 +17,9 @@
         "cviebrock/eloquent-sluggable": "^4.0",
         "spatie/eloquent-sortable": "^2.1",
         "james-heinrich/getid3": "^1.9",
-        "laravelcollective/html": "5.4.*"
+        "laravelcollective/html": "5.4.*",
+        "proengsoft/laravel-jsvalidation": "2.*",
+        "dereuromark/media-embed": "0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -50,7 +52,8 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
+            "php artisan optimize",
+            "php artisan vendor:publish --provider=\"Proengsoft\\JsValidation\\JsValidationServiceProvider\" --tag=public --force"
         ]
     },
     "config": {

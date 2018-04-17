@@ -171,8 +171,7 @@ return [
 //        Serverfireteam\Panel\PanelServiceProvider::class,
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
         Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
-//        Collective\Html\HtmlServiceProvider::class,
-//        Proengsoft\JsValidation\JsValidationServiceProvider::class,
+        Proengsoft\JsValidation\JsValidationServiceProvider::class,
 //        Conner\Likeable\LikeableServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Spatie\EloquentSortable\SortableServiceProvider::class,
@@ -249,9 +248,10 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'Input' => Illuminate\Support\Facades\Input::class,
 
         'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
+        'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
     ],
 
 ];

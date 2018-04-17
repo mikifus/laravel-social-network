@@ -36,9 +36,9 @@ class MusicalbumAddTrackRequest extends Request
         return [
             'title'        => 'required|min:1|max:255',
             'author'       => 'required|min:1|max:255',
-            'feat'         => 'min:1|max:255',
-            'beatmaker'    => 'min:1|max:255',
-            'description'  => 'min:1|max:700',
+            'feat'         => 'nullable|min:1|max:255',
+            'beatmaker'    => 'nullable|min:1|max:255',
+            'description'  => 'nullable|min:1|max:700',
             'file'         => 'required|mimes:mp3,mpga|max:15000|no_js_validation'
         ];
     }

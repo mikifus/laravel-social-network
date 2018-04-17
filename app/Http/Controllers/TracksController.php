@@ -8,7 +8,7 @@ use App\Repositories\User\UserRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 
-use App\Track;
+use App\Models\Track;
 use App\Http\Requests\TrackAddRequest;
 use App\Http\Requests\TrackDestroyRequest;
 use App\Http\Requests;
@@ -141,7 +141,7 @@ class TracksController extends UserProfileController
         $data = [];
         $data['id'] = $el->id;
         $data['item'] = $el;
-        $data['user'] = $this->currentUser;
+        $data['user'] = $this->user;
 //        return view('images.delete', $data);
         return $this->renderProfileView('tracks.delete', $data);
     }

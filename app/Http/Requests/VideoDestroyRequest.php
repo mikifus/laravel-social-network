@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\Video;
+use App\Models\Video;
 
 class VideoDestroyRequest extends Request
 {

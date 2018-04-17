@@ -3,7 +3,7 @@
 @section('header')
     {!! Html::style('/plugins/dropzone/dropzone.css') !!}
     {!! Html::style('css/dropzone-override.css') !!}
-@stop
+@append
 
 @section('footer')
     {!! Html::script('/plugins/dropzone/dropzone.js') !!}
@@ -50,4 +50,4 @@
         </div>
     </div>
     <!-- End Dropzone Preview Template -->
-@stop
+@append

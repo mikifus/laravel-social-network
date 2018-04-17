@@ -17,9 +17,9 @@ abstract class UserProfileController extends Controller
 
     protected function renderProfileView($view = null, $data = [], $mergeData = [])
     {
-//        if( empty($data['user']) ) {
-//            $data['user'] = $this->currentUser;
-//        }
+        if( empty($data['user']) ) {
+            $data['user'] = Auth::user();
+        }
         return view($view, $data, $mergeData);
     }
 }
