@@ -64,10 +64,8 @@
                                             <a href="{!! URL::route('tracks.slug_view', [$item->slug]) !!}">
                                                 <h3 class="media-heading">{!! $item->author !!} - {!! $item->title !!}</h3>
                                             </a>
-                                            <a href="{!! URL::route('tracks.delete', [$item->id]) !!}">
-                                                <button class="btn btn-primary" >
-                                                    {!! trans('images.index_btn_delete') !!}
-                                                </button>
+                                            <a data-href="{!! URL::route('tracks.destroy', [$item->id]) !!}" data-item_name="{{ $item->title }}" data-toggle="modal" data-target="#modal-confirm" data-target="#confirm" class="btn btn-danger" href="#">
+                                                <i class="fa fa-trash"></i> {!! trans('images.index_btn_delete') !!}
                                             </a>
                                         </div>
                                     </li>

@@ -147,18 +147,18 @@ Route::get('/{username}/videos/', ['as' => 'videos.username', 'uses' => 'VideosC
 //Route::post('videos/add', [ 'as' => 'videos.store', 'uses' => 'VideosController@store' ]);
 //Route::post('videos/delete', [ 'as' => 'videos.destroy', 'uses' => 'VideosController@destroy' ]);
 
-Route::get('/{username}/music', ['as' => 'music_profile_path', 'uses' => 'MusicController@showUser']);
-
 Route::get('profile/music', ['as' => 'music', 'uses' => 'MusicController@getIndex']);
+
+Route::get('/{username}/music', ['as' => 'music_profile_path', 'uses' => 'MusicController@showUser']);
 
 // Track management
 Route::get('profile/tracks/add', ['as' => 'tracks.add', 'uses' => 'TracksController@getAdd']);
 
 Route::post('profile/tracks/add', ['as' => 'tracks.store_async', 'uses' => 'TracksController@storeAsync']);
 
-Route::get('profile/tracks/delete/{id}', ['as' => 'tracks.delete', 'uses' => 'TracksController@getDelete']);
+Route::get('profile/tracks/destroy/{id}', ['as' => 'tracks.destroy', 'uses' => 'TracksController@destroy']);
 
-Route::post('profile/tracks/delete', ['as' => 'tracks.destroy', 'uses' => 'TracksController@destroy']);
+Route::post('profile/tracks/delete', ['as' => 'tracks.delete', 'uses' => 'TracksController@getDelete']);
 
 Route::get('profile/track/{slug}', ['as' => 'tracks.slug_view', 'uses' => 'TracksController@showSlug']);
 

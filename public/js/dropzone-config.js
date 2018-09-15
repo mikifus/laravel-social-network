@@ -217,7 +217,7 @@ $(function () {
                 node = _ref[_i];
                 _results.push(node.textContent = message);
             }
-            $(file.previewElement.querySelectorAll("[data-dz-extrafields]")).hide();
+            $(file.previewElement.querySelectorAll("[data-dz-extrafields]")).show();
             return _results;
         },
         success: function success(file, done) {

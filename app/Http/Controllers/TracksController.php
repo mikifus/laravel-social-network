@@ -76,9 +76,9 @@ class TracksController extends UserProfileController
         $el = new Track;
         $el->title = $title;
         $el->author = $request->author;
-        $el->feat = $request->feat;
-        $el->beatmaker = $request->beatmaker;
-        $el->description = $request->description;
+        $el->feat = $request->feat ? $request->feat : '';
+        $el->beatmaker = $request->beatmaker ? $request->beatmaker : '';
+        $el->description = $request->description ? $request->description : '';
         $el->user_id = $user->id;
         $el->file = $file;
         try {
@@ -136,7 +136,7 @@ class TracksController extends UserProfileController
         $el = Track::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect('music')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('music')->withErrors(['error'=>trans('general.permission_denied')]);
         }
         $data = [];
         $data['id'] = $el->id;
@@ -146,9 +146,21 @@ class TracksController extends UserProfileController
         return $this->renderProfileView('tracks.delete', $data);
     }
 
-    public function destroy(TrackDestroyRequest $request)
+//     public function destroy(TrackDestroyRequest $request)
+//     {
+//         Track::destroy($request->id);
+//         return redirect()->route('music')->withSuccess(trans('tracks.destroy_success'));
+//     }
+
+    public function destroy($id)
     {
-        Track::destroy($request->id);
-        return redirect('music')->withSuccess(trans('tracks.destroy_success'));
+        $user = Auth::user();
+        $el = Track::findOrFail($id);
+        if( $el->user_id != $user->id )
+        {
+            return redirect()->route('music')->withErrors(['error'=>trans('general.permission_denied')]);
+        }
+        Track::destroy($id);
+        return redirect()->route('music')->withSuccess(trans('tracks.destroy_success'));
     }
 }

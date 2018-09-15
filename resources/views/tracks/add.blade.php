@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @include('snippets.include_dropzone')
-
+@include('snippets.include_jsmediatags')
+@include('snippets.include_jsvalidator')
 
 @section('footer')
 <script>
