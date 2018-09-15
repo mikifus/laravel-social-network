@@ -15,6 +15,7 @@ use App\Http\Requests\ImageDestroyRequest;
 use App\Models\User;
 use App\Http\Controllers\UserProfileController;
 use Auth;
+use URL;
 
 class ImagesController extends UserProfileController {
 
@@ -302,9 +303,21 @@ class ImagesController extends UserProfileController {
         return $this->renderProfileView('images.delete', $data);
     }
 
-    public function destroy(ImageDestroyRequest $request)
+//     public function destroy(ImageDestroyRequest $request)
+//     {
+//         Image::destroy($request->id);
+//         return redirect(URL::route('images.index'))->withSuccess(trans('images.destroy_success'));
+//     }
+
+    public function destroy($id)
     {
-        Image::destroy($request->id);
-        return redirect('images')->withSuccess(trans('images.destroy_success'));
+        $user = Auth::user();
+        $el = Image::findOrFail($id);
+        if( $el->user_id != $user->id )
+        {
+            return redirect(URL::route('images.index'))->withErrors(['error'=>trans('general.permission_denied')]);
+        }
+        Image::destroy($id);
+        return redirect(URL::route('images.index'))->withSuccess(trans('images.destroy_success'));
     }
 }

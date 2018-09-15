@@ -95,16 +95,16 @@ Route::post('/{username}/save/relationship', 'ProfileController@saveRelationship
  */
 // Images
 //Route::group(['middleware' => 'web'], function() {
+    Route::get('profile/images', ['as' => 'images.index', 'uses' => 'ImagesController@getIndex']);
     Route::get('profile/images/add', ['as' => 'images.add', 'uses' => 'ImagesController@getAdd']);
     Route::post('profile/images/add', ['as' => 'images.store_async', 'uses' => 'ImagesController@storeAsync']);
     Route::get('profile/images/edit/{id}', ['as' => 'images.edit', 'uses' => 'ImagesController@getEdit']);
     Route::post('profile/images/udpate/{id}', ['as' => 'images.update', 'uses' => 'ImagesController@update']);
-    Route::get('profile/images/delete/{id}', ['as' => 'images.delete', 'uses' => 'ImagesController@getDelete']);
-    Route::post('profile/images/delete', ['as' => 'images.destroy', 'uses' => 'ImagesController@destroy']);
+//     Route::get('profile/images/delete/{id}', ['as' => 'images.destroy', 'uses' => 'ImagesController@getDelete']);
+//     Route::post('profile/images/delete', ['as' => 'images.delete', 'uses' => 'ImagesController@destroy']);
+    Route::get('profile/images/destroy/{id}', ['as' => 'images.destroy', 'uses' => 'ImagesController@destroy']);
     Route::get('/{username}/images/', ['as' => 'images_profile_path', 'uses' => 'ImagesController@showUser']);
     Route::get('image/{slug}', ['as' => 'images.slug_view', 'uses' => 'ImagesController@showSlug']);
-
-    Route::get('profile/images', ['as' => 'images.index', 'uses' => 'ImagesController@getIndex']);
 //});
 
 //imagealbum Routes
@@ -117,6 +117,7 @@ Route::post('/{username}/save/relationship', 'ProfileController@saveRelationship
 //});
 
 // Videos
+Route::get('profile/videos', ['as' => 'videos.index', 'uses' => 'VideosController@getIndex']);
 Route::get('profile/videos/add', ['as' => 'videos.add', 'uses' => 'VideosController@getAdd']);
 Route::post('profile/videos/add', ['as' => 'videos.store', 'uses' => 'VideosController@store']);
 Route::get('profile/videos/edit/{id}', ['as' => 'videos.edit', 'uses' => 'VideosController@getEdit']);
@@ -124,7 +125,6 @@ Route::post('profile/videos/edit/{id}', ['as' => 'videos.update', 'uses' => 'Vid
 Route::get('profile/videos/delete/{id}', ['as' => 'videos.destroy', 'uses' => 'VideosController@destroy']);
 
 Route::get('/{username}/videos/', ['as' => 'videos.username', 'uses' => 'VideosController@showUser']);
-Route::get('profile/videos', ['as' => 'videos.index', 'uses' => 'VideosController@getIndex']);
 
 //videoalbum Routes
 //Route::group(['middleware' => 'web'], function() {

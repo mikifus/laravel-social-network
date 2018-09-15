@@ -26,7 +26,7 @@ class MusicController extends UserProfileController
         if (empty($username)) {
             $user = Auth::user();
         } else if (!$this->secure($username)) {
-            return redirect('/404');
+            return abort(404);
         } else {
             $user = User::where('username', $username)->first();
         }

@@ -41,7 +41,11 @@ class GroupController extends Controller
         $groups = Group::join('user_hobbies', 'user_hobbies.hobby_id', '=', 'groups.hobby_id')
             ->where('user_hobbies.user_id', $user->id)->select('groups.*');
 
-        $city = $user->location->city;
+        if(!empty($user->location)) {
+            $city = $user->location->city;
+        } else {
+            $city = '';
+        }
 
 
         return view('groups.index', compact('user', 'groups', 'city'));
@@ -61,7 +65,13 @@ class GroupController extends Controller
             'new_post_group_id' => $group->id
         ];
 
-        $city = $user->location->city;
+//         $city = $user->location->city;
+
+        if(!empty($user->location)) {
+            $city = $user->location->city;
+        } else {
+            $city = '';
+        }
 
         return view('groups.group', compact('user', 'group', 'wall', 'city'));
     }
@@ -77,8 +87,16 @@ class GroupController extends Controller
 
         $group = $this->group;
 
-        $country = $user->location->city->country;
-        $city = $user->location->city;
+//         $country = $user->location->city->country;
+//         $city = $user->location->city;
+
+        if(!empty($user->location)) {
+            $city = $user->location->city;
+            $country = $city->country;
+        } else {
+            $city = '';
+            $country = '';
+        }
 
         $all_countries = $group->countAllCountries();
 
