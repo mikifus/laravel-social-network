@@ -11,6 +11,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
+    require('bootstrap-tagsinput');
+//     require('typeahead.js/dist/typeahead.bundle.js'); // Moved to webpack.mix.js
 } catch (e) {}
 
 /**

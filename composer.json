@@ -9,17 +9,19 @@
         "alexpechkarev/google-maps": "1.0.7",
         "barryvdh/laravel-debugbar": "^2.3",
         "barryvdh/laravel-ide-helper": "^2.3",
+        "codesleeve/laravel-stapler": "dev-master",
+        "cviebrock/eloquent-sluggable": "^4.0",
+        "cviebrock/eloquent-taggable": "3.1",
+        "dereuromark/media-embed": "0.*",
+        "james-heinrich/getid3": "^1.9",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "nesbot/carbon": "^1.22",
-        "codesleeve/laravel-stapler": "dev-master",
-        "thomaswelton/laravel-gravatar": "~1.0",
-        "cviebrock/eloquent-sluggable": "^4.0",
-        "spatie/eloquent-sortable": "^2.1",
-        "james-heinrich/getid3": "^1.9",
         "laravelcollective/html": "5.4.*",
+        "nesbot/carbon": "^1.22",
         "proengsoft/laravel-jsvalidation": "2.*",
-        "dereuromark/media-embed": "0.*"
+        "rtconner/laravel-likeable": "~1.2",
+        "spatie/eloquent-sortable": "^3.4",
+        "thomaswelton/laravel-gravatar": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -60,5 +62,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

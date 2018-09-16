@@ -1,5 +1,6 @@
 {
   "/js/app.js": "/js/app.js",
   "/css/app.css": "/css/app.css",
-  "/js/dropzone-config.js": "/js/dropzone-config.js"
+  "/js/dropzone-config.js": "/js/dropzone-config.js",
+  "/js/node_modules.js": "/js/node_modules.js"
 }

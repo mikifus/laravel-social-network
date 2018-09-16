@@ -1,5 +1,21 @@
 @extends('layouts.app')
 
+@section('footer')
+<script>
+$(document).ready(function(){
+    $(".tagsinput").tagsinput({
+        tagClass: 'big',
+//         typeahead: {
+//             source: function(query) {
+//                 return $.get('http://someservice.com');
+//             }
+//         },
+//         freeInput: true
+    });
+});
+</script>
+@append
+
 @section('content')
 <div class="h-20"></div>
 <div class="container">
@@ -43,6 +59,12 @@
                             {!! Form::text('videoalbum_title',
                                 NULL,
                                 array('class'=>' form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label( trans('videos.tags') ) !!}
+                            {!! Form::text('tags',
+                                NULL,
+                                array('class'=>' form-control tagsinput', 'data-role' => 'tagsinput')) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::submit(trans('videos.submit'),

@@ -137,6 +137,7 @@
 <script src="{{ asset('js/around.js') }}"></script>
 <script src="{{ asset('js/wall.js') }}"></script>
 <script src="{{ asset('js/notifications.js') }}"></script>
+<script src="{{ asset('js/node_modules.js')  }}"></script>
 @yield('footer')
 <script type="text/javascript">
     @if(!Auth::user()->has('location'))

@@ -63,20 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 49);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 17:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(5);
-
-
-/***/ }),
-
-/***/ 5:
+/***/ 12:
 /***/ (function(module, exports) {
 
 Dropzone.autoDiscover = false;
@@ -368,6 +360,14 @@ $(function () {
     $("#back_dropzone").dropzone(musicalbums_dropzone('#back_preview'));
 });
 //};
+
+/***/ }),
+
+/***/ 49:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(12);
+
 
 /***/ })
 

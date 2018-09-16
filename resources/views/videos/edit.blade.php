@@ -1,5 +1,34 @@
 @extends('layouts.app')
 
+@section('footer')
+<script>
+var tagnames = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+        url: '/videos/autocomplete_tags/%QUERY',
+        wildcard: '%QUERY'
+    }
+});
+tagnames.initialize();
+var adapter = tagnames.ttAdapter();
+
+$(document).ready(function(){
+    $(".bootstrap-tagsinput").tagsinput({
+        typeaheadjs: [{
+                        hint: true,
+                        highlight: true,
+                        minLength: 1
+                    },
+                    {
+                        source: adapter,
+                    }],
+        freeInput: true
+    });
+});
+</script>
+@append
+
 @section('content')
 <div class="h-20"></div>
 <div class="container">
@@ -47,6 +76,12 @@
                             {!! Form::text('videoalbum_title',
                                 NULL,
                                 array('class'=>' form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label( trans('videos.tags') ) !!}
+                            {!! Form::text('tags',
+                                $item->tagList,
+                                array('class'=>' form-control bootstrap-tagsinput')) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::submit(trans('videos.submit'),

@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MediaEmbed\MediaEmbed;
+use Cviebrock\EloquentTaggable\Taggable;
+
 
 class Video extends Model
 {
+    use Taggable;
     /**
      * The database table used by the model.
      *

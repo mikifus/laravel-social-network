@@ -25,8 +25,9 @@ class VideoEditRequest extends Request
     public function rules()
     {
         return [
-            'videoalbum_id' => 'integer|exists:videoalbums,id',
-            'videoalbum_title' => 'sometimes|min:4|unique:videoalbums,name'
+            'videoalbum_id'    => 'integer|exists:videoalbums,id',
+            'videoalbum_title' => 'sometimes|nullable|min:4|unique:videoalbums,name',
+            'tags'             => 'sometimes|nullable|min:1'
         ];
     }
 }

@@ -15,3 +15,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
 
 mix.js('resources/assets/js/dropzone-config.js', 'public/js')
+mix.scripts([
+    'node_modules/typeahead.js/dist/typeahead.bundle.min.js',
+], 'public/js/node_modules.js');

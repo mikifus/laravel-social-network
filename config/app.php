@@ -172,10 +172,11 @@ return [
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
         Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
-//        Conner\Likeable\LikeableServiceProvider::class,
+        Conner\Likeable\LikeableServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
-        Spatie\EloquentSortable\SortableServiceProvider::class,
+//         Spatie\EloquentSortable\SortableServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Cviebrock\EloquentTaggable\ServiceProvider::class,
 
         /*
          * Application Service Providers...

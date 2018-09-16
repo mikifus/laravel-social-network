@@ -13,6 +13,8 @@ use App\Http\Requests\VideoEditRequest;
 use App\Http\Requests\VideoDestroyRequest;
 use Auth;
 use App\Models\User;
+use Cviebrock\EloquentTaggable\Models\Tag;
+use Response;
 
 class VideosController extends UserProfileController
 {
@@ -108,6 +110,7 @@ class VideosController extends UserProfileController
         }
         try {
             $el->save();
+            $el->tag(trim(strip_tags($request->tags)));
         }
         catch (\Exception $e)
         {
@@ -145,6 +148,7 @@ class VideosController extends UserProfileController
         }
         try {
             $el->save();
+            $el->retag(trim(strip_tags($request->tags)));
         }
         catch (\Exception $e)
         {
@@ -174,5 +178,20 @@ class VideosController extends UserProfileController
         }
         $el->delete();
         return redirect($user->username.'/videos')->withSuccess(trans('videos.destroy_success'));
+    }
+
+    /**
+     * Async method for tags field autocomplete
+     *
+     * @param string $value
+     * @return MediaEmbed\MediaEmbed\MediaObject
+     */
+    public function autocompleteTags($term)
+    {
+//         $term = Request::get('term');
+        $term = trim($term);
+        $results = Tag::where('name', 'like', "%".$term."%")->offset(0)->limit(10)->pluck('name')->toArray();
+
+        return Response::json($results);
     }
 }

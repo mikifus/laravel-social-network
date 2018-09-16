@@ -126,6 +126,8 @@ Route::get('profile/videos/delete/{id}', ['as' => 'videos.destroy', 'uses' => 'V
 
 Route::get('/{username}/videos/', ['as' => 'videos.username', 'uses' => 'VideosController@showUser']);
 
+Route::get('/videos/autocomplete_tags/{term}', ['as' => 'videos.username', 'uses' => 'VideosController@autocompleteTags']);
+
 //videoalbum Routes
 //Route::group(['middleware' => 'web'], function() {
     Route::get('profile/videoalbums/add', ['as' => 'videoalbums.add', 'uses' => 'VideoalbumsController@getAdd']);

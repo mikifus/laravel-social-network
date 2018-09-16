@@ -37,10 +37,11 @@ class VideoAddRequest extends Request
         });
 
         return [
-            'title'      => 'required|min:4',
-            'url'        => 'required|url|video_url',
-            'videoalbum_id' => 'sometimes|integer|min:1|exists:videoalbums,id',
-            'videoalbum_title' => 'sometimes|min:4|unique:videoalbums,name'
+            'title'            => 'required|min:4',
+            'url'              => 'required|url|video_url',
+            'tags'             => 'sometimes|nullable|min:1,',
+            'videoalbum_id'    => 'sometimes|integer|min:1|exists:videoalbums,id',
+            'videoalbum_title' => 'sometimes|nullable|min:4|unique:videoalbums,name'
         ];
     }
 }
