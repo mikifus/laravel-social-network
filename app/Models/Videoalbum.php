@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Codesleeve\Stapler\ORM\EloquentTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use App\Traits\ModelTaggableTrait;
 
 /**
  * Class Videoalbum.
@@ -15,7 +16,7 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
  */
 class Videoalbum extends Model
 {
-    use EloquentTrait, Sluggable, SluggableScopeHelpers;
+    use EloquentTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
 
 
     protected $table = 'videoalbums';

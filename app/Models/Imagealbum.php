@@ -6,10 +6,11 @@ use Codesleeve\Stapler\ORM\EloquentTrait;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use App\Traits\ModelTaggableTrait;
 
 class Imagealbum extends Model
 {
-    use EloquentTrait, Sluggable, SluggableScopeHelpers;
+    use EloquentTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
 
     protected $table = 'imagealbums';
 

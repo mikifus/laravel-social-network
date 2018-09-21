@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use App\Models\Videoalbum;
+use App\Http\Requests\VideoalbumsEditRequest;
 use Amranidev\Ajaxis\Ajaxis;
+// use \Serverfireteam\Panel\CrudController;
 use URL;
-use \Serverfireteam\Panel\CrudController;
 use Auth;
+use Response;
 
 /**
  * Class VideoalbumController.
@@ -51,7 +53,7 @@ class VideoalbumsController extends UserProfileController
         $el = Videoalbum::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect('videos')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('videos.index')->withErrors(['error'=>trans('general.permission_denied')]);
         }
         $data = [];
         $data['id'] = $el->id;
@@ -69,28 +71,6 @@ class VideoalbumsController extends UserProfileController
         $title = 'Create - videoalbum';
 
         return view('videoalbum.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param    \Illuminate\Http\Request  $request
-     * @return  \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $user = Auth::user();
-        $videoalbum = new Videoalbum();
-
-        $videoalbum->name = $request->title;
-
-        $videoalbum->description = $request->description;
-
-        $videoalbum->user_id = $user->id;
-
-        $videoalbum->save();
-
-        return redirect('videos')->withSuccess(trans('videoalbums.add_success'));
     }
 
     /**
@@ -119,7 +99,7 @@ class VideoalbumsController extends UserProfileController
      * @param    int  $id
      * @return  \Illuminate\Http\Response
      */
-    public function edit($id,Request $request)
+    public function edit($id)
     {
         $title = 'Edit - videoalbum';
         if($request->ajax())
@@ -133,24 +113,40 @@ class VideoalbumsController extends UserProfileController
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param    \Illuminate\Http\Request  $request
+     * @return  \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $user = Auth::user();
+        $videoalbum = new Videoalbum();
+        $videoalbum->name = $request->title;
+        $videoalbum->description = $request->description;
+        $videoalbum->user_id = $user->id;
+        $videoalbum->save();
+        $videoalbum->tag(trim(strip_tags($request->tags)));
+
+        return redirect()->route('videos.index')->withSuccess(trans('videoalbums.add_success'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param    \Illuminate\Http\Request  $request
      * @param    int  $id
      * @return  \Illuminate\Http\Response
      */
-    public function update($id,Request $request)
+    public function update($id,VideoalbumsEditRequest $request)
     {
         $videoalbum = Videoalbum::findOrfail($id);
-
         $videoalbum->name = $request->name;
-
         $videoalbum->description = $request->description;
-
-
         $videoalbum->save();
+        $videoalbum->retag(trim(strip_tags($request->tags)));
 
-        return redirect('videoalbum');
+        return redirect()->route('videos.index')->withSuccess(trans('videoalbums.update_success'));
     }
 
     /**
@@ -182,9 +178,20 @@ class VideoalbumsController extends UserProfileController
      	$el = Videoalbum::findOrfail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect('videos')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('videos.index')->withErrors(['error'=>trans('general.permission_denied')]);
         }
      	$el->delete();
-        return redirect('videos')->withSuccess(trans('videoalbums.destroy_success'));
+        return redirect()->route('videos.index')->withSuccess(trans('videoalbums.destroy_success'));
+    }
+
+    /**
+     * Async method for tags field autocomplete
+     *
+     * @param string $value
+     * @return Response
+     */
+    protected function autocompleteTags($term)
+    {
+        return Response::json(Videoalbum::searchModelTags($term));
     }
 }

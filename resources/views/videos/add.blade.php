@@ -1,20 +1,6 @@
 @extends('layouts.app')
 
-@section('footer')
-<script>
-$(document).ready(function(){
-    $(".tagsinput").tagsinput({
-        tagClass: 'big',
-//         typeahead: {
-//             source: function(query) {
-//                 return $.get('http://someservice.com');
-//             }
-//         },
-//         freeInput: true
-    });
-});
-</script>
-@append
+@include('snippets.tagsinput-autocomplete', ['url' => route('videos.autocomplete_tags',['term'=>'%QUERY'])])
 
 @section('content')
 <div class="h-20"></div>

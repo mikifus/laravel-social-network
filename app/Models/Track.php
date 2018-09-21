@@ -7,10 +7,11 @@ use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Codesleeve\Stapler\ORM\EloquentTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use App\Traits\ModelTaggableTrait;
 
 class Track extends Model implements StaplerableInterface
 {
-    use EloquentTrait, Sluggable, SluggableScopeHelpers;
+    use EloquentTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
 
     /**
      * The database table used by the model.

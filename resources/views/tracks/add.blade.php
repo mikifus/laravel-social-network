@@ -141,6 +141,12 @@ $(document).ready(function(){
                             NULL,
                             array('class'=>' form-control')) !!}
                     </div>
+                    <div class="form-group">
+                        {!! Form::label( trans('videos.tags') ) !!}
+                        {!! Form::text('tags',
+                            NULL,
+                            array('class'=>' form-control bootstrap-tagsinput')) !!}
+                    </div>
                     {!! Form::close() !!}
                 </div>
             </div>

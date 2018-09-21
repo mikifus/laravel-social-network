@@ -105,6 +105,7 @@ Route::post('/{username}/save/relationship', 'ProfileController@saveRelationship
     Route::get('profile/images/destroy/{id}', ['as' => 'images.destroy', 'uses' => 'ImagesController@destroy']);
     Route::get('/{username}/images/', ['as' => 'images_profile_path', 'uses' => 'ImagesController@showUser']);
     Route::get('image/{slug}', ['as' => 'images.slug_view', 'uses' => 'ImagesController@showSlug']);
+    Route::get('/images/autocomplete_tags/{term}', ['as' => 'images.autocomplete_tags', 'uses' => 'ImagesController@autocompleteTags']);
 //});
 
 //imagealbum Routes
@@ -114,6 +115,7 @@ Route::post('/{username}/save/relationship', 'ProfileController@saveRelationship
     Route::get('profile/imagealbums/edit/{id}', ['as' => 'imagealbums.edit', 'uses' => 'ImagealbumsController@getEdit']);
     Route::post('profile/imagealbums/edit/{id}', ['as' => 'imagealbums.update', 'uses' => 'ImagealbumsController@update']);
     Route::get('profile/imagealbums/delete/{id}', ['as' => 'imagealbums.destroy', 'uses' => 'ImagealbumsController@destroy']);
+    Route::get('/imagealbums/autocomplete_tags/{term}', ['as' => 'imagealbums.autocomplete_tags', 'uses' => 'ImagealbumsController@autocompleteTags']);
 //});
 
 // Videos
@@ -123,10 +125,10 @@ Route::post('profile/videos/add', ['as' => 'videos.store', 'uses' => 'VideosCont
 Route::get('profile/videos/edit/{id}', ['as' => 'videos.edit', 'uses' => 'VideosController@getEdit']);
 Route::post('profile/videos/edit/{id}', ['as' => 'videos.update', 'uses' => 'VideosController@update']);
 Route::get('profile/videos/delete/{id}', ['as' => 'videos.destroy', 'uses' => 'VideosController@destroy']);
+Route::get('/videos/autocomplete_tags/{term}', ['as' => 'videos.autocomplete_tags', 'uses' => 'VideosController@autocompleteTags']);
 
 Route::get('/{username}/videos/', ['as' => 'videos.username', 'uses' => 'VideosController@showUser']);
 
-Route::get('/videos/autocomplete_tags/{term}', ['as' => 'videos.username', 'uses' => 'VideosController@autocompleteTags']);
 
 //videoalbum Routes
 //Route::group(['middleware' => 'web'], function() {
@@ -135,6 +137,7 @@ Route::get('/videos/autocomplete_tags/{term}', ['as' => 'videos.username', 'uses
     Route::get('profile/videoalbums/edit/{id}', ['as' => 'videoalbums.edit', 'uses' => 'VideoalbumsController@getEdit']);
     Route::post('profile/videoalbums/edit/{id}', ['as' => 'videoalbums.update', 'uses' => 'VideoalbumsController@update']);
     Route::get('profile/videoalbums/delete/{id}', ['as' => 'videoalbums.destroy', 'uses' => 'VideoalbumsController@destroy']);
+    Route::get('/videoalbums/autocomplete_tags/{term}', ['as' => 'videoalbums.autocomplete_tags', 'uses' => 'VideoalbumsController@autocompleteTags']);
 //    Route::get('videoalbums', [ 'as' => 'videoalbums.index', 'uses' => 'VideoalbumsController@getIndex' ]);
 //  Route::resource('videoalbum','\App\Http\Controllers\VideoalbumController');
 //  Route::post('videoalbums/{id}/update', [ 'as' => 'videoalbums.index', 'uses' => '\App\Http\Controllers\VideoalbumsController@update' ]);
@@ -163,6 +166,7 @@ Route::get('profile/tracks/destroy/{id}', ['as' => 'tracks.destroy', 'uses' => '
 Route::post('profile/tracks/delete', ['as' => 'tracks.delete', 'uses' => 'TracksController@getDelete']);
 
 Route::get('profile/track/{slug}', ['as' => 'tracks.slug_view', 'uses' => 'TracksController@showSlug']);
+Route::get('tracks/autocomplete_tags/{term}', ['as' => 'tracks.autocomplete_tags', 'uses' => 'TracksController@autocompleteTags']);
 
 //Route::controller('tracks', 'TracksController'); // The specific routes are declared first
 // Music album management
@@ -189,3 +193,5 @@ Route::post('profile/musicalbums/publish/{id}', ['as' => 'musicalbums.finish_pub
 Route::get('profile/musicalbums/delete/{id}', ['as' => 'musicalbums.delete', 'uses' => 'MusicalbumsController@destroy']);
 
 Route::get('musicalbums/{slug}', ['as' => 'musicalbums.slug_view', 'uses' => 'MusicalbumsController@showSlug']);
+
+Route::get('/musicalbums/autocomplete_tags/{term}', ['as' => 'musicalbums.autocomplete_tags', 'uses' => 'MusicalbumsController@autocompleteTags']);

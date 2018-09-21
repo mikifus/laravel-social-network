@@ -1,33 +1,6 @@
 @extends('layouts.app')
 
-@section('footer')
-<script>
-var tagnames = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    remote: {
-        url: '/videos/autocomplete_tags/%QUERY',
-        wildcard: '%QUERY'
-    }
-});
-tagnames.initialize();
-var adapter = tagnames.ttAdapter();
-
-$(document).ready(function(){
-    $(".bootstrap-tagsinput").tagsinput({
-        typeaheadjs: [{
-                        hint: true,
-                        highlight: true,
-                        minLength: 1
-                    },
-                    {
-                        source: adapter,
-                    }],
-        freeInput: true
-    });
-});
-</script>
-@append
+@include('snippets.tagsinput-autocomplete', ['url' => route('videos.autocomplete_tags',['term'=>'%QUERY'])])
 
 @section('content')
 <div class="h-20"></div>

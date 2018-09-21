@@ -1,5 +1,19 @@
 @extends('layouts.app')
 
+@include('snippets.tagsinput-autocomplete', ['url' => route('videoalbums.autocomplete_tags',['term'=>'%QUERY'])])
+@include('snippets.include_jsvalidator')
+
+@section('footer')
+<script>
+$(document).ready(function(){
+    $.validator.setDefaults({
+        ignore: []
+    });
+});
+</script>
+{!! JsValidator::formRequest('App\Http\Requests\VideoalbumsEditRequest', '.videoalbums_edit_form') !!}
+@append
+
 @section('title',trans('videoalbums.edit_page_title'))
 @section('content')
 <div class="h-20"></div>
@@ -15,7 +29,7 @@
                 <div class="panel-body">
                     @include('messages.errors')
 
-                    {!! Form::open(array('route' => ['videoalbums.update', $item->id], 'class' => 'form')) !!}
+                    {!! Form::open(array('route' => ['videoalbums.update', $item->id], 'class' => 'form videoalbums_edit_form')) !!}
                         <div class="form-group">
                             {!! Form::label( trans('videoalbums.add_name') ) !!}
 
@@ -27,6 +41,12 @@
                                 $item->description,
                                 array('required',
                                       'class'=>' form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label( trans('videoalbums.tags') ) !!}
+                            {!! Form::text('tags',
+                                $item->tagList,
+                                array('class'=>' form-control bootstrap-tagsinput')) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::submit(trans('videoalbums.submit'),

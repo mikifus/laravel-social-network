@@ -70,7 +70,7 @@ class VideosController extends UserProfileController
         $el = Video::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect($user->username.'/videos')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('videos.index')->withErrors(['error'=>trans('general.permission_denied')]);
         }
         $data = [];
         $data['id'] = $el->id;
@@ -117,7 +117,7 @@ class VideosController extends UserProfileController
             $el->delete();
             return back()->withErrors(['error' => "Unexpected error."]);
         }
-        return redirect($user->username.'/videos')->withSuccess(trans('videos.add_success'));
+        return redirect()->route('videos.index')->withSuccess(trans('videos.add_success'));
     }
 
     /**
@@ -154,7 +154,7 @@ class VideosController extends UserProfileController
         {
             return back()->withErrors(['error' => "Unexpected error."]);
         }
-        return redirect($user->username.'/videos')->withSuccess(trans('videos.edit_success'));
+        return redirect()->route('videos.index')->withSuccess(trans('videos.edit_success'));
     }
 
     /**
@@ -174,24 +174,20 @@ class VideosController extends UserProfileController
         $el = Video::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect($user->username.'/videos')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('videos.index')->withErrors(['error'=>trans('general.permission_denied')]);
         }
         $el->delete();
-        return redirect($user->username.'/videos')->withSuccess(trans('videos.destroy_success'));
+        return redirect()->route('videos.index')->withSuccess(trans('videos.destroy_success'));
     }
 
     /**
      * Async method for tags field autocomplete
      *
      * @param string $value
-     * @return MediaEmbed\MediaEmbed\MediaObject
+     * @return Response
      */
-    public function autocompleteTags($term)
+    protected function autocompleteTags($term)
     {
-//         $term = Request::get('term');
-        $term = trim($term);
-        $results = Tag::where('name', 'like', "%".$term."%")->offset(0)->limit(10)->pluck('name')->toArray();
-
-        return Response::json($results);
+        return Response::json(Video::searchModelTags($term));
     }
 }
