@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-
 use Auth;
 
-class ImageAddRequest extends Request
+class ImagealbumsEditRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +25,7 @@ class ImageAddRequest extends Request
     public function rules()
     {
         return [
-            'title'      => 'min:4',
-            'file'       => 'required|image|mimes:jpg,jpeg,png,gif',
-            'imagealbum_id' => 'sometimes|integer|min:1|exists:imagealbums,id',
-            'imagealbum_title' => 'sometimes|min:4|unique:imagealbums,title',
+            'description'      => 'nullable|min:4',
             'tags'             => 'sometimes|nullable|min:1'
         ];
     }

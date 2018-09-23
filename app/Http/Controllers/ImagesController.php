@@ -116,13 +116,14 @@ class ImagesController extends UserProfileController {
         $el->file = $file;
         try {
             $el->save();
+            $el->tag(trim(strip_tags($request->tags)));
         }
         catch (\Exception $e)
         {
             $el->delete();
             return back()->withErrors(['error' => "Unexpected error. Check file extension."]);
         }
-        return redirect('images')->withSuccess(trans('images.add_success'));
+        return redirect()->route('images.index')->withSuccess(trans('images.add_success'));
     }
 
     /**
@@ -173,6 +174,7 @@ class ImagesController extends UserProfileController {
         }
         try {
             $el->save();
+            $el->tag(trim(strip_tags($request->tags)));
         }
         catch (\Exception $e)
         {
@@ -183,7 +185,7 @@ class ImagesController extends UserProfileController {
                 'code' => 400
             ], 400);
         }
-//        return redirect('images')->withSuccess(trans('images.add_success'));
+//        return redirect()->route('images.index')->withSuccess(trans('images.add_success'));
 
         return Response::json([
             'error' => false,
@@ -202,7 +204,7 @@ class ImagesController extends UserProfileController {
         $el = Image::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect('images')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('images.index')->withErrors(['error'=>trans('general.permission_denied')]);
         }
         $data = [];
         $data['id'] = $el->id;
@@ -224,7 +226,7 @@ class ImagesController extends UserProfileController {
         $el = Image::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect('images')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('images.index')->withErrors(['error'=>trans('general.permission_denied')]);
         }
 
         if( !empty($request->imagealbum_title) )
@@ -245,12 +247,13 @@ class ImagesController extends UserProfileController {
         }
         try {
             $el->save();
+            $el->retag(trim(strip_tags($request->tags)));
         }
         catch (\Exception $e)
         {
             return back()->withErrors(['error' => "Unexpected error."]);
         }
-        return redirect('images')->withSuccess(trans('images.add_success'));
+        return redirect()->route('images.index')->withSuccess(trans('images.add_success'));
     }
 
     /**
@@ -293,7 +296,7 @@ class ImagesController extends UserProfileController {
         $el = Image::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect('images')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('images.index')->withErrors(['error'=>trans('general.permission_denied')]);
         }
         $data = [];
         $data['id'] = $el->id;
@@ -319,5 +322,16 @@ class ImagesController extends UserProfileController {
         }
         Image::destroy($id);
         return redirect(URL::route('images.index'))->withSuccess(trans('images.destroy_success'));
+    }
+
+    /**
+     * Async method for tags field autocomplete
+     *
+     * @param string $value
+     * @return Response
+     */
+    protected function autocompleteTags($term)
+    {
+        return Response::json(Image::searchModelTags($term));
     }
 }

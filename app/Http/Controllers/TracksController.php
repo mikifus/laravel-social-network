@@ -83,6 +83,7 @@ class TracksController extends UserProfileController
         $el->file = $file;
         try {
             $el->save();
+            $el->tag(trim(strip_tags($request->tags)));
         }
         catch (\Exception $e)
         {
@@ -162,5 +163,16 @@ class TracksController extends UserProfileController
         }
         Track::destroy($id);
         return redirect()->route('music')->withSuccess(trans('tracks.destroy_success'));
+    }
+
+    /**
+     * Async method for tags field autocomplete
+     *
+     * @param string $value
+     * @return Response
+     */
+    protected function autocompleteTags($term)
+    {
+        return Response::json(Track::searchModelTags($term));
     }
 }

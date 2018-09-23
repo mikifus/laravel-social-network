@@ -36,7 +36,8 @@ class TrackAddRequest extends Request
             'feat'         => 'nullable|min:1|max:255',
             'beatmaker'    => 'nullable|min:1|max:255',
             'description'  => 'nullable|min:1|max:700',
-            'file'         => 'required|mimes:mp3,mpga|max:15000|no_js_validation'
+            'file'         => 'required|mimes:mp3,mpga|max:15000|no_js_validation',
+            'tags'         => 'sometimes|nullable|min:1'
         ];
     }
 }

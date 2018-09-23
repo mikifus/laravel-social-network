@@ -1,6 +1,28 @@
 @extends('layouts.app')
 
 @include('snippets.include_dropzone')
+@include('snippets.tagsinput-autocomplete', ['url' => route('images.autocomplete_tags',['term'=>'%QUERY'])])
+
+@section('footer')
+<script>
+// Autocomplete tags
+$(document).ready(function(){
+    window._images_dropzone.on('addedfile',function(){
+        $(".bootstrap-tagsinput").tagsinput({
+            typeaheadjs: [{
+                            hint: true,
+                            highlight: true,
+                            minLength: 1
+                        },
+                        {
+                            source: window.adapter,
+                        }],
+            freeInput: true
+        });
+    });
+});
+</script>
+@append
 
 @section('content')
 <div class="h-20"></div>
@@ -104,18 +126,28 @@
             <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
             <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
         </div>
-        <div class="panel-body">
-            <div class="form-group" data-dz-extrafields>
-                {!! Form::label( trans('images.add_title') ) !!}
-                {!! Form::text('title_input',
-                    NULL,
-                    array('required',
-                          'class'=>' form-control')) !!}
+        <div class="panel-body" >
+            <div data-dz-extrafields>
+                <div class="form-group">
+                    {!! Form::label( trans('images.add_title') ) !!}
+                    {!! Form::text('title',
+                        NULL,
+                        array('required',
+                            'class'=>' form-control')) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label( trans('images.tags') ) !!}
+                    <div>
+                    {!! Form::text('tags',
+                        NULL,
+                        array('class'=>' form-control bootstrap-tagsinput')) !!}
+                    </div>
+                </div>
             </div>
-            <div class='hidden-fields'>
+<!--            <div class='hidden-fields'>
                 {!! Form::hidden('imagealbum_id') !!}
                 {!! Form::hidden('imagealbum_title') !!}
-            </div>
+            </div>-->
         </div>
         <div class="panel-footer dz-remove" data-dz-remove>
             {{ trans('images.delete') }}

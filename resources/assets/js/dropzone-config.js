@@ -5,7 +5,7 @@ function setConfirmUnload(fn) {
 }
 
 $(function(){
-    $("#images_dropzone").dropzone({
+    window._images_dropzone = $("#images_dropzone").dropzone({
     uploadMultiple: false,
     autoProcessQueue: false,
     parallelUploads: 100,
@@ -41,14 +41,25 @@ $(function(){
             myDropzone.processQueue();
         });
     },
+    accept: function(file, done){
+        // Default trigger won't occur, so a manual call is needed
+        $(window._images_dropzone).trigger('addedfile', [file]);
+        done();
+    },
     sending: function(file, xhr, formData) {
-      var value = $(file.previewElement.querySelectorAll("[data-dz-extrafields]"))
-        .find("input[name=title_input]").val();
+//       var value = $(file.previewElement.querySelectorAll("[data-dz-extrafields]"))
+//         .find("input[name=title_input]").val();
 
+        var extrafields = $( file.previewElement.querySelectorAll("[data-dz-extrafields]") );
+
+        var fields = extrafields.find("input");
+        $.each(fields, function( index, field ) {
+            formData.append($(field).attr('name'), $(field).val());
+        });
       var album_id = $('select[name=main_imagealbum_id]').val() || null;
       var album_title = $('input[name=main_imagealbum_title]').val();
 
-      formData.append("title", value); // Append all the additional input data of your form here!
+//       formData.append("title", value); // Append all the additional input data of your form here!
       if (album_id) {
         formData.append("imagealbum_id", album_id);
       }
@@ -82,7 +93,7 @@ $(function(){
 //Dropzone.options.trackDropzone = {
 
 $(function(){
-    $("#tracks_dropzone").dropzone({
+    window._tracks_dropzone = $("#tracks_dropzone").dropzone({
 //    url: utils.url.base_url("tracks/add"),
     uploadMultiple: false,
     autoProcessQueue: false,
@@ -154,19 +165,13 @@ $(function(){
     sending: function(file, xhr, formData) {
         var extrafields = $( file.previewElement.querySelectorAll("[data-dz-extrafields]") );
 
-        var title       = extrafields.find("input[name=title]").val();
-        var author      = extrafields.find("input[name=author]").val();
-        var feat        = extrafields.find("input[name=feat]").val();
-        var beatmaker   = extrafields.find("input[name=beatmaker]").val();
-        var description = extrafields.find("textarea[name=description]").val();
-
-        formData.append("title",       title);
-        formData.append("author",      author);
-        formData.append("feat",        feat);
-        formData.append("beatmaker",   beatmaker);
-        formData.append("description", description);
+        var fields = extrafields.find("input");
+        $.each(fields, function( index, field ) {
+            formData.append($(field).attr('name'), $(field).val());
+        });
     },
     accept: function(file, done){
+        var that = this;
         // Prepare elements
         var extrafields = $( file.previewElement.querySelectorAll("[data-dz-extrafields]") );
         var audio_preview = $("<audio controls >");
@@ -189,6 +194,9 @@ $(function(){
                     if( tags.comment ) {
                         extrafields.find("textarea[name=description]").val(tags.comment.text);
                     }
+                    
+                    // Default trigger won't occur, so a manual call is needed
+                    $(window._tracks_dropzone).trigger('addedfile', [file]);
                 },
                 onError: function(error) {
                   console.log(error);
@@ -294,7 +302,7 @@ $(function(){
             }
        }
     };
-    $("#front_dropzone").dropzone(musicalbums_dropzone('#front_preview'));
-    $("#back_dropzone").dropzone(musicalbums_dropzone('#back_preview'));
+    window._musicalbums_dropzone_front = $("#front_dropzone").dropzone(musicalbums_dropzone('#front_preview'));
+    window._musicalbums_dropzone_back  = $("#back_dropzone").dropzone(musicalbums_dropzone('#back_preview'));
 });
 //};

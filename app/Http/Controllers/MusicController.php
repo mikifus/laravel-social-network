@@ -40,6 +40,7 @@ class MusicController extends UserProfileController
 
         // Tracks
         $tracks = $user->tracks()->orderBy('id', 'desc')->get();
+        
 
         $data = [];
         $data['musicalbums'] = $musicalbums;

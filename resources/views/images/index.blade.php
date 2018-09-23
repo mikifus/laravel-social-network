@@ -30,8 +30,9 @@
                                 <div class="btn-group">
                                     <a class="btn btn-default" href="{{ URL::route('imagealbums.edit', $item->id) }}">
                                         <i class="fa fa-pencil"></i>
-                                        {{ trans('imagealbums.index_btn_edit') }}
+                                        {!! trans('imagealbums.index_btn_edit') !!}
                                     </a>
+                                    <div>{!! $item->tagList !!}</div>
                                     <a data-href="{!! URL::route('imagealbums.destroy', [$item->id]) !!}" data-item_name="{{ $item->title }}" data-toggle="modal" data-target="#modal-confirm" data-target="#confirm" class="btn btn-danger" href="#">
                                         <i class="fa fa-trash"></i> {!! trans('imagealbums.index_btn_delete') !!}
                                     </a>
@@ -53,6 +54,7 @@
                                 <a href="{{ URL::route('images.slug_view', [$item->slug]) }}">
                                     <h3 class="media-heading">{{ $item->title }}</h3>
                                 </a>
+                                <div>{!! $item->tagList !!}</div>
                                 <div class="btn-group">
                                     <a class="btn btn-default" href="{{ URL::route('images.edit', $item->id) }}">
                                         <i class="fa fa-pencil"></i>

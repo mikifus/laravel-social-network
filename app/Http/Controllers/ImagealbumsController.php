@@ -9,6 +9,7 @@ use App\Http\Controllers\UserProfileController;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Imagealbum;
+use App\Http\Requests\ImagealbumsEditRequest;
 
 class ImagealbumsController extends UserProfileController {
 
@@ -34,7 +35,7 @@ class ImagealbumsController extends UserProfileController {
         $el = Imagealbum::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect('images')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('images.index')->withErrors(['error'=>trans('general.permission_denied')]);
         }
         $data = [];
         $data['id'] = $el->id;
@@ -63,17 +64,18 @@ class ImagealbumsController extends UserProfileController {
     public function store(Request $request)
     {
         $user = Auth::user();
-        $imagealbum = new Imagealbum();
+        $el = new Imagealbum();
 
-        $imagealbum->title = $request->title;
+        $el->title = $request->title;
 
-        $imagealbum->description = $request->description;
+        $el->description = $request->description;
 
-        $imagealbum->user_id = $user->id;
+        $el->user_id = $user->id;
 
-        $imagealbum->save();
+        $el->save();
+        $el->tag(trim(strip_tags($request->tags)));
 
-        return redirect('images')->withSuccess(trans('imagealbums.add_success'));
+        return redirect()->route('images.index')->withSuccess(trans('imagealbums.add_success'));
     }
 
     /**
@@ -92,7 +94,7 @@ class ImagealbumsController extends UserProfileController {
             return URL::to('imagealbum/'.$id);
         }
 
-        $imagealbum = Imagealbum::findOrfail($id);
+        $el = Imagealbum::findOrfail($id);
         return view('imagealbum.show',compact('title','imagealbum'));
     }
 
@@ -111,7 +113,7 @@ class ImagealbumsController extends UserProfileController {
         }
 
 
-        $imagealbum = Imagealbum::findOrfail($id);
+        $el = Imagealbum::findOrfail($id);
         return view('imagealbum.edit',compact('title','imagealbum'  ));
     }
 
@@ -122,18 +124,15 @@ class ImagealbumsController extends UserProfileController {
      * @param    int  $id
      * @return  \Illuminate\Http\Response
      */
-    public function update($id,Request $request)
+    public function update($id,ImagealbumsEditRequest $request)
     {
-        $imagealbum = Imagealbum::findOrfail($id);
+        $el = Imagealbum::findOrfail($id);
+        $el->title = $request->title;
+        $el->description = $request->description;
+        $el->save();
+        $el->retag(trim(strip_tags($request->tags)));
 
-        $imagealbum->title = $request->title;
-
-        $imagealbum->description = $request->description;
-
-
-        $imagealbum->save();
-
-        return redirect('imagealbum');
+        return redirect()->route('images.index')->withSuccess(trans('imagealbums.edit_success'));
     }
 
     /**
@@ -148,9 +147,9 @@ class ImagealbumsController extends UserProfileController {
      	$el = Imagealbum::findOrfail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect('images')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('images.index')->withErrors(['error'=>trans('general.permission_denied')]);
         }
      	$el->delete();
-        return redirect('images')->withSuccess(trans('imagealbums.destroy_success'));
+        return redirect()->route('images.index')->withSuccess(trans('imagealbums.destroy_success'));
     }
 }

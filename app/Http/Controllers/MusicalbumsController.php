@@ -79,6 +79,7 @@ class MusicalbumsController extends UserProfileController
         $el->description = $request->description;
         try {
             $el->save();
+            $el->tag(trim(strip_tags($request->tags)));
         }
         catch (\Exception $e)
         {
@@ -123,6 +124,7 @@ class MusicalbumsController extends UserProfileController
         $el->description = $request->description;
         try {
             $el->save();
+            $el->retag(trim(strip_tags($request->tags)));
         }
         catch (\Exception $e)
         {
@@ -536,5 +538,16 @@ class MusicalbumsController extends UserProfileController
             'step' => $current_step,
             'disabled' => $disable,
         ];
+    }
+
+    /**
+     * Async method for tags field autocomplete
+     *
+     * @param string $value
+     * @return Response
+     */
+    protected function autocompleteTags($term)
+    {
+        return Response::json(Musicalbum::searchModelTags($term));
     }
 }

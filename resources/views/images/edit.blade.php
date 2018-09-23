@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@include('snippets.tagsinput-autocomplete', ['url' => route('images.autocomplete_tags',['term'=>'%QUERY'])])
+
 @section('content')
 <div class="h-20"></div>
 <div class="container">
@@ -27,6 +29,12 @@
                             <div class="thumbnail">
                                 <img src="{{ $item->file->url('thumb') }}">
                             </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label( trans('images.tags') ) !!}
+                            {!! Form::text('tags',
+                                $item->tagList,
+                                array('class'=>' form-control bootstrap-tagsinput')) !!}
                         </div>
 
                         @if (count($imagealbums) > 0)

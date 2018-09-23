@@ -28,7 +28,8 @@ class MusicalbumEditRequest extends Request
     public function rules()
     {
         return [
-            'description'  => 'required|min:25|max:2000'
+            'description'  => 'required|min:25|max:2000',
+            'tags'             => 'sometimes|nullable|min:1,'
         ];
     }
 }

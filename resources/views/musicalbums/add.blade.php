@@ -1,5 +1,18 @@
 @extends('layouts.app')
 
+@include('snippets.include_jsvalidator')
+@include('snippets.tagsinput-autocomplete', ['url' => route('musicalbums.autocomplete_tags',['term'=>'%QUERY'])])
+
+@section('footer')
+<script>
+$(document).ready(function(){
+    $.validator.setDefaults({
+        ignore: []
+    });
+});
+</script>
+@append
+
 @section('footer')
 {!! JsValidator::formRequest('App\Http\Requests\MusicalbumAddRequest', '#musicalbum_form') !!}
 @append
@@ -41,6 +54,12 @@
                             {!! Form::textarea('description',
                                 Input::old('description'),
                                 array('class'=>' form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label( trans('musicalbums.tags') ) !!}
+                            {!! Form::text('tags',
+                                NULL,
+                                array('class'=>' form-control bootstrap-tagsinput')) !!}
                         </div>
                 </div>
                 <div class="panel-footer text-center">

@@ -3,9 +3,27 @@
 @include('snippets.include_dropzone')
 @include('snippets.include_jsmediatags')
 @include('snippets.include_jsvalidator')
+@include('snippets.tagsinput-autocomplete', ['url' => route('tracks.autocomplete_tags',['term'=>'%QUERY'])])
 
 @section('footer')
 <script>
+// Autocomplete tags
+$(document).ready(function(){
+    window._tracks_dropzone.on('addedfile',function(){
+        $(".bootstrap-tagsinput").tagsinput({
+            typeaheadjs: [{
+                            hint: true,
+                            highlight: true,
+                            minLength: 1
+                        },
+                        {
+                            source: window.adapter,
+                        }],
+            freeInput: true
+        });
+    });
+});
+
 $(document).ready(function(){
     $.validator.setDefaults({
         ignore: []

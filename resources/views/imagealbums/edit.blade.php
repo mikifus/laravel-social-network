@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@include('snippets.tagsinput-autocomplete', ['url' => route('imagealbums.autocomplete_tags',['term'=>'%QUERY'])])
+
 @section('title',trans('imagealbums.edit_page_title'))
 @section('content')
 <div class="h-20"></div>
@@ -27,6 +29,12 @@
                                 $item->description,
                                 array('required',
                                       'class'=>' form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label( trans('images.tags') ) !!}
+                            {!! Form::text('tags',
+                                $item->tagList,
+                                array('class'=>' form-control bootstrap-tagsinput')) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::submit(trans('imagealbums.submit'),

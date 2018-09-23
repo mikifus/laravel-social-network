@@ -28,7 +28,8 @@ class MusicalbumAddRequest extends Request
         return [
             'title'        => 'required|min:1|max:255',
             'author'       => 'required|min:1|max:255',
-            'description'  => 'required|min:25|max:2000'
+            'description'  => 'required|min:25|max:2000',
+            'tags'             => 'sometimes|nullable|min:1,'
         ];
     }
 }
