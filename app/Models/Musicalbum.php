@@ -100,4 +100,8 @@ class Musicalbum extends Model implements StaplerableInterface
             ]
         ];
     }
+
+    public function getCover($size){
+        return url($this->front->url($size));
+    }
 }

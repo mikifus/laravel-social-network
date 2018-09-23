@@ -20,6 +20,9 @@ abstract class UserProfileController extends Controller
         if( empty($data['user']) ) {
             $data['user'] = Auth::user();
         }
+        if( empty($data['my_profile']) ) {
+            $data['my_profile'] = $this->my_profile;
+        }
         return view($view, $data, $mergeData);
     }
 }

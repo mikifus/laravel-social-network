@@ -32,6 +32,16 @@ class Videoalbum extends Model
     }
 
     /**
+     * Owner of this album
+     *
+     * @return HasMany
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id')->first();
+    }
+
+    /**
      * A preview of this album
      *
      * @return Video
@@ -54,5 +64,10 @@ class Videoalbum extends Model
                 'unique' => true
             ]
         ];
+    }
+
+    public function getCover(){
+        $video = $this->thumb();
+        return url(Video::get_video_thumbnail($video->url));
     }
 }

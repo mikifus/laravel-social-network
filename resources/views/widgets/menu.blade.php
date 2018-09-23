@@ -7,19 +7,19 @@
             </a>
         </li>
         <li class="list-group-item">
-            <a href="{!! url('/'.$user->username.'/music') !!}" class="menu-dm">
+            <a href="{!! url('/profile/music') !!}" class="menu-dm">
                 <i class="fa fa-music"></i>
                 {{ trans('widgets.menu.music') }}
             </a>
         </li>
         <li class="list-group-item">
-            <a href="{!! url('/'.$user->username.'/images') !!}" class="menu-dm">
+            <a href="{!! url('/profile/images') !!}" class="menu-dm">
                 <i class="fa fa-image"></i>
                 {{ trans('widgets.menu.images') }}
             </a>
         </li>
         <li class="list-group-item">
-            <a href="{!! url('/'.$user->username.'/videos') !!}" class="menu-dm">
+            <a href="{!! url('/profile/videos') !!}" class="menu-dm">
                 <i class="fa fa-video"></i>
                 {{ trans('widgets.menu.videos') }}
             </a>

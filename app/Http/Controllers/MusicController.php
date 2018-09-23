@@ -19,16 +19,8 @@ class MusicController extends UserProfileController
     public function getIndex()
     {
         $user = Auth::user();
-        return $this->showUser($user->username);
-    }
-
-    public function showUser($username) {
-        if (empty($username)) {
-            $user = Auth::user();
-        } else if (!$this->secure($username)) {
+        if (!$this->secure($user->username)) {
             return abort(404);
-        } else {
-            $user = User::where('username', $username)->first();
         }
 
         // Albums
@@ -47,7 +39,40 @@ class MusicController extends UserProfileController
         $data['tracks'] = $tracks;
         $data['user'] = $user;
 
-        return $this->renderProfileView('music.index', $data);
+        return $this->renderProfileView('profile.music', $data);
+    }
+
+    public function showUser($username) {
+        if (empty($username)) {
+            return redirect()->route('music');
+        } else if (!$this->secure($username)) {
+            return abort(404);
+        } else {
+            $user = User::where('username', $username)->first();
+        }
+
+        // Albums
+//         if( $user->isId( Auth::user()->id ) ) {
+//             $musicalbums = $user->musicalbums()->orderBy('id', 'desc')->get();
+//         } else {
+//             $musicalbums = $user->publishedMusicalbums()->orderBy('id', 'desc')->get();
+//         }
+        $musicalbums = $user->publishedMusicalbums()->orderBy('id', 'desc')->get();
+        
+        
+//         $can_see = $user->canSeeProfile(Auth::id());
+
+        // Tracks
+        $tracks = $user->tracks()->orderBy('id', 'desc')->get();
+        
+
+        $data = [];
+        $data['musicalbums'] = $musicalbums;
+        $data['tracks'] = $tracks;
+        $data['user'] = $user;
+        $data['can_see'] = $user->canSeeProfile(Auth::id());
+
+        return $this->renderProfileView('profile.music', $data);
     }
 
     /**

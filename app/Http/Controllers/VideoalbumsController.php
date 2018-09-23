@@ -21,6 +21,22 @@ use Response;
 class VideoalbumsController extends UserProfileController
 {
     /**
+     * Display the specified resource.
+     *
+     * @param  string  $slug
+     * @return Response
+     */
+    public function showSlug($slug)
+    {
+        $el = Videoalbum::findBySlug($slug);
+        $data = [];
+        $data['id'] = $el->id;
+        $data['item'] = $el;
+        $data['videos'] = $el->videos()->get();
+        $data['can_see'] = $el->user()->canSeeProfile(Auth::id());
+        return $this->renderProfileView('profile.videos', $data);
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return  \Illuminate\Http\Response
@@ -53,7 +69,7 @@ class VideoalbumsController extends UserProfileController
         $el = Videoalbum::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect()->route('videos.index')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('profile.videos')->withErrors(['error'=>trans('general.permission_denied')]);
         }
         $data = [];
         $data['id'] = $el->id;
@@ -128,7 +144,7 @@ class VideoalbumsController extends UserProfileController
         $videoalbum->save();
         $videoalbum->tag(trim(strip_tags($request->tags)));
 
-        return redirect()->route('videos.index')->withSuccess(trans('videoalbums.add_success'));
+        return redirect()->route('profile.videos')->withSuccess(trans('videoalbums.add_success'));
     }
 
     /**
@@ -146,7 +162,7 @@ class VideoalbumsController extends UserProfileController
         $videoalbum->save();
         $videoalbum->retag(trim(strip_tags($request->tags)));
 
-        return redirect()->route('videos.index')->withSuccess(trans('videoalbums.update_success'));
+        return redirect()->route('profile.videos')->withSuccess(trans('videoalbums.update_success'));
     }
 
     /**
@@ -178,10 +194,10 @@ class VideoalbumsController extends UserProfileController
      	$el = Videoalbum::findOrfail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect()->route('videos.index')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('profile.videos')->withErrors(['error'=>trans('general.permission_denied')]);
         }
      	$el->delete();
-        return redirect()->route('videos.index')->withSuccess(trans('videoalbums.destroy_success'));
+        return redirect()->route('profile.videos')->withSuccess(trans('videoalbums.destroy_success'));
     }
 
     /**

@@ -31,7 +31,7 @@ class MusicalbumsController extends UserProfileController
      */
     public function showSlug($slug)
     {
-        $el = Musicalbum::findBySlugOrFail($slug);
+        $el = Musicalbum::findBySlug($slug);
         $data = [];
         $data['id'] = $el->id;
         $data['item'] = $el;

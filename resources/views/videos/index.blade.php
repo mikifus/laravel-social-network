@@ -20,18 +20,13 @@
                     <ul class="media-list">
                         @foreach ($videoalbums as $item)
                             <li class="media">
+                                @if ( sizeof($item->videos) > 0 )
                                 <div class="media-left">
-                                    @if ( sizeof($item->videos) > 0 )
-                                        {!!
-                                        $item->videos[0]->media_object->setAttribute([
-                                            'width' => 250,
-                                            'height' => 150
-                                        ]);
-                                        $item->videos[0]->media_object->getEmbedCode() !!}
-                                    @endif
+                                    <img src="{{ $item->getCover() }}" alt="{{ $item->title }}" title="{{ $item->title }}">
                                 </div>
+                                @endif
                                 <div class="media-body">
-                                    <h3 class="media-heading">{{ $item->name }}</h3>
+                                    <h3 class="media-heading"><a href="{{ URL::route('videoalbums.slug_view', ['slug' => $item->slug]) }}">{{ $item->name }}</a></h3>
                                     <div class="btn-group">
                                         <a class="btn btn-default" href="{{ URL::route('videoalbums.edit', $item->id) }}">
                                             <i class="fa fa-pencil"></i>
@@ -53,15 +48,10 @@
                         @foreach ($videos as $item)
                             <li class="media">
                                 <div class="media-left">
-                                    {!!
-                                    $item->media_object->setAttribute([
-                                        'width' => 250,
-                                        'height' => 150
-                                    ]);
-                                    $item->media_object->getEmbedCode() !!}
+                                    <img src="{{ $item->getCover() }}" alt="{{ $item->title }}" title="{{ $item->title }}">
                                 </div>
                                 <div class="media-body">
-                                    <h3 class="media-heading">{{ $item->title }}</h3>
+                                    <h3 class="media-heading"><a href="{{ URL::route('videos.slug_view', ['slug' => $item->slug]) }}">{{ $item->title }}</a></h3>
                                     <div class="btn-group">
                                         <a class="btn btn-default" href="{{ URL::route('videos.edit', $item->id) }}">
                                             <i class="fa fa-pencil"></i>

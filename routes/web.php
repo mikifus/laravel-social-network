@@ -119,7 +119,7 @@ Route::post('/{username}/save/relationship', 'ProfileController@saveRelationship
 //});
 
 // Videos
-Route::get('profile/videos', ['as' => 'videos.index', 'uses' => 'VideosController@getIndex']);
+Route::get('profile/videos', ['as' => 'profile.videos', 'uses' => 'VideosController@getIndex']);
 Route::get('profile/videos/add', ['as' => 'videos.add', 'uses' => 'VideosController@getAdd']);
 Route::post('profile/videos/add', ['as' => 'videos.store', 'uses' => 'VideosController@store']);
 Route::get('profile/videos/edit/{id}', ['as' => 'videos.edit', 'uses' => 'VideosController@getEdit']);
@@ -127,7 +127,8 @@ Route::post('profile/videos/edit/{id}', ['as' => 'videos.update', 'uses' => 'Vid
 Route::get('profile/videos/delete/{id}', ['as' => 'videos.destroy', 'uses' => 'VideosController@destroy']);
 Route::get('/videos/autocomplete_tags/{term}', ['as' => 'videos.autocomplete_tags', 'uses' => 'VideosController@autocompleteTags']);
 
-Route::get('/{username}/videos/', ['as' => 'videos.username', 'uses' => 'VideosController@showUser']);
+Route::get('/{username}/videos/', ['as' => 'videos_profile_path', 'uses' => 'VideosController@showUser']);
+Route::get('videos/{slug}', ['as' => 'videos.slug_view', 'uses' => 'VideosController@showSlug']);
 
 
 //videoalbum Routes
@@ -138,6 +139,7 @@ Route::get('/{username}/videos/', ['as' => 'videos.username', 'uses' => 'VideosC
     Route::post('profile/videoalbums/edit/{id}', ['as' => 'videoalbums.update', 'uses' => 'VideoalbumsController@update']);
     Route::get('profile/videoalbums/delete/{id}', ['as' => 'videoalbums.destroy', 'uses' => 'VideoalbumsController@destroy']);
     Route::get('/videoalbums/autocomplete_tags/{term}', ['as' => 'videoalbums.autocomplete_tags', 'uses' => 'VideoalbumsController@autocompleteTags']);
+    Route::get('videoalbums/{slug}', ['as' => 'videoalbums.slug_view', 'uses' => 'VideoalbumsController@showSlug']);
 //    Route::get('videoalbums', [ 'as' => 'videoalbums.index', 'uses' => 'VideoalbumsController@getIndex' ]);
 //  Route::resource('videoalbum','\App\Http\Controllers\VideoalbumController');
 //  Route::post('videoalbums/{id}/update', [ 'as' => 'videoalbums.index', 'uses' => '\App\Http\Controllers\VideoalbumsController@update' ]);
@@ -152,7 +154,7 @@ Route::get('/{username}/videos/', ['as' => 'videos.username', 'uses' => 'VideosC
 //Route::post('videos/add', [ 'as' => 'videos.store', 'uses' => 'VideosController@store' ]);
 //Route::post('videos/delete', [ 'as' => 'videos.destroy', 'uses' => 'VideosController@destroy' ]);
 
-Route::get('profile/music', ['as' => 'music', 'uses' => 'MusicController@getIndex']);
+Route::get('profile/music', ['as' => 'profile.music', 'uses' => 'MusicController@getIndex']);
 
 Route::get('/{username}/music', ['as' => 'music_profile_path', 'uses' => 'MusicController@showUser']);
 

@@ -27,7 +27,16 @@ class VideosController extends UserProfileController
     public function getIndex()
     {
         $user = Auth::user();
-        return $this->showUser($user->username);
+        if (!$this->secure($user->username)) {
+            return abort(404);
+        }
+        $videos = $user->videos()->get();
+        $videoalbums = $user->videoalbums()->get();
+        $data = [];
+        $data['videos'] = $videos;
+        $data['videoalbums'] = $videoalbums;
+        $data['user'] = $user;
+        return view('videos.index', $data);
     }
 
     public function showUser($username) {
@@ -44,7 +53,8 @@ class VideosController extends UserProfileController
         $data['videos'] = $videos;
         $data['videoalbums'] = $videoalbums;
         $data['user'] = $user;
-        return view('videos.index', $data);
+        $data['can_see'] = $user->canSeeProfile(Auth::id());
+        return $this->renderProfileView('profile.videos', $data);
     }
 
     /**
@@ -70,7 +80,7 @@ class VideosController extends UserProfileController
         $el = Video::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect()->route('videos.index')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('profile.videos')->withErrors(['error'=>trans('general.permission_denied')]);
         }
         $data = [];
         $data['id'] = $el->id;
@@ -117,7 +127,7 @@ class VideosController extends UserProfileController
             $el->delete();
             return back()->withErrors(['error' => "Unexpected error."]);
         }
-        return redirect()->route('videos.index')->withSuccess(trans('videos.add_success'));
+        return redirect()->route('profile.videos')->withSuccess(trans('videos.add_success'));
     }
 
     /**
@@ -154,7 +164,7 @@ class VideosController extends UserProfileController
         {
             return back()->withErrors(['error' => "Unexpected error."]);
         }
-        return redirect()->route('videos.index')->withSuccess(trans('videos.edit_success'));
+        return redirect()->route('profile.videos')->withSuccess(trans('videos.edit_success'));
     }
 
     /**
@@ -174,10 +184,10 @@ class VideosController extends UserProfileController
         $el = Video::findOrFail($id);
         if( $el->user_id != $user->id )
         {
-            return redirect()->route('videos.index')->withErrors(['error'=>trans('general.permission_denied')]);
+            return redirect()->route('profile.videos')->withErrors(['error'=>trans('general.permission_denied')]);
         }
         $el->delete();
-        return redirect()->route('videos.index')->withSuccess(trans('videos.destroy_success'));
+        return redirect()->route('profile.videos')->withSuccess(trans('videos.destroy_success'));
     }
 
     /**

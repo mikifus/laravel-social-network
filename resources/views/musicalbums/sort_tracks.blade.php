@@ -38,7 +38,7 @@ $( function() {
                     <h3>{{ trans('musicalbums.sort_tracks') }}</h3>
                     <ul class="list-group" id='sortable'>
                         @foreach($tracks as $track)
-                        <li class="list-group-item" id='{{ $track->id }}'>
+                        <li class="list-group-item" style="cursor: move;" id='{{ $track->id }}'>
                             <h4 class="pull-left"><i class="fa fa-bars"></i> {{ $track->author }} - {{ $track->title }}</h4>
                             <span class="badge">{{ $track->duration }}</span>
                             <div class="clearfix"></div>
