@@ -35,6 +35,16 @@ class Imagealbum extends Model
     }
 
     /**
+     * owner of this album
+     *
+     * @return Image
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id')->first();
+    }
+
+    /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
@@ -47,5 +57,15 @@ class Imagealbum extends Model
                 'unique' => true
             ]
         ];
+    }
+
+    /**
+     * Get thumbnail
+     *
+     * @return BelongsTo
+     */
+    public function getCover()
+    {
+        return $this->thumb()->file->url('medium');
     }
 }

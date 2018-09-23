@@ -20,36 +20,36 @@
 
                         <div>
                             <div class="pull-right">
-                                <a href="{!! route('profile.videos') !!}">{!! trans('profile.admin_link') !!}</a>
+                                <a href="{!! route('images.index') !!}">{!! trans('profile.admin_link') !!}</a>
                             </div>
                             <div class="content-page-title">
-                                {!! trans('profile.videos_header') !!}
+                                {!! trans('profile.images_header') !!}
                                 @if ($user->isId( Auth::user()->id ) )
                                 @endif
                             </div>
                         </div>
 
-                        @if(!isset($videoalbums))
-                        @elseif ($videoalbums->count() == 0)
+                        @if(!isset($imagealbums))
+                        @elseif ($imagealbums->count() == 0)
                             <div class="alert-message alert-message-danger">
-                                {!! trans('profile.videos_videoalbums_empty') !!}
+                                {!! trans('profile.images_imagealbums_empty') !!}
                             </div>
                         @else
                             <div class="row">
 
-                                @foreach($videoalbums as $album)
+                                @foreach($imagealbums as $album)
 
 
                                     <div class="col-md-6">
                                         <div class="card-container">
                                             <div class="card">
                                                 <div class="front">
-                                                    <a href="{{ route('videoalbums.slug_view', ['slug' => $album->slug]) }}">
+                                                    <a href="{{ route('imagealbums.slug_view', ['slug' => $album->slug]) }}">
                                                         <div class="cover" style="height: 200px; background-image: url('{{ $album->getCover() }}')"></div>
                                                     </a>
                                                     <div class="content">
                                                         <div class="main">
-                                                            <a href="{{ route('videoalbums.slug_view', ['slug' => $album->slug]) }}">
+                                                            <a href="{{ route('imagealbums.slug_view', ['slug' => $album->slug]) }}">
                                                                 <h3 class="name">{{ $album->title }}</h3>
                                                                 <p class="profession">
                                                                     {{ str_limit($album->description, $limit = 100, $end = '...') }}
@@ -70,17 +70,17 @@
                             </div>
                         @endif
 
-                        @if($videos->count() == 0)
+                        @if($images->count() == 0)
                             <!--<div class="alert-message alert-message-danger">
                                 {!! trans('profile.music_tracks_empty') !!}
                             </div>-->
                         @else
                             <div class="row">
-                                @foreach($videos as $index => $video)
+                                @foreach($images as $index => $image)
                                 <div class="col-lg-4 col-md-12 mb-4">
 
                                     <!--Modal: Name-->
-                                    <div class="modal fade" id="video_modal_{{ $index }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="image_modal_{{ $index }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
 
                                             <!--Content-->
@@ -88,7 +88,7 @@
 
                                                 <!--Body-->
                                                 <div class="modal-body mb-0 p-0">
-                                                    {!! $video->getMediaObjectAttribute()->setAttribute(['width' => "100%",'height' => "400"]) !!}
+                                                    <img style="width: 100%;" src="{{ $image->file->url() }}" alt="{{ $image->title }}" title="{{ $image->title }}">
 <!--                                                     <div class="embed-responsive embed-responsive-16by9 z-depth-1-half"> -->
 <!--                                                         <iframe class="embed-responsive-item" src="" allowfullscreen></iframe> -->
 <!--                                                     </div> -->
@@ -118,27 +118,21 @@
                                     <!--Modal: Name-->
                                     <div class="card">
                                         <div class="front">
-                                            <a style="cursor: pointer;" data-toggle="modal" data-target="#video_modal_{{ $index }}">
-                                                <div class="cover" style="height: 200px; background-image: url('{{ $video->getCover() }}')"></div>
+                                            <a style="cursor: pointer;" data-toggle="modal" data-target="#image_modal_{{ $index }}">
+                                                <div class="cover" style="height: 200px; background-image: url('{{ $image->getCover() }}')"></div>
                                             </a>
                                                 <div class="content">
                                                     <div class="main">
-                                                        <a style="cursor: pointer;" data-toggle="modal" data-target=""#video_modal_{{ $index }}">
-                                                            <h3 class="name">{{ $video->title }}</h3>
+                                                        <a style="cursor: pointer;" data-toggle="modal" data-target=""#image_modal_{{ $index }}">
+                                                            <h3 class="name">{{ $image->title }}</h3>
                                                         </a>
                                                         <p class="profession">
-                                                            {{ str_limit(join(', ',$video->tagArray), $limit = 64, $end = '...') }}
+                                                            {{ str_limit(join(', ',$image->tagArray), $limit = 64, $end = '...') }}
                                                         </p>
                                                     </div>
                                                 </div>
                                         </div>
                                     </div>
-
-                                    
-<!--                                     <a style="cursor: pointer;"> -->
-<!--                                         <img class="img-fluid z-depth-1" style="width: 100%;" src="{{ $video->get_video_thumbnail($video->url) }}" alt="video" data-toggle="modal" data-target="#modal1"> -->
-<!--                                         <div class="text-center">{{ $video->title }}</div> -->
-<!--                                     </a> -->
 
                                 </div>
 <!--                                    <div class="col-md-6">
@@ -146,14 +140,14 @@
                                             <div class="card">
                                                 <div class="front">
                                                     <div>
-                                                        <audio style="width: 100%;" controls src="{{ $video->url }}">
+                                                        <audio style="width: 100%;" controls src="{{ $image->url }}">
                                                     </div>
                                                     <div class="content">
                                                         <div class="main">
-                                                            <a href="{{ route('videoalbums.slug_view', ['slug' => $video->slug]) }}">
-                                                                <h3 class="name">{{ $video->title }}</h3>
+                                                            <a href="{{ route('imagealbums.slug_view', ['slug' => $image->slug]) }}">
+                                                                <h3 class="name">{{ $image->title }}</h3>
                                                                 <p class="profession" style="height: 30px;">
-                                                                    {{ str_limit($video->tagList, $limit = 50, $end = '...') }}
+                                                                    {{ str_limit($image->tagList, $limit = 50, $end = '...') }}
                                                                 </p>
                                                             </a>
                                                         </div>

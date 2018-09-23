@@ -13,6 +13,22 @@ use App\Http\Requests\ImagealbumsEditRequest;
 
 class ImagealbumsController extends UserProfileController {
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  string  $slug
+     * @return Response
+     */
+    public function showSlug($slug)
+    {
+        $el = Imagealbum::findBySlug($slug);
+        $data = [];
+        $data['id'] = $el->id;
+        $data['item'] = $el;
+        $data['images'] = $el->images()->get();
+        $data['can_see'] = $el->user()->canSeeProfile(Auth::id());
+        return $this->renderProfileView('profile.images', $data);
+    }
 
     /**
      * Show the form for creating a new resource.

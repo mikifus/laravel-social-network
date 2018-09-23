@@ -116,6 +116,7 @@ Route::post('/{username}/save/relationship', 'ProfileController@saveRelationship
     Route::post('profile/imagealbums/edit/{id}', ['as' => 'imagealbums.update', 'uses' => 'ImagealbumsController@update']);
     Route::get('profile/imagealbums/delete/{id}', ['as' => 'imagealbums.destroy', 'uses' => 'ImagealbumsController@destroy']);
     Route::get('/imagealbums/autocomplete_tags/{term}', ['as' => 'imagealbums.autocomplete_tags', 'uses' => 'ImagealbumsController@autocompleteTags']);
+    Route::get('imagealbums/{slug}', ['as' => 'imagealbums.slug_view', 'uses' => 'ImagealbumsController@showSlug']);
 //});
 
 // Videos

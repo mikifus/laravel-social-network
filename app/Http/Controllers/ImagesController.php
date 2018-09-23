@@ -39,34 +39,52 @@ class ImagesController extends UserProfileController {
         return view('images.index', compact('user', 'user_list', 'show', 'id', 'imagealbums', 'images'));
 //        return $this->showUser($user->username, $userRepository);
     }
-
-    public function showUser($username = '') {
-        if(empty($username)) {
+    
+    public function showUser($username) {
+        if (empty($username)) {
             $user = Auth::user();
         } else if (!$this->secure($username)) {
-            return redirect('/404');
+            return abort(404);
         } else {
             $user = User::where('username', $username)->first();
         }
-
-        $id = $user->id;
-
-        $user_list = $user->messagePeopleList();
-
-        $show = false;
-        if ($id != null) {
-            $friend = User::find($id);
-            if ($friend) {
-                $show = true;
-            }
-        }
-
-        $images = $user->images()->orderBy('id', 'desc')->get();
-        $imagealbums = $user->imagealbums()->orderBy('id', 'desc')->get();
-
-        return view('images.index', compact('user', 'user_list', 'show', 'id', 'imagealbums', 'images'));
-//        return $this->showUser($user->username, $userRepository);
+        $images = $user->images()->get();
+        $imagealbums = $user->imagealbums()->get();
+        $data = [];
+        $data['images'] = $images;
+        $data['imagealbums'] = $imagealbums;
+        $data['user'] = $user;
+        $data['can_see'] = $user->canSeeProfile(Auth::id());
+        return $this->renderProfileView('profile.images', $data);
     }
+
+//     public function showUser($username = '') {
+//         if(empty($username)) {
+//             $user = Auth::user();
+//         } else if (!$this->secure($username)) {
+//             return redirect('/404');
+//         } else {
+//             $user = User::where('username', $username)->first();
+//         }
+// 
+//         $id = $user->id;
+// 
+//         $user_list = $user->messagePeopleList();
+// 
+//         $show = false;
+//         if ($id != null) {
+//             $friend = User::find($id);
+//             if ($friend) {
+//                 $show = true;
+//             }
+//         }
+// 
+//         $images = $user->images()->orderBy('id', 'desc')->get();
+//         $imagealbums = $user->imagealbums()->orderBy('id', 'desc')->get();
+// 
+//         return view('images.index', compact('user', 'user_list', 'show', 'id', 'imagealbums', 'images'));
+// //        return $this->showUser($user->username, $userRepository);
+//     }
 
 //    public function showUser($username, UserRepository $userRepository) {
 //        $user = $userRepository->findByUsername($username);

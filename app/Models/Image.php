@@ -66,4 +66,14 @@ class Image extends Model implements StaplerableInterface
             ]
         ];
     }
+
+    /**
+     * Get thumbnail
+     *
+     * @return BelongsTo
+     */
+    public function getCover()
+    {
+        return $this->file->url('medium');
+    }
 }
