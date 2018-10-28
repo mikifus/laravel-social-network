@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Codesleeve\Stapler\ORM\EloquentTrait;
+// use Czim\Paperclip\Model\PaperclipTrait;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
@@ -10,7 +10,7 @@ use App\Traits\ModelTaggableTrait;
 
 class Imagealbum extends Model
 {
-    use EloquentTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
+    use /*PaperclipTrait, */Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
 
     protected $table = 'imagealbums';
 

@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Codesleeve\Stapler\ORM\StaplerableInterface;
-use Codesleeve\Stapler\ORM\EloquentTrait;
+use Czim\Paperclip\Contracts\AttachableInterface;
+use Czim\Paperclip\Model\PaperclipTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use App\Traits\ModelTaggableTrait;
 
-class Musicalbum extends Model implements StaplerableInterface
+class Musicalbum extends Model implements AttachableInterface
 {
-    use EloquentTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
+    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
 
     /**
      * Status values
@@ -42,17 +42,30 @@ class Musicalbum extends Model implements StaplerableInterface
      */
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('front', [
-            'styles' => [
-                'medium' => '512x512',
-                'thumb' => '150x150#'
-            ]
+            'variants' => [
+                'medium' => [
+                    'auto-orient' => [],
+                    'resize'      => ['dimensions' => '512x512'],
+                ],
+                'thumb' => '150x150#',
+            ],
+            'attributes' => [
+                'variants' => true,
+            ],
         ]);
         $this->hasAttachedFile('back', [
-            'styles' => [
-                'medium' => '512x512',
-                'thumb' => '150x150#'
-            ]
+            'variants' => [
+                'medium' => [
+                    'auto-orient' => [],
+                    'resize'      => ['dimensions' => '512x512'],
+                ],
+                'thumb' => '150x150#',
+            ],
+            'attributes' => [
+                'variants' => true,
+            ],
         ]);
+        
         $this->hasAttachedFile('zipfile');
         parent::__construct($attributes);
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f73b1f8ddf4931e0a3703ba40c66649d",
+    "content-hash": "a49e1c53dfd79a0cb31c0d00fd2cf217",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -349,109 +349,6 @@
                 "slugify"
             ],
             "time": "2018-01-22T09:00:48+00:00"
-        },
-        {
-            "name": "codesleeve/laravel-stapler",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/CodeSleeve/laravel-stapler.git",
-                "reference": "265cfcc7430bda49521bcec8eee0b5311f267e53"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/CodeSleeve/laravel-stapler/zipball/265cfcc7430bda49521bcec8eee0b5311f267e53",
-                "reference": "265cfcc7430bda49521bcec8eee0b5311f267e53",
-                "shasum": ""
-            },
-            "require": {
-                "codesleeve/stapler": "1.2.*",
-                "laravel/framework": "4.*|5.*",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/migrations"
-                ],
-                "psr-4": {
-                    "Codesleeve\\LaravelStapler\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Travis Bennett",
-                    "email": "tandrewbennett@hotmail.com"
-                }
-            ],
-            "description": "Easy file upload management for the Laravel Framework.",
-            "keywords": [
-                "aws",
-                "file",
-                "laravel",
-                "paperclip",
-                "s3",
-                "stapler",
-                "upload"
-            ],
-            "time": "2018-05-12T15:34:52+00:00"
-        },
-        {
-            "name": "codesleeve/stapler",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/CodeSleeve/stapler.git",
-                "reference": "f15aa58d3dac213aefce27dd5885730d9bc31387"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/CodeSleeve/stapler/zipball/f15aa58d3dac213aefce27dd5885730d9bc31387",
-                "reference": "f15aa58d3dac213aefce27dd5885730d9bc31387",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/inflector": "~1",
-                "imagine/imagine": "~0.6.2",
-                "php": ">=5.4",
-                "symfony/http-foundation": "~2.3|~3.0"
-            },
-            "require-dev": {
-                "aws/aws-sdk-php": "2.4.*@dev",
-                "illuminate/config": "4.*|5.*",
-                "illuminate/database": "4.*|5.*",
-                "mockery/mockery": "0.8.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Codesleeve\\Stapler\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Travis Bennett",
-                    "email": "tandrewbennett@hotmail.com"
-                }
-            ],
-            "description": "Elegant and simple ORM-based file upload package for php.",
-            "keywords": [
-                "aws",
-                "file",
-                "orm",
-                "paperclip",
-                "s3",
-                "upload"
-            ],
-            "time": "2016-01-30T21:39:33+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -883,6 +780,184 @@
             "time": "2018-01-01T21:32:57+00:00"
         },
         {
+            "name": "cybercog/laravel-love",
+            "version": "5.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cybercog/laravel-love.git",
+                "reference": "258857c8f452276304063e35e599686a3814e7ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cybercog/laravel-love/zipball/258857c8f452276304063e35e599686a3814e7ee",
+                "reference": "258857c8f452276304063e35e599686a3814e7ee",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~5.5.0|~5.6.0|~5.7.0",
+                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.10",
+                "mockery/mockery": "^1.0",
+                "orchestra/database": "~3.5.0|~3.6.0|~3.7.0",
+                "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0",
+                "phpunit/phpunit": "^6.0|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Cog\\Laravel\\Love\\Providers\\LoveServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cog\\Contracts\\Love\\": "contracts/",
+                    "Cog\\Laravel\\Love\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Komarev",
+                    "email": "a.komarev@cybercog.su",
+                    "homepage": "http://ell.folio.su",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Make Laravel Eloquent models Likeable & Dislikeable in a minutes!",
+            "homepage": "https://github.com/cybercog/laravel-love",
+            "keywords": [
+                "Rate",
+                "Rating",
+                "Unlike",
+                "adore",
+                "cog",
+                "cybercog",
+                "dislike",
+                "eloquent",
+                "emotion",
+                "favorite",
+                "favourite",
+                "hate",
+                "kudos",
+                "laravel",
+                "likable",
+                "like",
+                "likeable",
+                "love",
+                "reaction",
+                "star",
+                "trait",
+                "undislike"
+            ],
+            "time": "2018-09-09T13:51:17+00:00"
+        },
+        {
+            "name": "czim/file-handling",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/czim/file-handling.git",
+                "reference": "c56c655a5ca10f500854e9b5153709783e8c34e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/czim/file-handling/zipball/c56c655a5ca10f500854e9b5153709783e8c34e3",
+                "reference": "c56c655a5ca10f500854e9b5153709783e8c34e3",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "^0.7",
+                "myclabs/php-enum": "^1.4",
+                "php": ">=5.5.9",
+                "psr/container": "^1.0",
+                "symfony/http-foundation": "^3.0|^4.0"
+            },
+            "require-dev": {
+                "illuminate/contracts": "^5.3",
+                "mikey179/vfsstream": "^1.6",
+                "mockery/mockery": "0.9.*",
+                "php-ffmpeg/php-ffmpeg": "^0.9.5",
+                "phpunit/phpunit": "~5.7",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "league/flysystem-aws-s3-v3": "Required for AWS S3 file storage",
+                "php-ffmpeg/php-ffmpeg": "Required for video conversion and thumbnail generation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Czim\\FileHandling\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "File Handling Helper",
+            "homepage": "https://github.com/czim",
+            "keywords": [
+                "file",
+                "s3",
+                "storage",
+                "uploads"
+            ],
+            "time": "2018-08-02T09:00:31+00:00"
+        },
+        {
+            "name": "czim/laravel-paperclip",
+            "version": "2.5.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/czim/laravel-paperclip.git",
+                "reference": "a03a7a9107c9c493c3baf8e2ae0e27e19566f1d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/czim/laravel-paperclip/zipball/a03a7a9107c9c493c3baf8e2ae0e27e19566f1d7",
+                "reference": "a03a7a9107c9c493c3baf8e2ae0e27e19566f1d7",
+                "shasum": ""
+            },
+            "require": {
+                "czim/file-handling": "^1.0",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*|~1.0",
+                "orchestra/testbench": "~3.5|~3.6",
+                "phpunit/phpunit": "~6.0|~7.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Czim\\Paperclip\\Providers\\PaperclipServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Czim\\Paperclip\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Laravel Eloquent file attachment solution",
+            "homepage": "https://github.com/czim",
+            "keywords": [
+                "attachment",
+                "file",
+                "laravel",
+                "upload"
+            ],
+            "time": "2018-10-25T10:05:46+00:00"
+        },
+        {
             "name": "dereuromark/media-embed",
             "version": "0.4.2",
             "source": {
@@ -1190,23 +1265,24 @@
         },
         {
             "name": "imagine/imagine",
-            "version": "v0.6.3",
+            "version": "v0.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche123/Imagine.git",
-                "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d"
+                "reference": "a9a702a946073cbca166718f1b02a1e72d742daa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/149041d2a1b517107bfe270ca2b1a17aa341715d",
-                "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/a9a702a946073cbca166718f1b02a1e72d742daa",
+                "reference": "a9a702a946073cbca166718f1b02a1e72d742daa",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
             "require-dev": {
-                "sami/sami": "dev-master"
+                "sami/sami": "^3.3",
+                "symfony/phpunit-bridge": "^3.2"
             },
             "suggest": {
                 "ext-gd": "to use the GD implementation",
@@ -1243,7 +1319,7 @@
                 "image manipulation",
                 "image processing"
             ],
-            "time": "2015-09-19T16:54:05+00:00"
+            "time": "2017-05-16T10:31:22+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -2047,6 +2123,50 @@
                 "schedule"
             ],
             "time": "2017-01-23T04:29:33+00:00"
+        },
+        {
+            "name": "myclabs/php-enum",
+            "version": "1.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/php-enum.git",
+                "reference": "a8284c7c540caf9988e339a404cadcdf1e8b165d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/a8284c7c540caf9988e339a404cadcdf1e8b165d",
+                "reference": "a8284c7c540caf9988e339a404cadcdf1e8b165d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
+                "squizlabs/php_codesniffer": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyCLabs\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP Enum contributors",
+                    "homepage": "https://github.com/myclabs/php-enum/graphs/contributors"
+                }
+            ],
+            "description": "PHP Enum implementation",
+            "homepage": "http://github.com/myclabs/php-enum",
+            "keywords": [
+                "enum"
+            ],
+            "time": "2018-10-27T21:15:22+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -5657,9 +5777,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "codesleeve/laravel-stapler": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

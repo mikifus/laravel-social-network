@@ -5,6 +5,7 @@
 /public/system
 /public/cache
 /public/build/*
+/storage/app/public/App/*
 /storage/app/public/uploads/covers/*
 /storage/app/public/uploads/posts/*
 /storage/app/public/uploads/profile_photos/*

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Validator;
 use Auth;
 use Input;
 use View;
+use Log;
 
 class MusicalbumsController extends UserProfileController
 {
@@ -83,6 +84,7 @@ class MusicalbumsController extends UserProfileController
         }
         catch (\Exception $e)
         {
+            Log::error($e->getMessage());
             $el->delete();
             return back()->withErrors(['error' => "Unexpected error."]);
         }
@@ -128,6 +130,7 @@ class MusicalbumsController extends UserProfileController
         }
         catch (\Exception $e)
         {
+            Log::error($e->getMessage());
             $el->delete();
             return back()->withErrors(['error' => "Unexpected error."])
                 ->withInput(Input::all());
@@ -192,6 +195,7 @@ class MusicalbumsController extends UserProfileController
         }
         catch (\Exception $e)
         {
+            Log::error($e->getMessage());
             return Response::json([
                 'error' => true,
 //                'message' => "Unexpected error: " . $e->getMessage(),
@@ -226,10 +230,10 @@ class MusicalbumsController extends UserProfileController
         }
         switch ($request->cover) {
             case 'front':
-                $el->front = STAPLER_NULL;
+                $el->front = config('paperclip.delete-hash');
                 break;
             case 'back':
-                $el->back = STAPLER_NULL;
+                $el->back = config('paperclip.delete-hash');
                 break;
             default:
                 return Response::json([
@@ -243,6 +247,7 @@ class MusicalbumsController extends UserProfileController
         }
         catch (\Exception $e)
         {
+            Log::error($e->getMessage());
             return Response::json([
                 'error' => true,
                 'message' => "Unexpected error.",
@@ -328,6 +333,7 @@ class MusicalbumsController extends UserProfileController
         }
         catch (\Exception $e)
         {
+            Log::error($e->getMessage());
             $el->delete();
             return Response::json([
                 'error' => true,
@@ -510,7 +516,7 @@ class MusicalbumsController extends UserProfileController
         $el->delete();
         // TODO: Check if images and songs are also deleted.
 
-        return redirect()->route('music');
+        return redirect()->route('profile.music');
     }
 
     /**

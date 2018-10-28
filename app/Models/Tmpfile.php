@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Codesleeve\Stapler\ORM\StaplerableInterface;
-use Codesleeve\Stapler\ORM\EloquentTrait;
+use Czim\Paperclip\Contracts\AttachableInterface;
+use Czim\Paperclip\Model\PaperclipTrait;
 
-class Tmpfile extends Model implements StaplerableInterface
+class Tmpfile extends Model implements AttachableInterface
 {
-    use EloquentTrait;
+    use PaperclipTrait;
 
     /**
      * The database table used by the model.

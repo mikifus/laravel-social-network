@@ -23,7 +23,11 @@
                     @foreach ($imagealbums as $item)
                         <li class="media">
                             <div class="media-left">
+                                @if (!is_null($item->thumb()))
                                 <img src='{{ $item->thumb()->file->url('thumb') }}' />
+                                @else
+                                <div class="alert alert-warning">{{ trans('imagealbums.empty') }}</div>
+                                @endif
                             </div>
                             <div class="media-body">
                                 <h3 class="media-heading">{{ $item->title }}</h3>

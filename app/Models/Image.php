@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Codesleeve\Stapler\ORM\StaplerableInterface;
-use Codesleeve\Stapler\ORM\EloquentTrait;
+use Czim\Paperclip\Contracts\AttachableInterface;
+use Czim\Paperclip\Model\PaperclipTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use App\Traits\ModelTaggableTrait;
 
-class Image extends Model implements StaplerableInterface
+class Image extends Model implements AttachableInterface
 {
-    use EloquentTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
+    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
     /**
      * The database table used by the model.
      *
@@ -33,10 +33,16 @@ class Image extends Model implements StaplerableInterface
      */
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('file', [
-            'styles' => [
-                'medium' => '512x512',
-                'thumb' => '150x150#'
-            ]
+            'variants' => [
+                'medium' => [
+                    'auto-orient' => [],
+                    'resize'      => ['dimensions' => '512x512'],
+                ],
+                'thumb' => '150x150#',
+            ],
+            'attributes' => [
+                'variants' => true,
+            ],
         ]);
 
         parent::__construct($attributes);

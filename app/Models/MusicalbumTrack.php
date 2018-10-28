@@ -3,16 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Codesleeve\Stapler\ORM\StaplerableInterface;
-use Codesleeve\Stapler\ORM\EloquentTrait;
+use Czim\Paperclip\Contracts\AttachableInterface;
+use Czim\Paperclip\Model\PaperclipTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Storage;
 
-class MusicalbumTrack extends Model implements StaplerableInterface, Sortable
+class MusicalbumTrack extends Model implements AttachableInterface, Sortable
 {
-    use EloquentTrait, Sluggable, SluggableScopeHelpers, SortableTrait;
+    use PaperclipTrait, Sluggable, SluggableScopeHelpers, SortableTrait;
     /**
      * The database table used by the model.
      *
@@ -93,7 +94,8 @@ class MusicalbumTrack extends Model implements StaplerableInterface, Sortable
     }
 
     public function getDurationAttribute() {
-        $path = $this->file->path();
+        // New Laravel Storage class, quite useful. Check out the disk() parameter.
+        $path = Storage::disk('public')->getDriver()->getAdapter()->applyPathPrefix($this->file->path());
         if( empty($path) )
         {
             return '0:00';
