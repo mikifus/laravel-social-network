@@ -39,7 +39,7 @@ class MusicController extends UserProfileController
         $data['tracks'] = $tracks;
         $data['user'] = $user;
 
-        return $this->renderProfileView('profile.music', $data);
+        return $this->renderProfileView('music.index', $data);
     }
 
     public function showUser($username) {
