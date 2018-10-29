@@ -198,3 +198,6 @@ Route::get('profile/musicalbums/delete/{id}', ['as' => 'musicalbums.delete', 'us
 Route::get('musicalbums/{slug}', ['as' => 'musicalbums.slug_view', 'uses' => 'MusicalbumsController@showSlug']);
 
 Route::get('/musicalbums/autocomplete_tags/{term}', ['as' => 'musicalbums.autocomplete_tags', 'uses' => 'MusicalbumsController@autocompleteTags']);
+
+// Likes
+Route::post('likes/toggle', ['as' => 'like.toggle', 'uses' => 'LikeController@toggle']);

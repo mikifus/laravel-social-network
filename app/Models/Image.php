@@ -8,10 +8,12 @@ use Czim\Paperclip\Model\PaperclipTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use App\Traits\ModelTaggableTrait;
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 
-class Image extends Model implements AttachableInterface
+class Image extends Model implements AttachableInterface,LikeableContract
 {
-    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
+    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Likeable;
     /**
      * The database table used by the model.
      *

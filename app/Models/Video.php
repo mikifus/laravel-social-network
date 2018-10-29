@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use MediaEmbed\MediaEmbed;
 // use Cviebrock\EloquentTaggable\Taggable;
 use App\Traits\ModelTaggableTrait;
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 
-class Video extends Model
+class Video extends Model implements LikeableContract
 {
-    use ModelTaggableTrait;
+    use ModelTaggableTrait, Likeable;
     
     /**
      * The database table used by the model.

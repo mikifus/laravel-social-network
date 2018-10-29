@@ -19,12 +19,12 @@
                     <div class="col-md-9">
 
                         <div>
-                            <div class="pull-right">
-                                <a href="{!! route('profile.videos') !!}">{!! trans('profile.admin_link') !!}</a>
-                            </div>
                             <div class="content-page-title">
                                 {!! trans('profile.videos_header') !!}
                                 @if ($user->isId( Auth::user()->id ) )
+                                <a href="{!! route('profile.videos') !!}" class="btn btn-default">
+                                    <i class="fa fa-pencil"></i> {!! trans('profile.admin_link') !!}
+                                </a>
                                 @endif
                             </div>
                         </div>
@@ -85,29 +85,27 @@
 
                                             <!--Content-->
                                             <div class="modal-content">
+                                                <!--Header-->
+                                                <div class="modal-header mb-0 p-0">
+                                                    <button type="button" class="btn btn-outlined-default btn-rounded btn-md ml-4 pull-right" data-dismiss="modal"><i class="fa fa-close"></i></button>
+                                                    <h4>{{ $video->title }}</h4>
+                                                </div>
 
                                                 <!--Body-->
                                                 <div class="modal-body mb-0 p-0">
                                                     {!! $video->getMediaObjectAttribute()->setAttribute(['width' => "100%",'height' => "400"]) !!}
-<!--                                                     <div class="embed-responsive embed-responsive-16by9 z-depth-1-half"> -->
-<!--                                                         <iframe class="embed-responsive-item" src="" allowfullscreen></iframe> -->
-<!--                                                     </div> -->
+                                                </div>
 
+                                                <!--Tags-->
+                                                <div class="modal-body mb-0 p-0">
+                                                    @foreach ($video->tagArray as $tag)
+                                                    <span class="tag label label-info">{{ $tag }}</span>
+                                                    @endforeach
                                                 </div>
 
                                                 <!--Footer-->
                                                 <div class="modal-footer justify-content-center">
-                                                    <span class="mr-4">Spread the word!</span>
-<!--                                                     <a type="button" class="btn-floating btn-sm btn-fb"><i class="fa fa-facebook"></i></a> -->
-                                                    <!--Twitter-->
-<!--                                                     <a type="button" class="btn-floating btn-sm btn-tw"><i class="fa fa-twitter"></i></a> -->
-                                                    <!--Google +-->
-<!--                                                     <a type="button" class="btn-floating btn-sm btn-gplus"><i class="fa fa-google-plus"></i></a> -->
-                                                    <!--Linkedin-->
-<!--                                                     <a type="button" class="btn-floating btn-sm btn-ins"><i class="fa fa-linkedin"></i></a> -->
-
-                                                    <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
-
+                                                    @include('widgets.like_button', ['item' => $video, 'class' => Video::class])
                                                 </div>
 
                                             </div>
@@ -133,35 +131,7 @@
                                                 </div>
                                         </div>
                                     </div>
-
-                                    
-<!--                                     <a style="cursor: pointer;"> -->
-<!--                                         <img class="img-fluid z-depth-1" style="width: 100%;" src="{{ $video->get_video_thumbnail($video->url) }}" alt="video" data-toggle="modal" data-target="#modal1"> -->
-<!--                                         <div class="text-center">{{ $video->title }}</div> -->
-<!--                                     </a> -->
-
                                 </div>
-<!--                                    <div class="col-md-6">
-                                        <div class="card-container">
-                                            <div class="card">
-                                                <div class="front">
-                                                    <div>
-                                                        <audio style="width: 100%;" controls src="{{ $video->url }}">
-                                                    </div>
-                                                    <div class="content">
-                                                        <div class="main">
-                                                            <a href="{{ route('videoalbums.slug_view', ['slug' => $video->slug]) }}">
-                                                                <h3 class="name">{{ $video->title }}</h3>
-                                                                <p class="profession" style="height: 30px;">
-                                                                    {{ str_limit($video->tagList, $limit = 50, $end = '...') }}
-                                                                </p>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>-->
                                 @endforeach
                             </div>
                         @endif
