@@ -299,6 +299,7 @@ class ImagesController extends UserProfileController {
         $data['id'] = $el->id;
         $data['item'] = $el;
         $data['user'] = $user;
+        $data['can_see'] = $user->canSeeProfile(Auth::id());
         return $this->renderProfileView('images.view', $data);
     }
 

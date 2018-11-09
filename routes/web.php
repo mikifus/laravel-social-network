@@ -104,7 +104,7 @@ Route::post('/{username}/save/relationship', 'ProfileController@saveRelationship
 //     Route::post('profile/images/delete', ['as' => 'images.delete', 'uses' => 'ImagesController@destroy']);
     Route::get('profile/images/destroy/{id}', ['as' => 'images.destroy', 'uses' => 'ImagesController@destroy']);
     Route::get('/{username}/images/', ['as' => 'images_profile_path', 'uses' => 'ImagesController@showUser']);
-    Route::get('image/{slug}', ['as' => 'images.slug_view', 'uses' => 'ImagesController@showSlug']);
+    Route::get('images/{slug}', ['as' => 'images.slug_view', 'uses' => 'ImagesController@showSlug']);
     Route::get('/images/autocomplete_tags/{term}', ['as' => 'images.autocomplete_tags', 'uses' => 'ImagesController@autocompleteTags']);
 //});
 

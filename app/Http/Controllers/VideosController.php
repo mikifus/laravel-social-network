@@ -66,11 +66,13 @@ class VideosController extends UserProfileController
     public function showSlug($slug)
     {
         $el = Video::findBySlug($slug);
+        $user = $el->user()->first();
         $data = [];
         $data['id'] = $el->id;
         $data['item'] = $el;
-        $data['can_see'] = $el->user()->canSeeProfile(Auth::id());
-        return $this->renderProfileView('profile.videos', $data);
+        $data['user'] = $user;
+        $data['can_see'] = $user->canSeeProfile(Auth::id());
+        return $this->renderProfileView('videos.show', $data);
     }
 
     /**

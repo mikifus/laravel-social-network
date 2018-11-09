@@ -30,7 +30,7 @@
                         </div>
                         
                         <div class="">
-                            <img src='{{ $item->file->url('original') }}' style="width: 100%;" />
+                            {!! $item->getMediaObjectAttribute()->setAttribute(['width' => "100%",'height' => "400"]) !!}
                         </div>
 
                         <!--Tags-->

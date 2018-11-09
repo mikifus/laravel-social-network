@@ -8,10 +8,12 @@ use MediaEmbed\MediaEmbed;
 use App\Traits\ModelTaggableTrait;
 use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
 use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class Video extends Model implements LikeableContract
 {
-    use ModelTaggableTrait, Likeable;
+    use ModelTaggableTrait, Likeable, Sluggable, SluggableScopeHelpers;
     
     /**
      * The database table used by the model.
@@ -111,5 +113,20 @@ class Video extends Model implements LikeableContract
 
     public function getCover(){
         return $this->get_video_thumbnail($this->url);
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'unique' => true
+            ]
+        ];
     }
 }
