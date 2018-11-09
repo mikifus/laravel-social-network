@@ -26,33 +26,37 @@ import 'vue-promise-btn/dist/vue-promise-btn.css'
 
 Vue.use(VuePromiseBtn) // or with global options Vue.use(VuePromiseBtn, {})
 
-var like_button = new Vue({
-  el: '.btn-like',
-  data: {
-    liked: false
-  },
-  methods: {
-    toggleLike (model, id, event) {
-        var target = $(event.target).parent(); // It's always the parent
-      return axios.post(BASE_URL+'/likes/toggle', {
-            model: model,
-            id: id
-        })
-      .then((response)  =>  {
-        if(response.data.likedBy) {
-            target.find('.unlike-toggle').show();
-            target.find('.like-toggle').hide();
-        } else {
-            target.find('.unlike-toggle').hide();
-            target.find('.like-toggle').show();
+$('.btn-like').each(function(){
+    var liked = $(this).data('liked');
+    
+    /*var like_button = */new Vue({
+    el: this,
+    data: {
+        liked: liked
+    },
+    methods: {
+        toggleLike (model, id, event) {
+            var target = $(event.target).parent(); // It's always the parent
+            return axios.post(BASE_URL+'/likes/toggle', {
+                    model: model,
+                    id: id
+                })
+            .then((response)  =>  {
+                if(response.data.likedBy) {
+                    target.find('.unlike-toggle').show();
+                    target.find('.like-toggle').hide();
+                } else {
+                    target.find('.unlike-toggle').hide();
+                    target.find('.like-toggle').show();
+                }
+                target.find('.btn-label').text(response.data.likesCount);
+            }, (error)  =>  {
+                console.log(error);
+                // TODO: Error managing in Vue
+            })
         }
-        target.find('.btn-label').text(response.data.likesCount);
-      }, (error)  =>  {
-          console.log(error);
-        // TODO: Error managing in Vue
-      })
     }
-  }
+    });
 });
 
 

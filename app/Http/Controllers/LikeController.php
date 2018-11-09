@@ -33,7 +33,7 @@ class LikeController extends Controller
         $full_model_name = "App\Models\\".$model;
         $user = Auth::user();
         
-        $model_object = $full_model_name::find($id)->first();
+        $model_object = $full_model_name::find($id);
         $model_object->toggleLikeBy($user->id);
 //         $user->toggleLike($model_object);
 

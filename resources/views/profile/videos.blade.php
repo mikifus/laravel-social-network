@@ -149,5 +149,4 @@
 
 @section('footer')
     <script src="{{ asset('js/profile.js') }}"></script>
-
 @endsection

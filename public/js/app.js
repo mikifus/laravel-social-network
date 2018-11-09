@@ -22580,32 +22580,36 @@ window.Vue = __webpack_require__(6);
 
 __WEBPACK_IMPORTED_MODULE_4_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_vue_promise_btn__["a" /* default */]); // or with global options Vue.use(VuePromiseBtn, {})
 
-var like_button = new __WEBPACK_IMPORTED_MODULE_4_vue___default.a({
-  el: '.btn-like',
-  data: {
-    liked: false
-  },
-  methods: {
-    toggleLike: function toggleLike(model, id, event) {
-      var target = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(event.target).parent(); // It's always the parent
-      return axios.post(BASE_URL + '/likes/toggle', {
-        model: model,
-        id: id
-      }).then(function (response) {
-        if (response.data.likedBy) {
-          target.find('.unlike-toggle').show();
-          target.find('.like-toggle').hide();
-        } else {
-          target.find('.unlike-toggle').hide();
-          target.find('.like-toggle').show();
+__WEBPACK_IMPORTED_MODULE_0_jquery___default()('.btn-like').each(function () {
+    var liked = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(this).data('liked');
+
+    /*var like_button = */new __WEBPACK_IMPORTED_MODULE_4_vue___default.a({
+        el: this,
+        data: {
+            liked: liked
+        },
+        methods: {
+            toggleLike: function toggleLike(model, id, event) {
+                var target = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(event.target).parent(); // It's always the parent
+                return axios.post(BASE_URL + '/likes/toggle', {
+                    model: model,
+                    id: id
+                }).then(function (response) {
+                    if (response.data.likedBy) {
+                        target.find('.unlike-toggle').show();
+                        target.find('.like-toggle').hide();
+                    } else {
+                        target.find('.unlike-toggle').hide();
+                        target.find('.like-toggle').show();
+                    }
+                    target.find('.btn-label').text(response.data.likesCount);
+                }, function (error) {
+                    console.log(error);
+                    // TODO: Error managing in Vue
+                });
+            }
         }
-        target.find('.btn-label').text(response.data.likesCount);
-      }, function (error) {
-        console.log(error);
-        // TODO: Error managing in Vue
-      });
-    }
-  }
+    });
 });
 
 /**
