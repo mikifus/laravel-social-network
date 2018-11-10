@@ -8,10 +8,13 @@ use Czim\Paperclip\Model\PaperclipTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use App\Traits\ModelTaggableTrait;
+use Nagy\LaravelRating\Traits\Rate\Rateable;
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 
-class Track extends Model implements AttachableInterface
+class Track extends Model implements AttachableInterface, LikeableContract
 {
-    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
+    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Likeable, Rateable;
 
     /**
      * The database table used by the model.

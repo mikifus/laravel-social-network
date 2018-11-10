@@ -89,6 +89,10 @@
                                                                 <p class="profession" style="height: 30px;">
                                                                     {{ str_limit($track->description, $limit = 100, $end = '...') }}
                                                                 </p>
+                                                                <p class="profession text-center">
+                                                                    @include('widgets.like_button', ['item' => $track, 'class' => Track::class])
+                                                                    @include('widgets.rating_stars', ['item' => $track, 'class' => Track::class])
+                                                                </p>
                                                                 <p class="profession" style="height: 30px;">
                                                                     @include('widgets.tag_array', ['item' => $track])
                                                                 </p>
