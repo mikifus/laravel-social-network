@@ -10,10 +10,11 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use App\Traits\ModelTaggableTrait;
 use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
 use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
+use Nagy\LaravelRating\Traits\Rate\Rateable;
 
 class Musicalbum extends Model implements AttachableInterface, LikeableContract
 {
-    use PaperclipTrait, Likeable, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
+    use PaperclipTrait, Likeable, Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Rateable;
 
     /**
      * Status values

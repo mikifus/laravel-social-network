@@ -199,5 +199,6 @@ Route::get('musicalbums/{slug}', ['as' => 'musicalbums.slug_view', 'uses' => 'Mu
 
 Route::get('/musicalbums/autocomplete_tags/{term}', ['as' => 'musicalbums.autocomplete_tags', 'uses' => 'MusicalbumsController@autocompleteTags']);
 
-// Likes
+// Likes and rating
 Route::post('likes/toggle', ['as' => 'like.toggle', 'uses' => 'LikeController@toggle']);
+Route::post('likes/rate', ['as' => 'like.rate', 'uses' => 'LikeController@rate']);

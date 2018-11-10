@@ -22988,6 +22988,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_aplayer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_vue_aplayer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_vue_goodshare__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_vue_goodshare___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_vue_goodshare__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_vue_stars__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_vue_stars___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_vue_stars__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -23022,11 +23024,18 @@ __WEBPACK_IMPORTED_MODULE_4_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_vue_
 __WEBPACK_IMPORTED_MODULE_4_vue___default.a.component('aplayer', __WEBPACK_IMPORTED_MODULE_7_vue_aplayer___default.a);
 
 /**
- * Shareing buttons
+ * Sharing buttons
  * @see https://github.com/koddr/vue-goodshare
  */
 
 __WEBPACK_IMPORTED_MODULE_4_vue___default.a.component('vue-goodshare', __WEBPACK_IMPORTED_MODULE_8_vue_goodshare___default.a);
+
+/**
+ * Star rating
+ * @see https://www.tallent.us/vue-stars/
+ */
+
+__WEBPACK_IMPORTED_MODULE_4_vue___default.a.component('vue-stars', __WEBPACK_IMPORTED_MODULE_9_vue_stars___default.a);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -23053,6 +23062,29 @@ var app = new __WEBPACK_IMPORTED_MODULE_4_vue___default.a({
                     target.find('.like-toggle').show();
                 }
                 target.find('.btn-label').text(response.data.likesCount);
+            }, function (error) {
+                console.log(error);
+                // TODO: Error managing in Vue
+            });
+        },
+
+        /**
+         * Star rating
+         */
+        rate: function rate(model, id, rating) {
+            return axios.post(BASE_URL + '/likes/rate', {
+                model: model,
+                id: id,
+                rating: rating
+            }).then(function (response) {
+                //                 if(response.data.likedBy) {
+                //                     target.find('.unlike-toggle').show();
+                //                     target.find('.like-toggle').hide();
+                //                 } else {
+                //                     target.find('.unlike-toggle').hide();
+                //                     target.find('.like-toggle').show();
+                //                 }
+                //                 target.find('.btn-label').text(response.data.likesCount);
             }, function (error) {
                 console.log(error);
                 // TODO: Error managing in Vue
@@ -70837,6 +70869,14 @@ module.exports = function(module) {
 __webpack_require__(26);
 module.exports = __webpack_require__(28);
 
+
+/***/ }),
+/* 154 */,
+/* 155 */,
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define("vue-stars",[],t):"object"==typeof exports?exports["vue-stars"]=t():e["vue-stars"]=t()}("undefined"!=typeof self?self:this,function(){return function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,t),o.l=!0,o.exports}var n={};return t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=1)}([function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={name:"VueStars",props:{max:{type:Number,required:!1,default:5},value:{type:Number,required:!1,default:0},name:{type:String,required:!1,default:"rating"},char:{type:String,required:!1,default:"★"},inactiveChar:{type:String,required:!1,default:null},readonly:{type:Boolean,required:!1,default:!1},activeColor:{type:String,required:!1,default:"#FD0"},inactiveColor:{type:String,required:!1,default:"#999"},shadowColor:{type:String,required:!1,default:"#FF0"},hoverColor:{type:String,required:!1,default:"#DD0"}},computed:{ratingChars:function(){return Array.from(this.char)},inactiveRatingChars:function(){return this.inactiveChar?Array.from(this.inactiveChar):this.ratingChars},notouch:function(){return!("ontouchstart"in document.documentElement)},mapCssProps:function(){return{"--active-color":this.activeColor,"--inactive-color":this.inactiveColor,"--shadow-color":this.shadowColor,"--hover-color":this.hoverColor}}},methods:{updateInput:function(e){this.$emit("input",parseInt(e,10))},getActiveLabel:function(e){var t=this.ratingChars;return t[Math.min(t.length-1,e-1)]},getInactiveLabel:function(e){var t=this.inactiveRatingChars;return t[Math.min(t.length-1,e-1)]}}}},function(e,t,n){"use strict";function r(e){u||n(2)}Object.defineProperty(t,"__esModule",{value:!0});var o=n(0),a=n.n(o);for(var i in o)"default"!==i&&function(e){n.d(t,e,function(){return o[e]})}(i);var s=n(8),u=!1,l=n(7),c=r,d=l(a.a,s.a,!1,c,null,null);d.options.__file="src/VueStars.vue",t.default=d.exports},function(e,t,n){var r=n(3);"string"==typeof r&&(r=[[e.i,r,""]]),r.locals&&(e.exports=r.locals);n(5)("6f072fcb",r,!1)},function(e,t,n){t=e.exports=n(4)(void 0),t.push([e.i,"\n.vue-stars {\n\tdisplay: -webkit-inline-box;\n\tdisplay: -ms-inline-flexbox;\n\tdisplay: inline-flex;\n\t-webkit-box-orient: horizontal;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-flow: row nowrap;\n\t        flex-flow: row nowrap;\n\t-webkit-box-align: flex-start center;\n\t    -ms-flex-align: flex-start center;\n\t        align-items: flex-start center;\n\tline-height: 1em;\n}\n.vue-stars label {\n\tdisplay: block;\n\tpadding: 0.125em;\n\twidth: 1.2em;\n\ttext-align: center;\n\tcolor: #fd0;\n\ttext-shadow: 0 0 0.3em #ff0;\n}\n.vue-stars input,\n.vue-stars label .inactive,\n.vue-stars input:checked ~ label .active,\n.vue-stars.notouch:not(.readonly):hover label .inactive,\n.vue-stars.notouch:not(.readonly) label:hover ~ label .active {\n\tdisplay: none;\n}\n.vue-stars input:checked ~ label .inactive,\n.vue-stars.notouch:not(.readonly):hover label .active,\n.vue-stars.notouch:not(.readonly) label:hover ~ label .inactive {\n\tdisplay: inline;\n}\n.vue-stars.notouch:not(.readonly):hover label {\n\tcolor: #dd0;\n\ttext-shadow: 0 0 0.3em #ff0;\n}\ninput:checked ~ label,\n.vue-stars.notouch:not(.readonly) label:hover ~ label {\n\tcolor: #999;\n\ttext-shadow: none;\n}\n@supports (color: var(--prop)) {\n.vue-stars label {\n\t\tcolor: var(--active-color);\n\t\ttext-shadow: 0 0 0.3em var(--shadow-color);\n}\n.vue-stars.notouch:not(.readonly):hover label {\n\t\tcolor: var(--hover-color);\n\t\ttext-shadow: 0 0 0.3em var(--shadow-color);\n}\n.vue-stars input:checked ~ label,\n\t.vue-stars.notouch:not(.readonly) label:hover ~ label {\n\t\tcolor: var(--inactive-color);\n}\n}\n",""])},function(e,t){function n(e,t){var n=e[1]||"",o=e[3];if(!o)return n;if(t&&"function"==typeof btoa){var a=r(o);return[n].concat(o.sources.map(function(e){return"/*# sourceURL="+o.sourceRoot+e+" */"})).concat([a]).join("\n")}return[n].join("\n")}function r(e){return"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(e))))+" */"}e.exports=function(e){var t=[];return t.toString=function(){return this.map(function(t){var r=n(t,e);return t[2]?"@media "+t[2]+"{"+r+"}":r}).join("")},t.i=function(e,n){"string"==typeof e&&(e=[[null,e,""]]);for(var r={},o=0;o<this.length;o++){var a=this[o][0];"number"==typeof a&&(r[a]=!0)}for(o=0;o<e.length;o++){var i=e[o];"number"==typeof i[0]&&r[i[0]]||(n&&!i[2]?i[2]=n:n&&(i[2]="("+i[2]+") and ("+n+")"),t.push(i))}},t}},function(e,t,n){function r(e){for(var t=0;t<e.length;t++){var n=e[t],r=c[n.id];if(r){r.refs++;for(var o=0;o<r.parts.length;o++)r.parts[o](n.parts[o]);for(;o<n.parts.length;o++)r.parts.push(a(n.parts[o]));r.parts.length>n.parts.length&&(r.parts.length=n.parts.length)}else{for(var i=[],o=0;o<n.parts.length;o++)i.push(a(n.parts[o]));c[n.id]={id:n.id,refs:1,parts:i}}}}function o(){var e=document.createElement("style");return e.type="text/css",d.appendChild(e),e}function a(e){var t,n,r=document.querySelector('style[data-vue-ssr-id~="'+e.id+'"]');if(r){if(v)return h;r.parentNode.removeChild(r)}if(m){var a=p++;r=f||(f=o()),t=i.bind(null,r,a,!1),n=i.bind(null,r,a,!0)}else r=o(),t=s.bind(null,r),n=function(){r.parentNode.removeChild(r)};return t(e),function(r){if(r){if(r.css===e.css&&r.media===e.media&&r.sourceMap===e.sourceMap)return;t(e=r)}else n()}}function i(e,t,n,r){var o=n?"":r.css;if(e.styleSheet)e.styleSheet.cssText=y(t,o);else{var a=document.createTextNode(o),i=e.childNodes;i[t]&&e.removeChild(i[t]),i.length?e.insertBefore(a,i[t]):e.appendChild(a)}}function s(e,t){var n=t.css,r=t.media,o=t.sourceMap;if(r&&e.setAttribute("media",r),o&&(n+="\n/*# sourceURL="+o.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(o))))+" */"),e.styleSheet)e.styleSheet.cssText=n;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(n))}}var u="undefined"!=typeof document;if("undefined"!=typeof DEBUG&&DEBUG&&!u)throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var l=n(6),c={},d=u&&(document.head||document.getElementsByTagName("head")[0]),f=null,p=0,v=!1,h=function(){},m="undefined"!=typeof navigator&&/msie [6-9]\b/.test(navigator.userAgent.toLowerCase());e.exports=function(e,t,n){v=n;var o=l(e,t);return r(o),function(t){for(var n=[],a=0;a<o.length;a++){var i=o[a],s=c[i.id];s.refs--,n.push(s)}t?(o=l(e,t),r(o)):o=[];for(var a=0;a<n.length;a++){var s=n[a];if(0===s.refs){for(var u=0;u<s.parts.length;u++)s.parts[u]();delete c[s.id]}}}};var y=function(){var e=[];return function(t,n){return e[t]=n,e.filter(Boolean).join("\n")}}()},function(e,t){e.exports=function(e,t){for(var n=[],r={},o=0;o<t.length;o++){var a=t[o],i=a[0],s=a[1],u=a[2],l=a[3],c={id:e+":"+o,css:s,media:u,sourceMap:l};r[i]?r[i].parts.push(c):n.push(r[i]={id:i,parts:[c]})}return n}},function(e,t){e.exports=function(e,t,n,r,o,a){var i,s=e=e||{},u=typeof e.default;"object"!==u&&"function"!==u||(i=e,s=e.default);var l="function"==typeof s?s.options:s;t&&(l.render=t.render,l.staticRenderFns=t.staticRenderFns,l._compiled=!0),n&&(l.functional=!0),o&&(l._scopeId=o);var c;if(a?(c=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),r&&r.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(a)},l._ssrRegister=c):r&&(c=r),c){var d=l.functional,f=d?l.render:l.beforeCreate;d?(l._injectStyles=c,l.render=function(e,t){return c.call(t),f(e,t)}):l.beforeCreate=f?[].concat(f,c):[c]}return{esModule:i,exports:s,options:l}}},function(e,t,n){"use strict";var r=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{ref:"ratingEl",staticClass:"vue-stars",class:{readonly:e.readonly,notouch:e.notouch},style:e.mapCssProps},[n("input",{attrs:{type:"radio",id:e.name+"0",name:e.name,value:"0"},domProps:{checked:0===e.value}}),e._v(" "),e._l(e.max,function(t){return[n("label",{key:"l"+t,attrs:{for:e.name+t}},[n("span",{staticClass:"active"},[e._t("activeLabel",[e._v(e._s(e.getActiveLabel(t)))])],2),e._v(" "),n("span",{staticClass:"inactive"},[e._t("inactiveLabel",[e._v(e._s(e.getInactiveLabel(t)))])],2)]),n("input",{key:"i"+t,attrs:{type:"radio",id:e.name+t,name:e.name,disabled:e.readonly},domProps:{checked:e.value===t,value:t},on:{change:function(t){e.updateInput(t.target.value)}}})]})],2)},o=[];r._withStripped=!0;var a={render:r,staticRenderFns:o};t.a=a}])});
 
 /***/ })
 /******/ ]);

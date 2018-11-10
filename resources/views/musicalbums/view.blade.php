@@ -24,6 +24,7 @@
                         <div>
                             <div class="pull-right">
                                 @include('widgets.like_button', ['item' => $item, 'class' => Musicalbum::class])
+                                @include('widgets.rating_stars', ['item' => $item, 'class' => Musicalbum::class])
                             </div>
                             <div class="content-page-title">
                                 <h1>{!! $item->title !!}</h1>

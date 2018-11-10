@@ -15,6 +15,7 @@ use Response;
 use Session;
 use View;
 use App\Http\Requests\ToggleLikeRequest;
+use App\Http\Requests\RateRequest;
 
 
 class LikeController extends Controller
@@ -28,7 +29,7 @@ class LikeController extends Controller
 
     public function toggle(ToggleLikeRequest $request){
         $model = $request->input('model');
-        $id = $request->input('id');
+        $id    = $request->input('id');
         
         $full_model_name = "App\Models\\".$model;
         $user = Auth::user();
@@ -40,6 +41,26 @@ class LikeController extends Controller
         $response = array(
             'likedBy'     => $user->hasLiked($model_object),
             'likesCount' => $model_object->likesCount
+        );
+
+        return Response::json($response);
+    }
+
+
+    public function rate(RateRequest $request){
+        $model  = $request->input('model');
+        $id     = $request->input('id');
+        $rating = $request->input('rating');
+        
+        $full_model_name = "App\Models\\".$model;
+        $user = Auth::user();
+        $model_object = $full_model_name::find($id);
+        
+        $user->rate($model_object, $rating);
+
+        $response = array(
+            'ratingsAvg'   => $model_object->ratingsAvg(),
+            'ratingsCount' => $model_object->ratingsCount()
         );
 
         return Response::json($response);

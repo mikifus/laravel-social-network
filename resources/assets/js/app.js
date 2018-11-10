@@ -32,11 +32,19 @@ import VueAPlayer from 'vue-aplayer';
 Vue.component('aplayer', VueAPlayer);
 
 /**
- * Shareing buttons
+ * Sharing buttons
  * @see https://github.com/koddr/vue-goodshare
  */
 import VueGoodshare from "vue-goodshare";
 Vue.component('vue-goodshare', VueGoodshare);
+
+/**
+ * Star rating
+ * @see https://www.tallent.us/vue-stars/
+ */
+import VueStars from 'vue-stars'
+Vue.component('vue-stars', VueStars);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -64,6 +72,29 @@ const app = new Vue({
                     target.find('.like-toggle').show();
                 }
                 target.find('.btn-label').text(response.data.likesCount);
+            }, (error)  =>  {
+                console.log(error);
+                // TODO: Error managing in Vue
+            })
+        },
+        /**
+         * Star rating
+         */
+        rate (model, id, rating) {
+            return axios.post(BASE_URL+'/likes/rate', {
+                    model: model,
+                    id: id,
+                    rating: rating
+                })
+            .then((response)  =>  {
+//                 if(response.data.likedBy) {
+//                     target.find('.unlike-toggle').show();
+//                     target.find('.like-toggle').hide();
+//                 } else {
+//                     target.find('.unlike-toggle').hide();
+//                     target.find('.like-toggle').show();
+//                 }
+//                 target.find('.btn-label').text(response.data.likesCount);
             }, (error)  =>  {
                 console.log(error);
                 // TODO: Error managing in Vue

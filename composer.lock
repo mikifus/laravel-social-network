@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a49e1c53dfd79a0cb31c0d00fd2cf217",
+    "content-hash": "c0786cc7320fdcfe47c24047a24dec85",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -2167,6 +2167,58 @@
                 "enum"
             ],
             "time": "2018-10-27T21:15:22+00:00"
+        },
+        {
+            "name": "nagy/laravel-rating",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mohamednagy/Laravel-rating.git",
+                "reference": "497d6fe9c28d2ef6f02b13a2acc2ad16da49cb39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mohamednagy/Laravel-rating/zipball/497d6fe9c28d2ef6f02b13a2acc2ad16da49cb39",
+                "reference": "497d6fe9c28d2ef6f02b13a2acc2ad16da49cb39",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.*",
+                "illuminate/support": "5.*",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "orchestra/database": "^3.5",
+                "orchestra/testbench": "~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Nagy\\LaravelRating\\LaravelRatingServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelRating": "Nagy\\LaravelRating\\LaravelRatingFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nagy\\LaravelRating\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mohamednagy",
+                    "email": "mohamed.n.haleem@gmail.com"
+                }
+            ],
+            "description": "manage rating column for elqouent models",
+            "time": "2018-11-04T15:23:48+00:00"
         },
         {
             "name": "nesbot/carbon",
