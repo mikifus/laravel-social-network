@@ -33,10 +33,15 @@ class MusicalbumsController extends UserProfileController
     public function showSlug($slug)
     {
         $el = Musicalbum::findBySlug($slug);
+        $user = $el->user()->first();
         $data = [];
         $data['id'] = $el->id;
         $data['item'] = $el;
         $data['tracks'] = $el->tracks()->get();
+        $data['can_see'] = $user->canSeeProfile(Auth::id());
+        $data['first_track'] = $el->first_track_json();
+        $data['tracklist']   = $el->tracks_json();
+        
         return $this->renderProfileView('musicalbums.view', $data);
     }
 

@@ -70,4 +70,18 @@ class Track extends Model implements AttachableInterface
             ]
         ];
     }
+
+    /**
+     * Track json for player
+     *
+     * @return BelongsTo
+     */
+    public function track_json()
+    {
+        return json_encode([
+            'title' => $this->title,
+            'artist' => $this->author,
+            'src' => $this->file->url()
+        ]);
+    }
 }

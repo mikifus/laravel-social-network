@@ -35,9 +35,7 @@
 
                         <!--Tags-->
                         <div class="">
-                            @foreach ($item->tagArray as $tag)
-                            <span class="tag label label-info">{{ $tag }}</span>
-                            @endforeach
+                            @include('widgets.tag_array', ['item' => $item])
                         </div>
 
                         <!--Footer-->

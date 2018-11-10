@@ -8,10 +8,12 @@ use Czim\Paperclip\Model\PaperclipTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use App\Traits\ModelTaggableTrait;
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 
-class Musicalbum extends Model implements AttachableInterface
+class Musicalbum extends Model implements AttachableInterface, LikeableContract
 {
-    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
+    use PaperclipTrait, Likeable, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
 
     /**
      * Status values
@@ -116,5 +118,32 @@ class Musicalbum extends Model implements AttachableInterface
 
     public function getCover($size){
         return url($this->front->url($size));
+    }
+    
+    /**
+     * 
+     */
+    public function first_track_json(){
+        $track = $this->tracks()->first();
+        return json_encode([
+            'title' => $track->title,
+            'artist' => $track->author,
+            'src' => $track->file->url(),
+            'pic' => $this->getCover('thumb')
+        ]);
+    }
+    
+    public function tracks_json(){
+        $tracks = $this->tracks()->get();
+        $music_list = [];
+        foreach($tracks as $track) {
+            $music_list[] = [
+                'title' => $track->title,
+                'artist' => $track->author,
+                'src' => $track->file->url(),
+                'pic' => $this->getCover('thumb')
+            ];
+        }
+        return json_encode($music_list);
     }
 }

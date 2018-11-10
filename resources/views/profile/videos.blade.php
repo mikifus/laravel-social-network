@@ -50,12 +50,9 @@
                                                     <div class="content">
                                                         <div class="main">
                                                             <a href="{{ route('videoalbums.slug_view', ['slug' => $album->slug]) }}">
-                                                                <h3 class="name">{{ $album->title }}</h3>
+                                                                <h3 class="name">{{ $album->name }}</h3>
                                                                 <p class="profession">
-                                                                    {{ str_limit($album->description, $limit = 100, $end = '...') }}
-                                                                </p>
-                                                                <p class="profession">
-                                                                    {{ str_limit(join(', ',$album->tagArray), $limit = 64, $end = '...') }}
+                                                                    @include('widgets.tag_array', ['item' => $album])
                                                                 </p>
                                                             </a>
                                                         </div>
@@ -119,16 +116,16 @@
                                             <a style="cursor: pointer;" data-toggle="modal" data-target="#video_modal_{{ $index }}">
                                                 <div class="cover" style="height: 200px; background-image: url('{{ $video->getCover() }}')"></div>
                                             </a>
-                                                <div class="content">
-                                                    <div class="main">
-                                                        <a style="cursor: pointer;" data-toggle="modal" data-target=""#video_modal_{{ $index }}">
-                                                            <h3 class="name">{{ $video->title }}</h3>
-                                                        </a>
-                                                        <p class="profession">
-                                                            {{ str_limit(join(', ',$video->tagArray), $limit = 64, $end = '...') }}
-                                                        </p>
-                                                    </div>
+                                            <div class="content">
+                                                <div class="main">
+                                                    <a style="cursor: pointer;" data-toggle="modal" data-target="#video_modal_{{ $index }}">
+                                                        <h3 class="name">{{ $video->title }}</h3>
+                                                    </a>
+                                                    <p class="profession">
+                                                        @include('widgets.tag_array', ['item' => $video])
+                                                    </p>
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

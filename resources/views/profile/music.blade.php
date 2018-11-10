@@ -50,13 +50,10 @@
                                                         <div class="main">
                                                             <a href="{{ route('musicalbums.slug_view', ['slug' => $album->slug]) }}">
                                                                 <h3 class="name">{{ $album->title }}</h3>
-                                                                <p class="profession">
-                                                                    {{ str_limit($album->description, $limit = 100, $end = '...') }}
-                                                                </p>
-                                                                <p class="profession">
-                                                                    {{ str_limit(join(', ',$album->tagArray), $limit = 64, $end = '...') }}
-                                                                </p>
                                                             </a>
+                                                            <p class="profession">
+                                                                @include('widgets.tag_array', ['item' => $album])
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -81,19 +78,21 @@
                                             <div class="card">
                                                 <div class="front">
                                                     <div>
-                                                        <audio style="width: 100%;" controls src="{{ $track->file->url() }}">
+                                                        <aplayer
+                                                            :music="{{ $track->track_json() }}"
+                                                            ></aplayer>
                                                     </div>
                                                     <div class="content">
                                                         <div class="main">
-                                                            <a href="{{ route('musicalbums.slug_view', ['slug' => $track->slug]) }}">
-                                                                <h3 class="name">{{ $track->title }}</h3>
+<!--                                                             <a href="{{ route('musicalbums.slug_view', ['slug' => $track->slug]) }}"> -->
+                                                                
                                                                 <p class="profession" style="height: 30px;">
                                                                     {{ str_limit($track->description, $limit = 100, $end = '...') }}
                                                                 </p>
                                                                 <p class="profession" style="height: 30px;">
-                                                                    {{ str_limit(join(', ',$track->tagArray), $limit = 64, $end = '...') }}
+                                                                    @include('widgets.tag_array', ['item' => $track])
                                                                 </p>
-                                                            </a>
+<!--                                                             </a> -->
                                                         </div>
                                                     </div>
                                                 </div>

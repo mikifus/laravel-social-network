@@ -19,22 +19,36 @@ window.Vue = require('vue');
 import Vue from 'vue'
 
 /* ### Like Button ### */
-import VuePromiseBtn from 'vue-promise-btn'
-
+import VuePromiseBtn from 'vue-promise-btn';
 // not required. Styles for built-in spinner
-import 'vue-promise-btn/dist/vue-promise-btn.css'
+import 'vue-promise-btn/dist/vue-promise-btn.css';
+Vue.use(VuePromiseBtn);
 
-Vue.use(VuePromiseBtn) // or with global options Vue.use(VuePromiseBtn, {})
+/**
+ * Music player
+ * @see https://github.com/SevenOutman/vue-aplayer/blob/develop/docs/README.md
+ */
+import VueAPlayer from 'vue-aplayer';
+Vue.component('aplayer', VueAPlayer);
 
-$('.btn-like').each(function(){
-    var liked = $(this).data('liked');
-    
-    /*var like_button = */new Vue({
-    el: this,
-    data: {
-        liked: liked
-    },
+/**
+ * Shareing buttons
+ * @see https://github.com/koddr/vue-goodshare
+ */
+import VueGoodshare from "vue-goodshare";
+Vue.component('vue-goodshare', VueGoodshare);
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+const app = new Vue({
+    el: '#app',
     methods: {
+        /**
+         * Toggle Like for like button
+         */
         toggleLike (model, id, event) {
             var target = $(event.target).parent(); // It's always the parent
             return axios.post(BASE_URL+'/likes/toggle', {
@@ -56,18 +70,4 @@ $('.btn-like').each(function(){
             })
         }
     }
-    });
 });
-
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-//Vue.component('example', require('./components/Example.vue'));
-//
-//const app = new Vue({
-//    el: '#app'
-//});
