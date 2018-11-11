@@ -56,6 +56,14 @@ $(document).ready(function(){
                     NULL,
                     array('class'=>' form-control')) !!}
                 </div>
+                
+                <div class="form-group">
+                    {!! Form::label( trans('images.add_category') ) !!}
+                    {!! Form::select('add_category',
+                    [null=>trans('images.add_no_category')] + $categories,
+                    null,
+                    ['class' => 'form-control']) !!}
+                </div>
 
                 <div class='dropzone dz-previews-container'>
                     <div class="dropzone-previews" id="dropzonePreview"></div>

@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Http\Controllers\UserProfileController;
 use Auth;
 use URL;
+use Rinvex\Categories\Models\Category;
 
 class ImagesController extends UserProfileController {
 
@@ -108,6 +109,8 @@ class ImagesController extends UserProfileController {
         $data = [];
         $data['imagealbums'] = Imagealbum::pluck('title', 'id');
         $data['user'] = $user;
+//         $data['categories'] = Category::get()->toTree();
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
         return $this->renderProfileView('images.add', $data);
     }
 
