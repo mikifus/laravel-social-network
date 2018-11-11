@@ -12,9 +12,6 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-3 pull-right">
                         @include('profile.widgets.user_follow_counts')
-                        <div class="hidden-sm hidden-xs">
-                            @include('widgets.suggested_people')
-                        </div>
                     </div>
                     <div class="col-md-9">
 
@@ -121,7 +118,7 @@
                                             </a>
                                                 <div class="content">
                                                     <div class="main">
-                                                        <a style="cursor: pointer;" data-toggle="modal" data-target=""#image_modal_{{ $index }}">
+                                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#image_modal_{{ $index }}">
                                                             <h3 class="name">{{ $image->title }}</h3>
                                                         </a>
                                                         <p class="profession">

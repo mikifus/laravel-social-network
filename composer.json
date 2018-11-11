@@ -22,6 +22,7 @@
         "nagy/laravel-rating": "^1.2",
         "nesbot/carbon": "^1.22",
         "proengsoft/laravel-jsvalidation": "2.*",
+        "rinvex/laravel-categories": "^1.0",
         "rtconner/laravel-likeable": "~1.2",
         "spatie/eloquent-sortable": "^3.4",
         "thomaswelton/laravel-gravatar": "~1.0"

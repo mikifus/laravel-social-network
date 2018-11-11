@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use App\Traits\ModelTaggableTrait;
+use Nagy\LaravelRating\Traits\Rate\Rateable;
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 
-class Imagealbum extends Model
+class Imagealbum extends Model implements LikeableContract
 {
-    use /*PaperclipTrait, */Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
+    use /*PaperclipTrait, */Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Likeable, Rateable;
 
     protected $table = 'imagealbums';
 

@@ -27,7 +27,7 @@ class ImagealbumsController extends UserProfileController {
         $data['item'] = $el;
         $data['images'] = $el->images()->get();
         $data['can_see'] = $el->user()->canSeeProfile(Auth::id());
-        return $this->renderProfileView('profile.images', $data);
+        return $this->renderProfileView('imagealbums.view', $data);
     }
 
     /**

@@ -7,6 +7,9 @@ use Czim\Paperclip\Model\PaperclipTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use App\Traits\ModelTaggableTrait;
+use Nagy\LaravelRating\Traits\Rate\Rateable;
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 
 /**
  * Class Videoalbum.
@@ -14,9 +17,9 @@ use App\Traits\ModelTaggableTrait;
  * @author  The scaffold-interface created at 2017-02-18 11:47:16pm
  * @link  https://github.com/amranidev/scaffold-interface
  */
-class Videoalbum extends Model
+class Videoalbum extends Model implements LikeableContract
 {
-    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait;
+    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Likeable, Rateable;
 
 
     protected $table = 'videoalbums';

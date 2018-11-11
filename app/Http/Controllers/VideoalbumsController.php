@@ -28,7 +28,7 @@ class VideoalbumsController extends UserProfileController
         $data['item'] = $el;
         $data['videos'] = $el->videos()->get();
         $data['can_see'] = $el->user()->canSeeProfile(Auth::id());
-        return $this->renderProfileView('profile.videos', $data);
+        return $this->renderProfileView('videoalbums.view', $data);
     }
     /**
      * Display a listing of the resource.

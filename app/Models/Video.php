@@ -10,10 +10,11 @@ use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
 use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Nagy\LaravelRating\Traits\Rate\Rateable;
 
 class Video extends Model implements LikeableContract
 {
-    use ModelTaggableTrait, Likeable, Sluggable, SluggableScopeHelpers;
+    use ModelTaggableTrait, Likeable, Sluggable, SluggableScopeHelpers, Rateable;
     
     /**
      * The database table used by the model.

@@ -10,15 +10,6 @@
         @if ($can_see)
             <div class="container profile-main">
                 <div class="row">
-                    <div class="col-xs-12 col-md-3 pull-right">
-                        @include('profile.widgets.user_follow_counts')
-                        <div>
-                            @include('widgets.item_liked', ['item' => $item])
-                        </div>
-                        <div class="text-center">
-                            <vue-goodshare></vue-goodshare>
-                        </div>
-                    </div>
                     <div class="col-md-9">
 
                         <div>
@@ -63,6 +54,15 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        @include('profile.widgets.user_follow_counts')
+                        <div>
+                            @include('widgets.item_liked', ['item' => $item])
+                        </div>
+                        <div class="text-center">
+                            <vue-goodshare></vue-goodshare>
                         </div>
                     </div>
                 </div>
