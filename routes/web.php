@@ -11,6 +11,10 @@
 |
 */
 
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {
         return view('layouts.guest');
@@ -202,3 +206,4 @@ Route::get('/musicalbums/autocomplete_tags/{term}', ['as' => 'musicalbums.autoco
 // Likes and rating
 Route::post('likes/toggle', ['as' => 'like.toggle', 'uses' => 'LikeController@toggle']);
 Route::post('likes/rate', ['as' => 'like.rate', 'uses' => 'LikeController@rate']);
+

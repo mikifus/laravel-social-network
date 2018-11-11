@@ -11,7 +11,7 @@ use Cog\Contracts\Love\Liker\Models\Liker as LikerContract;
 use Cog\Laravel\Love\Liker\Models\Traits\Liker;
 use Nagy\LaravelRating\Traits\Rate\CanRate;
 
-class User extends Authenticatable implements LikerContract
+class User extends \TCG\Voyager\Models\User implements LikerContract
 {
     use Notifiable, Liker, CanRate;
 

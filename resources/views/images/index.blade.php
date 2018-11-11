@@ -30,7 +30,9 @@
                                 @endif
                             </div>
                             <div class="media-body">
-                                <h3 class="media-heading">{{ $item->title }}</h3>
+                                <a href="{{ URL::route('imagealbums.slug_view', [$item->slug]) }}">
+                                    <h3 class="media-heading">{{ $item->title }}</h3>
+                                </a>
                                 <div class="btn-group">
                                     <a class="btn btn-default" href="{{ URL::route('imagealbums.edit', $item->id) }}">
                                         <i class="fa fa-pencil"></i>
