@@ -2,7 +2,7 @@
 Migrations:
 ```
 php artisan migrate
-#php artisan rinvex:migrate:categories
+php artisan rinvex:migrate:categories
 ```
 
 # OLD docs

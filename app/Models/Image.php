@@ -11,10 +11,11 @@ use App\Traits\ModelTaggableTrait;
 use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
 use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
+use Rinvex\Categories\Traits\Categorizable;
 
 class Image extends Model implements AttachableInterface,LikeableContract
 {
-    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Likeable, Rateable;
+    use PaperclipTrait, Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Likeable, Rateable, Categorizable;
     /**
      * The database table used by the model.
      *

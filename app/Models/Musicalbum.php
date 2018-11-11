@@ -11,10 +11,11 @@ use App\Traits\ModelTaggableTrait;
 use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
 use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
+use Rinvex\Categories\Traits\Categorizable;
 
 class Musicalbum extends Model implements AttachableInterface, LikeableContract
 {
-    use PaperclipTrait, Likeable, Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Rateable;
+    use PaperclipTrait, Likeable, Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Rateable, Categorizable;
 
     /**
      * Status values
@@ -118,6 +119,10 @@ class Musicalbum extends Model implements AttachableInterface, LikeableContract
     }
 
     public function getCover($size){
+        $url = $this->front->url($size);
+        if(empty($url)) {
+            return '';
+        }
         return url($this->front->url($size));
     }
     

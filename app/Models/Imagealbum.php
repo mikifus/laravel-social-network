@@ -10,10 +10,11 @@ use App\Traits\ModelTaggableTrait;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
 use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
 use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
+use Rinvex\Categories\Traits\Categorizable;
 
 class Imagealbum extends Model implements LikeableContract
 {
-    use /*PaperclipTrait, */Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Likeable, Rateable;
+    use /*PaperclipTrait, */Sluggable, SluggableScopeHelpers, ModelTaggableTrait, Likeable, Rateable, Categorizable;
 
     protected $table = 'imagealbums';
 
