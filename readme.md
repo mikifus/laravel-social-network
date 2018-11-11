@@ -1,3 +1,11 @@
+# HHX Docs
+Migrations:
+```
+php artisan migrate
+#php artisan rinvex:migrate:categories
+```
+
+# OLD docs
 ## Laravel 5 - Simple Location-Based Social Network 
 It's location-based social network developed by [lvntayn](https://github.com/lvntayn), [theoneremains](https://github.com/theoneremains) and [koniqwe](https://github.com/koniqwe) using the Laravel PHP framework.
 
