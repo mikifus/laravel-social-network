@@ -26,7 +26,8 @@ class ImagealbumsEditRequest extends Request
     {
         return [
             'description'      => 'nullable|min:4',
-            'tags'             => 'sometimes|nullable|min:1'
+            'tags'             => 'sometimes|nullable|min:1',
+            'category_id'      => 'sometimes|nullable|exists:categories,id'
         ];
     }
 }

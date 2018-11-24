@@ -49,6 +49,13 @@ $(document).ready(function(){
                                 array('class'=>' form-control bootstrap-tagsinput')) !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::label( trans('images.add_category') ) !!}
+                            {!! Form::select('category_id',
+                            [null=>trans('images.add_no_category')] + $categories,
+                            $category_id,
+                            ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::submit(trans('videoalbums.submit'),
                               array('class'=>'btn btn-primary')) !!}
                         </div>

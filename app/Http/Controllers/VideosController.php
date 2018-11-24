@@ -15,6 +15,7 @@ use Auth;
 use App\Models\User;
 use Cviebrock\EloquentTaggable\Models\Tag;
 use Response;
+use Rinvex\Categories\Models\Category;
 
 class VideosController extends UserProfileController
 {
@@ -84,6 +85,7 @@ class VideosController extends UserProfileController
     {
         $data = [];
         $data['videoalbums'] = Videoalbum::pluck('name', 'id');
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
         return $this->renderProfileView('videos.add', $data);
     }
 
@@ -104,6 +106,8 @@ class VideosController extends UserProfileController
         $data['id'] = $el->id;
         $data['item'] = $el;
         $data['videoalbums'] = Videoalbum::pluck('name', 'id');
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
+        $data['category_id'] = sizeof($el->categories) > 0 ? $el->categories[0]->id : 0;
         return $this->renderProfileView('videos.edit', $data);
     }
 
@@ -139,6 +143,11 @@ class VideosController extends UserProfileController
         try {
             $el->save();
             $el->tag(trim(strip_tags($request->tags)));
+            if(empty($request->category_id)) {
+                $el->detachCategories();
+            } else {
+                $el->attachCategories([intval($request->category_id)]);
+            }
         }
         catch (\Exception $e)
         {
@@ -177,6 +186,11 @@ class VideosController extends UserProfileController
         try {
             $el->save();
             $el->retag(trim(strip_tags($request->tags)));
+            if(empty($request->category_id)) {
+                $el->detachCategories();
+            } else {
+                $el->attachCategories([intval($request->category_id)]);
+            }
         }
         catch (\Exception $e)
         {

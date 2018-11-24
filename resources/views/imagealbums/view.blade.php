@@ -44,9 +44,7 @@
 
                                             <!--Tags-->
                                             <div class="modal-body mb-0 p-0">
-                                                @foreach ($image->tagArray as $tag)
-                                                <span class="tag label label-info">{{ $tag }}</span>
-                                                @endforeach
+                                                @include('widgets.tag_array', ['item' => $image])
                                             </div>
 
                                             <!--Footer-->
@@ -71,7 +69,7 @@
                                                         <h3 class="name">{{ $image->title }}</h3>
                                                     </a>
                                                     <p class="profession">
-                                                        {{ str_limit(join(', ',$image->tagArray), $limit = 64, $end = '...') }}
+                                                        @include('widgets.tag_array', ['item' => $image])
                                                     </p>
                                                 </div>
                                             </div>

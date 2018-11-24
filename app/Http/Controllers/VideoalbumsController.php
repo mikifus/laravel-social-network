@@ -11,6 +11,7 @@ use Amranidev\Ajaxis\Ajaxis;
 use URL;
 use Auth;
 use Response;
+use Rinvex\Categories\Models\Category;
 
 class VideoalbumsController extends UserProfileController
 {
@@ -49,7 +50,9 @@ class VideoalbumsController extends UserProfileController
      */
     public function getAdd()
     {
-        return $this->renderProfileView('videoalbums.add');
+        $data = array();
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
+        return $this->renderProfileView('videoalbums.add', $data);
     }
 
     /**
@@ -68,6 +71,8 @@ class VideoalbumsController extends UserProfileController
         $data = [];
         $data['id'] = $el->id;
         $data['item'] = $el;
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
+        $data['category_id'] = sizeof($el->categories) > 0 ? $el->categories[0]->id : 0;
         return $this->renderProfileView('videoalbums.edit', $data);
     }
 
@@ -137,6 +142,11 @@ class VideoalbumsController extends UserProfileController
         $videoalbum->user_id = $user->id;
         $videoalbum->save();
         $videoalbum->tag(trim(strip_tags($request->tags)));
+        if(empty($request->category_id)) {
+            $videoalbum->detachCategories();
+        } else {
+            $videoalbum->attachCategories([intval($request->category_id)]);
+        }
 
         return redirect()->route('profile.videos')->withSuccess(trans('videoalbums.add_success'));
     }
@@ -151,10 +161,15 @@ class VideoalbumsController extends UserProfileController
     public function update($id,VideoalbumsEditRequest $request)
     {
         $videoalbum = Videoalbum::findOrfail($id);
-        $videoalbum->name = $request->name;
+//         $videoalbum->name = $request->name; // No! Name change is not allowed!
         $videoalbum->description = $request->description;
         $videoalbum->save();
         $videoalbum->retag(trim(strip_tags($request->tags)));
+        if(empty($request->category_id)) {
+            $videoalbum->detachCategories();
+        } else {
+            $videoalbum->attachCategories([intval($request->category_id)]);
+        }
 
         return redirect()->route('profile.videos')->withSuccess(trans('videoalbums.update_success'));
     }

@@ -52,7 +52,10 @@
                                                                     {{ str_limit($album->description, $limit = 100, $end = '...') }}
                                                                 </p>
                                                                 <p class="profession">
-                                                                    {{ str_limit(join(', ',$album->tagArray), $limit = 64, $end = '...') }}
+                                                                    @include('widgets.category_array', ['item' => $album])
+                                                                </p>
+                                                                <p class="profession">
+                                                                    @include('widgets.tag_array', ['item' => $album])
                                                                 </p>
                                                             </a>
                                                         </div>
@@ -122,7 +125,10 @@
                                                             <h3 class="name">{{ $image->title }}</h3>
                                                         </a>
                                                         <p class="profession">
-                                                            {{ str_limit(join(', ',$image->tagArray), $limit = 64, $end = '...') }}
+                                                            @include('widgets.category_array', ['item' => $image])
+                                                        </p>
+                                                        <p class="profession">
+                                                            @include('widgets.tag_array', ['item' => $image])
                                                         </p>
                                                     </div>
                                                 </div>

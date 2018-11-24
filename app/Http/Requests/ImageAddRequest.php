@@ -26,11 +26,12 @@ class ImageAddRequest extends Request
     public function rules()
     {
         return [
-            'title'      => 'min:4',
-            'file'       => 'required|image|mimes:jpg,jpeg,png,gif',
-            'imagealbum_id' => 'sometimes|integer|min:1|exists:imagealbums,id',
+            'title'            => 'min:4',
+            'file'             => 'required|image|mimes:jpg,jpeg,png,gif',
+            'imagealbum_id'    => 'sometimes|integer|min:1|exists:imagealbums,id',
             'imagealbum_title' => 'sometimes|min:4|unique:imagealbums,title',
-            'tags'             => 'sometimes|nullable|min:1'
+            'tags'             => 'sometimes|nullable|min:1',
+            'category_id'      => 'sometimes|nullable|exists:categories,id'
         ];
     }
 }

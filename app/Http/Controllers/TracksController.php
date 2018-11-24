@@ -13,6 +13,7 @@ use App\Http\Requests\TrackAddRequest;
 use App\Http\Requests\TrackDestroyRequest;
 use App\Http\Requests;
 use Auth;
+use Rinvex\Categories\Models\Category;
 
 class TracksController extends UserProfileController
 {
@@ -39,7 +40,9 @@ class TracksController extends UserProfileController
      */
     public function getAdd()
     {
-        return $this->renderProfileView('tracks.add');
+        $data = array();
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
+        return $this->renderProfileView('tracks.add', $data);
     }
 
     /**
@@ -84,6 +87,11 @@ class TracksController extends UserProfileController
         try {
             $el->save();
             $el->tag(trim(strip_tags($request->tags)));
+            if(empty($request->category_id)) {
+                $el->detachCategories();
+            } else {
+                $el->attachCategories([intval($request->category_id)]);
+            }
         }
         catch (\Exception $e)
         {

@@ -21,6 +21,7 @@ use Auth;
 use Input;
 use View;
 use Log;
+use Rinvex\Categories\Models\Category;
 
 class MusicalbumsController extends UserProfileController
 {
@@ -64,8 +65,11 @@ class MusicalbumsController extends UserProfileController
     public function getAdd()
     {
         View::share('steps', $this->getStepsConfig(1, 0));
+        
+        $data = array();
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
 
-        return $this->renderProfileView('musicalbums.add');
+        return $this->renderProfileView('musicalbums.add', $data);
     }
 
     /**
@@ -86,6 +90,11 @@ class MusicalbumsController extends UserProfileController
         try {
             $el->save();
             $el->tag(trim(strip_tags($request->tags)));
+            if(empty($request->category_id)) {
+                $el->detachCategories();
+            } else {
+                $el->attachCategories([intval($request->category_id)]);
+            }
         }
         catch (\Exception $e)
         {
@@ -112,6 +121,8 @@ class MusicalbumsController extends UserProfileController
         $data = [];
         $data['id'] = $el->id;
         $data['item'] = $el;
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
+        $data['category_id'] = sizeof($el->categories) > 0 ? $el->categories[0]->id : 0;
         View::share('steps', $this->getStepsConfig(1, $id));
         return $this->renderProfileView('musicalbums.edit', $data);
     }
@@ -132,6 +143,11 @@ class MusicalbumsController extends UserProfileController
         try {
             $el->save();
             $el->retag(trim(strip_tags($request->tags)));
+            if(empty($request->category_id)) {
+                $el->detachCategories();
+            } else {
+                $el->attachCategories([intval($request->category_id)]);
+            }
         }
         catch (\Exception $e)
         {

@@ -29,7 +29,8 @@ class MusicalbumAddRequest extends Request
             'title'        => 'required|min:1|max:255',
             'author'       => 'required|min:1|max:255',
             'description'  => 'required|min:25|max:2000',
-            'tags'             => 'sometimes|nullable|min:1,'
+            'tags'         => 'sometimes|nullable|min:1,',
+            'category_id'  => 'sometimes|nullable|exists:categories,id'
         ];
     }
 }

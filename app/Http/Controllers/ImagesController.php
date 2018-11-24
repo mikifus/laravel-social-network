@@ -17,6 +17,7 @@ use App\Http\Controllers\UserProfileController;
 use Auth;
 use URL;
 use Rinvex\Categories\Models\Category;
+use Log;
 
 class ImagesController extends UserProfileController {
 
@@ -138,6 +139,11 @@ class ImagesController extends UserProfileController {
         try {
             $el->save();
             $el->tag(trim(strip_tags($request->tags)));
+            if(empty($request->category_id)) {
+                $el->detachCategories();
+            } else {
+                $el->attachCategories([intval($request->category_id)]);
+            }
         }
         catch (\Exception $e)
         {
@@ -196,6 +202,11 @@ class ImagesController extends UserProfileController {
         try {
             $el->save();
             $el->tag(trim(strip_tags($request->tags)));
+            if(empty($request->category_id)) {
+                $el->detachCategories();
+            } else {
+                $el->attachCategories([intval($request->category_id)]);
+            }
         }
         catch (\Exception $e)
         {
@@ -232,6 +243,8 @@ class ImagesController extends UserProfileController {
         $data['item'] = $el;
         $data['imagealbums'] = Imagealbum::pluck('title', 'id');
         $data['user'] = $user;
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
+        $data['category_id'] = sizeof($el->categories) > 0 ? $el->categories[0]->id : 0;
         return $this->renderProfileView('images.edit', $data);
     }
 
@@ -269,9 +282,15 @@ class ImagesController extends UserProfileController {
         try {
             $el->save();
             $el->retag(trim(strip_tags($request->tags)));
+            if(empty($request->category_id)) {
+                $el->detachCategories();
+            } else {
+                $el->attachCategories([intval($request->category_id)]);
+            }
         }
         catch (\Exception $e)
         {
+            Log::debug($e->getMessage());
             return back()->withErrors(['error' => "Unexpected error."]);
         }
         return redirect()->route('images.index')->withSuccess(trans('images.add_success'));

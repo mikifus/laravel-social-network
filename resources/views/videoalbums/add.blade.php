@@ -30,6 +30,13 @@
                                       'class'=>' form-control')) !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::label( trans('images.add_category') ) !!}
+                            {!! Form::select('category_id',
+                            [null=>trans('images.add_no_category')] + $categories,
+                            null,
+                            ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::submit(trans('videoalbums.submit'),
                               array('class'=>'btn btn-primary')) !!}
                         </div>

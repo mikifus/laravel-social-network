@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Imagealbum;
 use App\Http\Requests\ImagealbumsEditRequest;
+use Rinvex\Categories\Models\Category;
 
 class ImagealbumsController extends UserProfileController {
 
@@ -37,7 +38,9 @@ class ImagealbumsController extends UserProfileController {
      */
     public function getAdd()
     {
-        return $this->renderProfileView('imagealbums.add');
+        $data = [];
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
+        return $this->renderProfileView('imagealbums.add', $data);
     }
 
     /**
@@ -56,6 +59,8 @@ class ImagealbumsController extends UserProfileController {
         $data = [];
         $data['id'] = $el->id;
         $data['item'] = $el;
+        $data['categories'] = Category::pluck('name', 'id')->toArray();
+        $data['category_id'] = sizeof($el->categories) > 0 ? $el->categories[0]->id : 0;
         return $this->renderProfileView('imagealbums.edit', $data);
     }
 
@@ -90,6 +95,11 @@ class ImagealbumsController extends UserProfileController {
 
         $el->save();
         $el->tag(trim(strip_tags($request->tags)));
+        if(empty($request->category_id)) {
+            $el->detachCategories();
+        } else {
+            $el->attachCategories([intval($request->category_id)]);
+        }
 
         return redirect()->route('images.index')->withSuccess(trans('imagealbums.add_success'));
     }
@@ -140,13 +150,18 @@ class ImagealbumsController extends UserProfileController {
      * @param    int  $id
      * @return  \Illuminate\Http\Response
      */
-    public function update($id,ImagealbumsEditRequest $request)
+    public function update($id, ImagealbumsEditRequest $request)
     {
         $el = Imagealbum::findOrfail($id);
-        $el->title = $request->title;
+//         $el->title = $request->title; // No! Can't change it.
         $el->description = $request->description;
         $el->save();
         $el->retag(trim(strip_tags($request->tags)));
+        if(empty($request->category_id)) {
+            $el->detachCategories();
+        } else {
+            $el->attachCategories([intval($request->category_id)]);
+        }
 
         return redirect()->route('images.index')->withSuccess(trans('imagealbums.edit_success'));
     }

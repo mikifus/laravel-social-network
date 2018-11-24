@@ -32,61 +32,53 @@ $(document).ready(function(){
             @include('widgets.sidebar')
         </div>
         <div class="col-md-9">
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class='pull-left'>{{ trans('images.add_heading') }}</h2> @include('images.add_option_buttons', ['user'=>$user])
-             </div>
-
-            <div class="panel-body">
-                @include('messages.errors')
-
-                @if (count($imagealbums) > 0)
-                <div class="form-group">
-                    {!! Form::label( trans('images.add_imagealbum') ) !!}<br />
-                    {!! Form::select('main_imagealbum_id',
-                    [null=>trans('images.add_no_imagealbum')] + $imagealbums->toArray(),
-                    null,
-                    ['class' => 'form-control']) !!}
-                </div>
-                @endif
-                <div class="form-group">
-                    {!! Form::label( trans('images.add_imagealbum_title') ) !!}
-                    {!! Form::text('main_imagealbum_title',
-                    NULL,
-                    array('class'=>' form-control')) !!}
-                </div>
-                
-                <div class="form-group">
-                    {!! Form::label( trans('images.add_category') ) !!}
-                    {!! Form::select('add_category',
-                    [null=>trans('images.add_no_category')] + $categories,
-                    null,
-                    ['class' => 'form-control']) !!}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class='pull-left'>{{ trans('images.add_heading') }}</h2> @include('images.add_option_buttons', ['user'=>$user])
                 </div>
 
-                <div class='dropzone dz-previews-container'>
-                    <div class="dropzone-previews" id="dropzonePreview"></div>
+                <div class="panel-body">
+                    @include('messages.errors')
 
-                    <div class="form-group text-center">
-                        {!! Form::submit(trans('tracks.submit'),
-                          ['class'=>'btn btn-primary', 'id'=>'submit_all', 'style'=>'display: none;']) !!}
+                    @if (count($imagealbums) > 0)
+                    <div class="form-group">
+                        {!! Form::label( trans('images.add_imagealbum') ) !!}<br />
+                        {!! Form::select('main_imagealbum_id',
+                        [null=>trans('images.add_no_imagealbum')] + $imagealbums->toArray(),
+                        null,
+                        ['class' => 'form-control']) !!}
                     </div>
+                    @endif
+                    <div class="form-group">
+                        {!! Form::label( trans('images.add_imagealbum_title') ) !!}
+                        {!! Form::text('main_imagealbum_title',
+                        NULL,
+                        array('class'=>' form-control')) !!}
+                    </div>
+
+                    <div class='dropzone dz-previews-container'>
+                        <div class="dropzone-previews" id="dropzonePreview"></div>
+
+                        <div class="form-group text-center">
+                            {!! Form::submit(trans('tracks.submit'),
+                            ['class'=>'btn btn-primary', 'id'=>'submit_all', 'style'=>'display: none;']) !!}
+                        </div>
+                    </div>
+
+                    {!! Form::open(['url' => route('images.store_async'), 'class' => 'dropzone dz-container', 'files'=>true, 'id'=>'images_dropzone']) !!}
+
+                    <div class="dz-message"></div>
+
+                    <div class="fallback">
+                        <input name="file" type="file" multiple />
+                    </div>
+
+                    <!--<input name="model_type" type="hidden" value='image' />-->
+
+                    <h4 style="text-align: center;">Drop images in this area  <span class="glyphicon glyphicon-hand-down"></span></h4>
+
+                    {!! Form::close() !!}
                 </div>
-
-                {!! Form::open(['url' => route('images.store_async'), 'class' => 'dropzone dz-container', 'files'=>true, 'id'=>'images_dropzone']) !!}
-
-                <div class="dz-message"></div>
-
-                <div class="fallback">
-                    <input name="file" type="file" multiple />
-                </div>
-
-                <!--<input name="model_type" type="hidden" value='image' />-->
-
-                <h4 style="text-align: center;">Drop images in this area  <span class="glyphicon glyphicon-hand-down"></span></h4>
-
-                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -150,6 +142,13 @@ $(document).ready(function(){
                         NULL,
                         array('class'=>' form-control bootstrap-tagsinput')) !!}
                     </div>
+                </div>
+                <div class="form-group">
+                    {!! Form::label( trans('images.add_category') ) !!}
+                    {!! Form::select('category_id',
+                    [null=>trans('images.add_no_category')] + $categories,
+                    null,
+                    ['class' => 'form-control']) !!}
                 </div>
             </div>
 <!--            <div class='hidden-fields'>

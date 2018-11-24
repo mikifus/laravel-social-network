@@ -40,8 +40,9 @@ class VideoAddRequest extends Request
             'title'            => 'required|min:4',
             'url'              => 'required|url|video_url',
             'tags'             => 'sometimes|nullable|min:1,',
-            'videoalbum_id'    => 'sometimes|integer|min:1|exists:videoalbums,id',
-            'videoalbum_title' => 'sometimes|nullable|min:4|unique:videoalbums,name'
+            'videoalbum_id'    => 'sometimes|nullable|integer|min:1|exists:videoalbums,id',
+            'videoalbum_title' => 'sometimes|nullable|min:4|unique:videoalbums,name',
+            'category_id'      => 'sometimes|nullable|exists:categories,id'
         ];
     }
 }

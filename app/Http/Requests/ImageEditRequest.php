@@ -25,9 +25,10 @@ class ImageEditRequest extends Request
     public function rules()
     {
         return [
-            'imagealbum_id' => 'nullable|integer|exists:imagealbums,id',
+            'imagealbum_id'    => 'nullable|integer|exists:imagealbums,id',
             'imagealbum_title' => 'nullable|min:4|unique:imagealbums,title',
-            'tags'             => 'sometimes|nullable|min:1'
+            'tags'             => 'sometimes|nullable|min:1',
+            'category_id'      => 'sometimes|nullable|exists:categories,id'
         ];
     }
 }

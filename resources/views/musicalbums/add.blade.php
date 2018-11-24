@@ -61,6 +61,13 @@ $(document).ready(function(){
                                 NULL,
                                 array('class'=>' form-control bootstrap-tagsinput')) !!}
                         </div>
+                        <div class="form-group">
+                            {!! Form::label( trans('images.add_category') ) !!}
+                            {!! Form::select('category_id',
+                            [null=>trans('images.add_no_category')] + $categories,
+                            NULL,
+                            ['class' => 'form-control']) !!}
+                        </div>
                 </div>
                 <div class="panel-footer text-center">
                     <div class="form-group">
