@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 154);
+/******/ 	return __webpack_require__(__webpack_require__.s = 155);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 154:
+/***/ 155:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(27);
@@ -241,7 +241,7 @@ $(function () {
         sending: function sending(file, xhr, formData) {
             var extrafields = $(file.previewElement.querySelectorAll("[data-dz-extrafields]"));
 
-            var fields = extrafields.find("input");
+            var fields = extrafields.find("input,select");
             $.each(fields, function (index, field) {
                 formData.append($(field).attr('name'), $(field).val());
             });

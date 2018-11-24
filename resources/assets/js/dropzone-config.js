@@ -165,7 +165,7 @@ $(function(){
     sending: function(file, xhr, formData) {
         var extrafields = $( file.previewElement.querySelectorAll("[data-dz-extrafields]") );
 
-        var fields = extrafields.find("input");
+        var fields = extrafields.find("input,select");
         $.each(fields, function( index, field ) {
             formData.append($(field).attr('name'), $(field).val());
         });
