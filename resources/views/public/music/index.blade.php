@@ -1,34 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
 @section('content')
 <div class="h-20"></div>
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            @include('widgets.sidebar')
-        </div>
-        <div class="col-md-9">
-            <p>
-                <a href="{{ URL::route('musicalbums.add') }}">
-                    <button class="btn btn-primary" >
-                        {{ trans('musicalbums.index_btn_add') }}
-                    </button>
-                </a>
-                <a href="{{ URL::route('tracks.add') }}">
-                    <button class="btn btn-primary" >
-                        {{ trans('tracks.index_btn_add') }}
-                    </button>
-                </a>
-            </p>
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2>{{ trans('music.heading') }}</h2>
                 </div>
 
                 <div class="panel-body">
-                    @include('messages.success')
-                    @include('messages.errors')
-
                     @if (count($musicalbums) )
                         <div class="row">
                         @foreach ($musicalbums as $album)
@@ -54,11 +36,6 @@
                                                     <p class="profession">
                                                         @include('widgets.tag_array', ['item' => $album])
                                                     </p>
-                                                    <div class="btn-group">
-                                                        <a data-href="{!! URL::route('musicalbums.delete', [$album->id]) !!}" data-item_name="{{ $album->title }}" data-toggle="modal" data-target="#modal-confirm" data-target="#confirm" class="btn btn-danger" href="#">
-                                                            <i class="fa fa-trash"></i> {!! trans('images.index_btn_delete') !!}
-                                                        </a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -90,10 +67,6 @@
                                                         <p class="profession" style="height: 30px;">
                                                             @include('widgets.tag_array', ['item' => $track])
                                                         </p>
-<!--                                                             </a> -->
-                                                        <a data-href="{!! URL::route('tracks.destroy', [$track->id]) !!}" data-item_name="{{ $track->title }}" data-toggle="modal" data-target="#modal-confirm" data-target="#confirm" class="btn btn-danger" href="#">
-                                                            <i class="fa fa-trash"></i> {!! trans('images.index_btn_delete') !!}
-                                                        </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,6 +82,5 @@
     </div>
 </div>
 
-@include('modals.confirm')
-
 @endsection
+

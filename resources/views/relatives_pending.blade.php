@@ -42,13 +42,14 @@
                                                             {{ '@'.$relation->relative->username }}
                                                         </p>
                                                     </a>
-                                                    <p style="padding: 10px; text-align: center">Is {{ $relation->relative->name }} your {{ $relation->getType() }}?</p>
+<!--                                                     <p style="padding: 10px; text-align: center">Is {{ $relation->relative->name }} your {{ $relation->getType() }}?</p> -->
+                                                    <p style="padding: 10px; text-align: center">{{ trans('relationships.pending.is_your_x', [$relation->relative->name, $relation->getType()]) }}</p>
                                                 </div>
                                                 <div class="bottom" id="approve-buttons-{{ $relation->id }}">
-                                                    <div class="text-success approved" style="display: none"><i class="fa fa-check"></i> Successfully Approved</div>
-                                                    <div class="text-danger denied" style="display: none"><i class="fa fa-times"></i> Denied</div>
-                                                    <a href="javascript:;" class="btn btn-success approve-button btn-sm" onclick="relativeRequest(1, {{ $relation->id }})"><i class="fa fa-check"></i> Approve</a>
-                                                    <a href="javascript:;" class="btn btn-danger approve-button btn-sm" onclick="relativeRequest(2, {{ $relation->id }})"><i class="fa fa-times"></i> Deny</a>
+                                                    <div class="text-success approved" style="display: none"><i class="fa fa-check"></i> {{ trans('relationships.pending.approved') }}</div>
+                                                    <div class="text-danger denied" style="display: none"><i class="fa fa-times"></i> relationships.pending.denied</div>
+                                                    <a href="javascript:;" class="btn btn-success approve-button btn-sm" onclick="relativeRequest(1, {{ $relation->id }})"><i class="fa fa-check"></i> relationships.pending.approve</a>
+                                                    <a href="javascript:;" class="btn btn-danger approve-button btn-sm" onclick="relativeRequest(2, {{ $relation->id }})"><i class="fa fa-times"></i> relationships.pending.deny</a>
                                                 </div>
                                             </div>
                                         </div>

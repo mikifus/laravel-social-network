@@ -31,18 +31,22 @@ class UserRelationship extends Model
     }
 
     public function getType(){
-        if ($this->relation_type == 0){
-            return "Mother";
-        }else if($this->relation_type == 1){
-            return "Father";
-        }else if($this->relation_type == 2){
-            return "Spouse";
-        }else if($this->relation_type == 3){
-            return "Sister";
-        }else if($this->relation_type == 4){
-            return "Brother";
+        return self::getTypeString($this->relation_type);
+    }
+    
+    public static function getTypeString($type){
+        if ($type == 0){
+            return trans('relationships.type.fan');
+        }else if($type == 1){
+            return trans('relationships.type.collaborator');
+        }else if($type == 2){
+            return trans('relationships.type.dj');
+        }else if($type == 3){
+            return trans('relationships.type.producer');
+        }else if($type == 4){
+            return trans('relationships.type.manager');
         }else{
-            return "Relative";
+            return trans('relationships.type.mate');
         }
     }
 }

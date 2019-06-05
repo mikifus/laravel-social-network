@@ -3,26 +3,17 @@
 @include('snippets.include_dropzone')
 @include('snippets.tagsinput-autocomplete', ['url' => route('images.autocomplete_tags',['term'=>'%QUERY'])])
 
-@section('footer')
+@push('head_scripts')
 <script>
-// Autocomplete tags
-$(document).ready(function(){
-    window._images_dropzone.on('addedfile',function(){
-        $(".bootstrap-tagsinput").tagsinput({
-            typeaheadjs: [{
-                            hint: true,
-                            highlight: true,
-                            minLength: 1
-                        },
-                        {
-                            source: window.adapter,
-                        }],
-            freeInput: true
-        });
-    });
-});
+var __vue_mixin = {
+    data:() => ({
+        imagealbum_select_value: '0'
+    }),
+    mounted() {
+    }
+};
 </script>
-@append
+@endpush
 
 @section('content')
 <div class="h-20"></div>
@@ -44,12 +35,12 @@ $(document).ready(function(){
                     <div class="form-group">
                         {!! Form::label( trans('images.add_imagealbum') ) !!}<br />
                         {!! Form::select('main_imagealbum_id',
-                        [null=>trans('images.add_no_imagealbum')] + $imagealbums->toArray(),
+                        [null=>trans('images.add_no_imagealbum'),0=>trans('images.add_new_imagealbum')] + $imagealbums->toArray(),
                         null,
-                        ['class' => 'form-control']) !!}
+                        ['class' => 'form-control', 'v-model' => 'imagealbum_select_value']) !!}
                     </div>
                     @endif
-                    <div class="form-group">
+                    <div class="form-group" v-if="imagealbum_select_value === '0'">
                         {!! Form::label( trans('images.add_imagealbum_title') ) !!}
                         {!! Form::text('main_imagealbum_title',
                         NULL,
@@ -163,3 +154,24 @@ $(document).ready(function(){
 </div>
 <!-- End Dropzone Preview Template -->
 @endsection
+
+@section('footer')
+<script>
+// Autocomplete tags
+$(document).ready(function(){
+    window._images_dropzone.on('addedfile',function(){
+        $(".bootstrap-tagsinput").tagsinput({
+            typeaheadjs: [{
+                            hint: true,
+                            highlight: true,
+                            minLength: 1
+                        },
+                        {
+                            source: window.adapter,
+                        }],
+            freeInput: true
+        });
+    });
+});
+</script>
+@append

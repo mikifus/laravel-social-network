@@ -45,6 +45,13 @@ Vue.component('vue-goodshare', VueGoodshare);
 import VueStars from 'vue-stars'
 Vue.component('vue-stars', VueStars);
 
+// Toastr
+import VueToastr2 from 'vue-toastr-2';
+import 'vue-toastr-2/dist/vue-toastr-2.min.css'
+window.toastr = require('toastr');
+Vue.use(VueToastr2);
+
+// Vue.component('v-toastr', require('./components/ToastrComponent.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -53,7 +60,9 @@ Vue.component('vue-stars', VueStars);
  */
 const app = new Vue({
     el: '#app',
+    mixins: [ (typeof __vue_mixin != 'undefined' ? __vue_mixin : {}) ], // check if the page defined a mixin
     methods: {
+        $: $,
         /**
          * Toggle Like for like button
          */
@@ -74,6 +83,7 @@ const app = new Vue({
                 target.find('.btn-label').text(response.data.likesCount);
             }, (error)  =>  {
                 console.log(error);
+                this.$toastr.error(error, ''); // TODO: Exception error
                 // TODO: Error managing in Vue
             })
         },
@@ -97,6 +107,7 @@ const app = new Vue({
 //                 target.find('.btn-label').text(response.data.likesCount);
             }, (error)  =>  {
                 console.log(error);
+                this.$toastr.error(error, ''); // TODO: Exception error
                 // TODO: Error managing in Vue
             })
         }

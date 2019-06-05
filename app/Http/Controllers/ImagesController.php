@@ -35,7 +35,7 @@ class ImagesController extends UserProfileController {
 
         $show = true;
 
-        $images = $user->images()->orderBy('id', 'desc')->get();
+        $images = $user->images()->where('imagealbum_id', null)->orderBy('id', 'desc')->get();
         $imagealbums = $user->imagealbums()->orderBy('id', 'desc')->get();
 
         return view('images.index', compact('user', 'user_list', 'show', 'id', 'imagealbums', 'images'));
@@ -50,7 +50,7 @@ class ImagesController extends UserProfileController {
         } else {
             $user = User::where('username', $username)->first();
         }
-        $images = $user->images()->get();
+        $images = $user->images()->where('imagealbum_id', null)->get();
         $imagealbums = $user->imagealbums()->get();
         $data = [];
         $data['images'] = $images;
@@ -189,10 +189,13 @@ class ImagesController extends UserProfileController {
         $el->user_id = $user->id;
         $el->file = $file;
         if (!empty($request->imagealbum_title)) {
-            $imagealbum = new Imagealbum;
-            $imagealbum->title = $request->imagealbum_title;
-            $imagealbum->user_id = $user->id;
-            $imagealbum->save();
+            $imagealbum = Imagealbum::where('user_id', $user->id)->where('title', $request->imagealbum_title)->first();
+            if(!$imagealbum) {
+                $imagealbum = new Imagealbum;
+                $imagealbum->title = $request->imagealbum_title;
+                $imagealbum->user_id = $user->id;
+                $imagealbum->save();
+            }
             $el->imagealbum_id = $imagealbum->id;
         } else if (empty($request->imagealbum_id)) {
             $el->imagealbum_id = null;

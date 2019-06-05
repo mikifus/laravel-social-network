@@ -24,8 +24,10 @@
   "dependencies": {
     "hls.js": "^0.11.0",
     "jquery-ui": "^1.12.1",
+    "toastr": "^2.1.4",
     "vue-aplayer": "^1.6.1",
     "vue-goodshare": "^1.1.0",
-    "vue-promise-btn": "^1.1.0"
+    "vue-promise-btn": "^1.1.0",
+    "vue-toastr-2": "0.0.10"
   }
 }

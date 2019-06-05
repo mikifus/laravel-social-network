@@ -63,20 +63,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 155);
+/******/ 	return __webpack_require__(__webpack_require__.s = 161);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 155:
+/***/ 161:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(27);
+module.exports = __webpack_require__(29);
 
 
 /***/ }),
 
-/***/ 27:
+/***/ 29:
 /***/ (function(module, exports) {
 
 Dropzone.autoDiscover = false;
@@ -141,7 +141,7 @@ $(function () {
             var album_title = $('input[name=main_imagealbum_title]').val();
 
             //       formData.append("title", value); // Append all the additional input data of your form here!
-            if (album_id) {
+            if (parseInt(album_id) > 0) {
                 formData.append("imagealbum_id", album_id);
             }
             if (album_title) {

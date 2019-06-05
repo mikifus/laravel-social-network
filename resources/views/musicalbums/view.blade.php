@@ -45,6 +45,9 @@
                                     {!! $item->description !!}
                                     </div>
                                     <div class="panel-body">
+                                        {{ $item->categories[0] ?? '' }}
+                                    </div>
+                                    <div class="panel-body">
                                         @foreach ($item->tagArray as $tag)
                                         <span class="tag label label-info">{{ $tag }}</span>
                                         @endforeach

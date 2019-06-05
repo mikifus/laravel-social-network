@@ -31,7 +31,7 @@ class VideosController extends UserProfileController
         if (!$this->secure($user->username)) {
             return abort(404);
         }
-        $videos = $user->videos()->get();
+        $videos = $user->videos()->where('videoalbum_id', null)->get();
         $videoalbums = $user->videoalbums()->get();
         $data = [];
         $data['videos'] = $videos;
@@ -48,7 +48,7 @@ class VideosController extends UserProfileController
         } else {
             $user = User::where('username', $username)->first();
         }
-        $videos = $user->videos()->get();
+        $videos = $user->videos()->where('videoalbum_id', null)->get();
         $videoalbums = $user->videoalbums()->get();
         $data = [];
         $data['videos'] = $videos;

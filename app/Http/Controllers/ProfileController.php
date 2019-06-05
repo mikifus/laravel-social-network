@@ -96,9 +96,9 @@ class ProfileController extends Controller
 
 
         $validator = Validator::make($data, [
-            'sex' => 'in:0,1',
-            'birthday' => 'date',
-            'phone' => 'max:20',
+//             'sex' => 'in:0,1',
+//             'birthday' => 'date',
+//             'phone' => 'max:20',
             'bio' => 'max:140',
         ]);
 
@@ -109,16 +109,16 @@ class ProfileController extends Controller
             $response['message'] = implode(' ', $validator->errors()->all());
         }else{
             $user = $this->user;
-            $user->sex = $data['sex'];
-            $user->birthday = $data['birthday'];
-            $user->phone = $data['phone'];
+//             $user->sex = $data['sex'];
+//             $user->birthday = $data['birthday'];
+//             $user->phone = $data['phone'];
             $user->bio = $data['bio'];
             $save = $user->save();
             if ($save){
 
                 $response['code'] = 200;
 
-                if (count($data['map_info']) > 1) {
+                if ($data['map_info'] && count($data['map_info']) > 1) {
                     $find_country = Country::where('shortname', $data['map_info']['country']['short_name'])->first();
                     $country_id = 0;
                     if ($find_country) {
@@ -215,7 +215,7 @@ class ProfileController extends Controller
             $hobby->save();
         }
 
-        $request->session()->flash('alert-success', 'Your hobbies have been successfully updated!');
+        $request->session()->flash('alert-success', trans('hobbies.alert.success')); // 'Your hobbies have been successfully updated!'
 
         return redirect('/'.Auth::user()->username);
 
@@ -237,10 +237,10 @@ class ProfileController extends Controller
 
         if ($relation->save()) {
 
-            $request->session()->flash('alert-success', 'Your relationship have been successfully requested! He/She needs to accept relationship with you to publish.');
+            $request->session()->flash('alert-success', trans('relationships.request.success')); // 'Your relationship have been successfully requested! He/She needs to accept relationship with you to publish.'
 
         }else{
-            $request->session()->flash('alert-danger', 'Something wents wrong!');
+            $request->session()->flash('alert-danger', trans('index.errors.something_went_wrong'));
         }
 
         return redirect('/'.Auth::user()->username);
@@ -277,7 +277,7 @@ class ProfileController extends Controller
                 $response['image_thumb'] = $this->user->getPhoto(200, 200);
             }else{
                 $response['code'] = 400;
-                $response['message'] = "Something went wrong!";
+                $response['message'] = trans('index.errors.something_went_wrong');
             }
         }
         return Response::json($response);
@@ -313,7 +313,7 @@ class ProfileController extends Controller
                 $response['image'] = $this->user->getCover();
             }else{
                 $response['code'] = 400;
-                $response['message'] = "Something went wrong!";
+                $response['message'] = trans('index.errors.something_went_wrong');
             }
         }
         return Response::json($response);

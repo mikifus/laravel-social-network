@@ -21,8 +21,12 @@ Route::group(['middleware' => 'guest'], function () {
     });
 });
 
-
+// Auth routes
 Auth::routes();
+
+// Public routes
+Route::get('/music', 'PublicMusicController@index')->name('public.music');
+Route::match(array('GET', 'POST'), '/music/search', 'PublicMusicController@index')->name('public.music.search');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/settings', 'SettingsController@index');

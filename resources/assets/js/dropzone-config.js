@@ -60,7 +60,7 @@ $(function(){
       var album_title = $('input[name=main_imagealbum_title]').val();
 
 //       formData.append("title", value); // Append all the additional input data of your form here!
-      if (album_id) {
+      if (parseInt(album_id) > 0) {
         formData.append("imagealbum_id", album_id);
       }
       if (album_title) {

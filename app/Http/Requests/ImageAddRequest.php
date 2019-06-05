@@ -29,7 +29,7 @@ class ImageAddRequest extends Request
             'title'            => 'min:4',
             'file'             => 'required|image|mimes:jpg,jpeg,png,gif',
             'imagealbum_id'    => 'sometimes|integer|min:1|exists:imagealbums,id',
-            'imagealbum_title' => 'sometimes|min:4|unique:imagealbums,title',
+            'imagealbum_title' => 'sometimes|min:4',
             'tags'             => 'sometimes|nullable|min:1',
             'category_id'      => 'sometimes|nullable|exists:categories,id'
         ];

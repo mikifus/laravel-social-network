@@ -22,6 +22,8 @@
     <link href="{{ asset('plugins/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/around.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    @stack('head_scripts')
 
     @yield('header')
 </head>
