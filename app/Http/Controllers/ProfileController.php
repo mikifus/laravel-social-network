@@ -192,7 +192,7 @@ class ProfileController extends Controller
 
         $list = [];
 
-        foreach($request->input('hobbies') as $i => $id){
+        foreach($request->input('hobbies') ?? [] as $i => $id){
             $list[$id] = 1;
         }
 
