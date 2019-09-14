@@ -14,10 +14,11 @@
             @endif
             <div class="clearfix"></div>
         </div>
-        <br />
-        <p>
-            {{ $comment->comment }}
-        </p>
+    </div>
+    <div class="panel-body">
+        <div class="comment-content">
+            <p>{!! \Nahid\Linkify\Facades\Linkify::process(strip_tags($comment->comment)) !!}</p>
+        </div>
     </div>
 </div>
 

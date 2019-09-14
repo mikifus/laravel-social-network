@@ -45,6 +45,7 @@ Route::post('/posts/likes', 'PostsController@likes');
 Route::post('/posts/comment', 'PostsController@comment');
 Route::post('/posts/comments/delete', 'PostsController@deleteComment');
 Route::get('/post/{id}', 'PostsController@single');
+Route::post('/posts/link_preview', 'PostsController@linkPreview')->name('posts.link_preview');
 
 // Search
 Route::get('/search', 'HomeController@search');

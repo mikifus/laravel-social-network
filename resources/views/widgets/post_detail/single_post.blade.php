@@ -39,7 +39,7 @@
         </span>
         <hr class="fix-hr">
         <div class="post-content post-content-s">
-            {{ $post->content }}
+            {!! \Nahid\Linkify\Facades\Linkify::process(strip_tags($post->content)) !!}
             @if($post->hasImage())
                 @foreach($post->images()->get() as $image)
                     <a data-fancybox="gallery" href="{{ $image->getURL() }}" data-caption="{{ $post->content }}"><img class="img-responsive post-image" src="{{ $image->getURL() }}"></a>
@@ -47,6 +47,15 @@
             @endif
         </div>
         <hr class="fix-hr">
+        @if($post->hasLink())
+            <div class="post-content post-content-s">
+                <div v-if="ready">
+                    <link-prevue key="{{ md5($post->id) }}" card-width="100%" url="{{ $post->url }}" api-url="{{ route('posts.link_preview') }}"></link-prevue>
+    <!--                 <component :is="link-prevue" key="{{ md5($post->id) }}" card-width="100%" url="{{ $post->url }}" api-url="{{ route('posts.link_preview') }}"></component> -->
+                </div>
+            </div>
+            <hr class="fix-hr">
+        @endif
         <div class="comments-title">
             @include('widgets.post_detail.comments_title')
         </div>

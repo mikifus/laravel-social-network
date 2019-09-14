@@ -194,7 +194,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
-
+        Nahid\Linkify\LinkifyServiceProvider::class,
 
     ],
 
@@ -254,6 +254,7 @@ return [
 
         'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
+        'Linkify' => Nahid\Linkify\Facades\Linkify::class,
     ],
 
 ];

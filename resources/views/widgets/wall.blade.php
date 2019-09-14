@@ -1,3 +1,20 @@
+
+@push('head_scripts')
+<script>
+var __vue_mixin = {
+    data:() => ({
+        link_url_input_value: ''
+    }),
+    mounted() {
+        $('.link-url-input').on('change', () => {
+            this.link_url_input_value = $('.link-url-input').val();
+            $('.link-area').slideDown().css('display', 'inline');
+        });
+    }
+};
+</script>
+@endpush
+
 <div class="clearfix"></div>
 @if($user->id == Auth::user()->id)
 <div class="panel panel-default new-post-box">
@@ -9,12 +26,22 @@
                 <a href="javascript:;" class="image-remove-button" onclick="removePostImage()"><i class="fa fa-times-circle"></i></a>
                 <img src="" />
             </div>
+            <div class="link-area">
+                <input type="hidden" class="link-url-input" name="url" />
+                <a href="javascript:;" class="image-remove-button link-remove-button" onclick="removePostLink()"><i class="fa fa-times-circle"></i></a>
+                
+                <link-prevue key="0" card-width="100%" :url="link_url_input_value" api-url="{{ route('posts.link_preview') }}" v-on:error="$('.link-remove-button').click()"></link-prevue>
+<!--                 <link-prevue card-width="100%" :url="link_url_input_value"></link-prevue> -->
+            </div>
             <hr />
             <div class="row">
                 <div class="col-xs-4">
                     <button type="button" class="btn btn-default btn-add-image btn-sm" onclick="uploadPostImage()">
                         <i class="fa fa-image"></i> Add Image
                     </button>
+<!--                    <button type="button" class="btn btn-default btn-add-link btn-sm" onclick="uploadPostLink()">
+                        <i class="fa fa-link"></i> Add Link
+                    </button>-->
                     <input type="file" accept="image/*" class="image-input" name="photo" onchange="previewPostImage(this)">
                 </div>
                 <div class="col-xs-4">

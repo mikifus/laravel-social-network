@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Redirect;
 use Response;
 use Session;
 use View;
+use Embed\Embed;
 
 
 class PostsController extends Controller
@@ -261,9 +262,10 @@ class PostsController extends Controller
 
         if ($request->hasFile('image')){
             $validator_data['image'] = 'required|mimes:jpeg,jpg,png,gif|max:2048';
-        }else{
+        } else {
             $validator_data['content'] = 'required';
         }
+        $validator_data['url'] = 'nullable|string|url';
 
         $validator = Validator::make($data, $validator_data);
 
@@ -274,6 +276,7 @@ class PostsController extends Controller
 
             $post = new Post();
             $post->content = !empty($data['content'])?$data['content']:'';
+            $post->url = !empty($data['url'])?$data['url']:'';
             $post->group_id = $data['group_id'];
             $post->user_id = Auth::user()->id;
 
@@ -322,5 +325,31 @@ class PostsController extends Controller
 
     }
 
+
+
+    public function linkPreview(Request $request){
+        $url = $request->url ?? '';
+        
+        if(!$url || !filter_var($url, FILTER_VALIDATE_URL)) {
+            $response = ['error' => 'Invalid URL'];
+        } else {
+            try {
+                $info = Embed::create($url);
+                $response = [
+                    'title'       => $info->title,
+                    'description' => $info->description,
+                    'url'         => $info->url,
+//                     'image'       => $info->image,
+//                     'imageWidth'  => $info->imageWidth,
+//                     'imageHeight' => $info->imageHeight,
+                    'images'      => array_map(function($item){ return $item['url']; }, $info->images),
+                ];
+            } catch (\Exception $e) {
+                $response = ['error' => $e->getMessage()];
+            }
+        }
+
+        return Response::json($response);
+    }
 
 }

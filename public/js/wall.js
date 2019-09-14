@@ -3,11 +3,56 @@
  */
 $(function() {
     if (WALL_ACTIVE) {
+        var url = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+        //var url = /((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
+        
         $('.new-post-box textarea, .panel-post .post-write-comment textarea').each(function () {
             this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
         }).on('input', function () {
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
+        }).on("change keyup input", function(e) {
+        //$("#textarea").on("keyup paste", function(e) {
+        //$("#textarea").on("keyup", function(e) {
+
+            var urls, lastURL,
+            checkURL = "",
+            output = "";
+
+            //if (urls.data('curr_val') == urls) //if it still has same value
+            // return false; //returns false
+
+            //8 = backspace
+            //46 = delete
+
+            if (e.keyCode == 8 && e.keyCode !== 9 && e.keyCode !== 13 && e.keyCode !== 32 && e.keyCode !== 46) {
+            // Return is backspace, tab, enter, space or delete was not pressed.
+            return;
+            }
+
+            // GC keyCodes
+            if (e.keyCode !== 46 && e.keyCode == 17) {
+            // Return is backspace, tab, enter, space or delete was not pressed.
+            return;
+            }
+
+            while ((urls = url.exec(this.value)) !== null) {
+                output += urls[0];
+                console.log("URLS: " + output.substring(0, output.length - 2));
+
+            }
+            
+            lastURL = $('.link-url-input').val();
+
+            if (output != lastURL) { // ctrl = 17
+                $('.link-url-input').val(output)
+                lastURL = $('.link-url-input').val();
+                $('.link-url-input').change();
+            }
+            
+            if (output.length == 0) {
+                removePostLink();
+            }
         });
 
         $(window).scroll(function () {
@@ -15,8 +60,6 @@ $(function() {
                 fetchForOlderPosts();
             }
         });
-
-
 
 
         setInterval(function(){
@@ -62,6 +105,19 @@ function cleanPostForm(){
     var form_name = '#form-new-post';
     $(form_name + ' textarea').val('');
     removePostImage();
+}
+
+function removePostLink(){
+    var form_name = '#form-new-post';
+    $(form_name + ' .link-area img').attr('src', " ");
+    $(form_name + ' .link-area').hide();
+}
+
+function cleanPostLink(){
+    var form_name = '#form-new-post';
+    $(form_name + ' textarea').val('');
+    removePostImage();
+    removePostLink();
 }
 
 function newPost(){

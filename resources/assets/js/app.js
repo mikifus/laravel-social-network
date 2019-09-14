@@ -53,6 +53,44 @@ Vue.use(VueToastr2);
 
 // Vue.component('v-toastr', require('./components/ToastrComponent.vue'));
 
+// Prevue
+import LinkPrevue from 'link-prevue'
+Vue.component('link-prevue-base', LinkPrevue);
+// Vue.use(LinkPrevue);
+
+const BaseLinkPrevue = Vue.options.components['link-prevue-base'];
+const CustomLinkPrevue = BaseLinkPrevue.extend({
+  methods: {
+        httpRequest: function(success, error) {
+            const self = this;
+            const http = new XMLHttpRequest()
+            const params = 'url=' + this.url
+            let token = document.head.querySelector('meta[name="csrf-token"]');
+            
+            http.open('POST', this.apiUrl, true)
+            http.setRequestHeader('X-CSRF-TOKEN', token.content);
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+            http.onreadystatechange = function() {
+                    if (http.readyState === 4 && http.status === 200) {
+                        let json = JSON.parse(http.responseText);
+                        if (json['error']) {
+                            error();
+                            self.$emit('error', json['error']);
+                        } else {
+                            success(http.responseText);
+                        }
+                    }
+                if (http.readyState === 4 && http.status === 500) {
+                    error()
+                    }
+            }
+            http.send(params)
+        }
+  }
+});
+
+Vue.component('link-prevue', CustomLinkPrevue);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

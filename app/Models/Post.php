@@ -62,6 +62,10 @@ class Post extends Model
         return $this->has_image;
     }
 
+    public function hasLink(){
+        return !empty($this->url) ? true : false;
+    }
+
     public function checkLike($user_id){
         if ($this->likes()->where('like_user_id', $user_id)->get()->first()){
             return true;
