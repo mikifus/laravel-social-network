@@ -273,10 +273,22 @@ class PostsController extends Controller
             $response['code'] = 400;
             $response['message'] = implode(' ', $validator->errors()->all());
         }else{
+        
+            $url = '';
+            $url_meta = array();
+            if(!empty($data['url'])) {
+                $meta = $this->getLinkPreviewMeta($data['url']);
+                if(empty($meta['error'])) {
+                    $url = $data['url'];
+                    $url_meta = $meta;
+                }
+            }
 
             $post = new Post();
             $post->content = !empty($data['content'])?$data['content']:'';
-            $post->url = !empty($data['url'])?$data['url']:'';
+            $post->url = $url;
+//             $post->url_meta = json_encode($url_meta);
+            $post->url_meta = $url_meta;
             $post->group_id = $data['group_id'];
             $post->user_id = Auth::user()->id;
 
@@ -330,6 +342,14 @@ class PostsController extends Controller
     public function linkPreview(Request $request){
         $url = $request->url ?? '';
         
+        $response = $this->getLinkPreviewMeta($url);
+
+        return Response::json($response);
+    }
+
+
+
+    public function getLinkPreviewMeta($url){        
         if(!$url || !filter_var($url, FILTER_VALIDATE_URL)) {
             $response = ['error' => 'Invalid URL'];
         } else {
@@ -348,8 +368,8 @@ class PostsController extends Controller
                 $response = ['error' => $e->getMessage()];
             }
         }
-
-        return Response::json($response);
+        
+        return $response;
     }
 
 }

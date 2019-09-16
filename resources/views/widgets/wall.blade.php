@@ -30,7 +30,7 @@ var __vue_mixin = {
                 <input type="hidden" class="link-url-input" name="url" />
                 <a href="javascript:;" class="image-remove-button link-remove-button" onclick="removePostLink()"><i class="fa fa-times-circle"></i></a>
                 
-                <link-prevue key="0" card-width="100%" :url="link_url_input_value" api-url="{{ route('posts.link_preview') }}" v-on:error="$('.link-remove-button').click()"></link-prevue>
+                <link-prevue key="0" card-width="100%" :url="link_url_input_value" api-url="{{ route('posts.link_preview') }}" v-on:error="$('.link-remove-button').click()" :show-button="false"></link-prevue>
 <!--                 <link-prevue card-width="100%" :url="link_url_input_value"></link-prevue> -->
             </div>
             <hr />

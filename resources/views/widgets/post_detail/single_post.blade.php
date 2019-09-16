@@ -48,10 +48,26 @@
         </div>
         <hr class="fix-hr">
         @if($post->hasLink())
-            <div class="post-content post-content-s">
-                <div v-if="ready">
-                    <link-prevue key="{{ md5($post->id) }}" card-width="100%" url="{{ $post->url }}" api-url="{{ route('posts.link_preview') }}"></link-prevue>
-    <!--                 <component :is="link-prevue" key="{{ md5($post->id) }}" card-width="100%" url="{{ $post->url }}" api-url="{{ route('posts.link_preview') }}"></component> -->
+            <div class="post-content post-content-s post-content-link-preview">
+                <div>
+                    <div>
+                        <div class="wrapper" style="width: 100%;">
+                            @if(sizeof($post->url_meta['images']) > 0)
+                                <div class="card-img">
+                                    <img src="{{ $post->url_meta['images'][0] }}">
+                                </div>
+                            @endif
+                            <div class="card-info">
+                                <div class="card-text">
+                                    <h1>{{ $post->url_meta['title'] }}</h1>
+                                    <p>{{ $post->url_meta['description'] }}.</p>
+                                </div>
+                                <div class="card-btn">
+                                    <a href="javascript:;">{{ __('general.view_more') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <hr class="fix-hr">

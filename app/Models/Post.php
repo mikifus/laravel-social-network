@@ -19,6 +19,10 @@ class Post extends Model
         'created_at',
         'updated_at'
     ];
+    
+    protected $casts = [
+        'url_meta' => 'json',
+    ];
 
     private $like_count = null;
     private $comment_count = null;
@@ -63,7 +67,7 @@ class Post extends Model
     }
 
     public function hasLink(){
-        return !empty($this->url) ? true : false;
+        return !empty($this->url) && !empty($this->url_meta) ? true : false;
     }
 
     public function checkLike($user_id){

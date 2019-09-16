@@ -105,6 +105,7 @@ function cleanPostForm(){
     var form_name = '#form-new-post';
     $(form_name + ' textarea').val('');
     removePostImage();
+    removePostLink();
 }
 
 function removePostLink(){
