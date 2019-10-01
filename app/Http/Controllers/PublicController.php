@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Musicalbum;
 use App\Models\Track;
+use App\Models\Image;
 
-class PublicMusicController extends Controller
+class PublicController extends Controller
 {
 
     public function __construct()
@@ -20,11 +21,11 @@ class PublicMusicController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * List music
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function music(Request $request)
     {
 
         // TODO: Only public visibility
@@ -32,6 +33,20 @@ class PublicMusicController extends Controller
         $tracks = Track::limit(10)->get();
 
         return view('public.music.index', compact('musicalbums', 'tracks'));
+    }
+
+    /**
+     * List images
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function images(Request $request)
+    {
+
+        // TODO: Only public visibility
+        $images = Image::limit(10)->get();
+
+        return view('public.images.index', compact('images'));
     }
 
 

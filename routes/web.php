@@ -25,8 +25,9 @@ Route::group(['middleware' => 'guest'], function () {
 Auth::routes();
 
 // Public routes
-Route::get('/music', 'PublicMusicController@index')->name('public.music');
-Route::match(array('GET', 'POST'), '/music/search', 'PublicMusicController@index')->name('public.music.search');
+Route::get('/public/music', 'PublicController@music')->name('public.music');
+// Route::match(array('GET', 'POST'), '/public/music/search', 'PublicController@search')->name('public.music.search');
+Route::get('/public/images', 'PublicController@images')->name('public.images');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/settings', 'SettingsController@index');
@@ -113,7 +114,7 @@ Route::post('/{username}/save/relationship', 'ProfileController@saveRelationship
 //     Route::post('profile/images/delete', ['as' => 'images.delete', 'uses' => 'ImagesController@destroy']);
     Route::get('profile/images/destroy/{id}', ['as' => 'images.destroy', 'uses' => 'ImagesController@destroy']);
     Route::get('/{username}/images/', ['as' => 'images_profile_path', 'uses' => 'ImagesController@showUser']);
-    Route::get('images/{slug}', ['as' => 'images.slug_view', 'uses' => 'ImagesController@showSlug']);
+    Route::get('image/{slug}', ['as' => 'images.slug_view', 'uses' => 'ImagesController@showSlug']);
     Route::get('/images/autocomplete_tags/{term}', ['as' => 'images.autocomplete_tags', 'uses' => 'ImagesController@autocompleteTags']);
 //});
 
