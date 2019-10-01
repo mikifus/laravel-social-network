@@ -11,70 +11,101 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/pace-master/themes/white/pace-theme-flash.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/around.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    @stack('head_scripts')
+
+    @yield('header')
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+<div id="app">
+    <nav class="navbar navbar-default navbar-static-top navbar-around">
+        <div class="container">
+            <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('img/logo.png') }}" alt="" />
+                </a>
             </div>
-        </nav>
 
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    &nbsp;
+                </ul>
+
+                <div class="navbar-form navbar-left">
+                    <form id="custom-search-input" method="get" action="{{ url('/search') }}">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control input-lg" name="s" placeholder="search..." />
+                            <span class="input-group-btn">
+                                <button class="btn btn-info btn-lg" type="button">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+
+
+                <!-- Right Side Of Navbar -->
+                @include('widgets.right_navbar')
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
         @yield('content')
     </div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <div class="container">
+        @include('widgets.footer')
+    </div>
+</div>
+<div class="loading-page">
+    <img src="{{ asset('img/rolling.gif') }}" alt="">
+</div>
+@include('widgets.error')
+<!-- Scripts -->
+<script type="text/javascript">
+    var BASE_URL = "{{ url('/') }}";
+    var REQUEST_URL = "<?=Request::url()?>";
+    var CSRF = "{{ csrf_token() }}";
+    var WALL_ACTIVE = false;
+</script>
+<script src="{{ asset('plugins/jquery/jquery-2.1.4.min.js')  }}"></script>
+<script src="{{ asset('plugins/pace-master/pace.min.js') }}"></script>
+<script src="{{ asset('js/app.js')  }}"></script>
+<script src="{{ asset('plugins/jquery.serializeJSON/jquery.serializejson.min.js') }}"></script>
+<script src="{{ asset('plugins/fancybox/dist/jquery.fancybox.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js') }}"></script>
+<script src="{{ asset('plugins/select2/dist/js/select2.full.min.js') }}"></script>
+<script src="//maps.google.com/maps/api/js?key=<?=config('googlemaps.key')?>"></script>
+<script src="{{ asset('plugins/gmaps/gmaps.min.js') }}"></script>
+<script src="{{ asset('js/around.js') }}"></script>
+<script src="{{ asset('js/wall.js') }}"></script>
+<script src="{{ asset('js/notifications.js') }}"></script>
+<script src="{{ asset('js/node_modules.js')  }}"></script>
+@yield('footer')
 </body>
 </html>
